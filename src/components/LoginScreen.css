@@ -1,0 +1,337 @@
+.screen-container.login-screen {
+  min-height: 100vh;
+  padding: 32px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at top left, rgba(227, 6, 19, 0.08), transparent 35%),
+    linear-gradient(180deg, #f8f6f6 0%, #eceef1 100%);
+  box-sizing: border-box;
+}
+
+.login-wallpaper {
+  width: 100%;
+  max-width: 480px;
+}
+
+.login-card {
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.08);
+  padding: 38px 34px;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+}
+
+.login-brand-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.airtel-logo-badge {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.airtel-logo-icon {
+  width: auto;
+  height: 28px;
+  object-fit: contain;
+  display: block;
+}
+
+.login-brand-copy {
+  flex: 1;
+}
+
+.login-label {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #E30613;
+}
+
+.login-heading {
+  margin: 6px 0 8px;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #1A1D27;
+}
+
+.login-description {
+  margin: 0;
+  color: #5F6577;
+  line-height: 1.6;
+  font-size: 0.9rem;
+}
+
+.login-form {
+  display: grid;
+  gap: 24px;
+}
+
+.input-group {
+  display: grid;
+  gap: 8px;
+}
+
+.input-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #5F6577;
+}
+
+.phone-input-container {
+  width: 100%;
+  border-radius: 12px;
+  border: 1.5px solid #E5E7EB;
+  background: #F9FAFB;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.2s ease;
+  height: 52px;
+}
+
+.phone-input-container:focus-within {
+  border-color: #E30613;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.08);
+}
+
+.phone-prefix {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 14px;
+  font-weight: 700;
+  color: #1A1D27;
+  border-right: 1.5px solid #E5E7EB;
+  height: 100%;
+  font-size: 14px;
+  background: #F3F4F6;
+}
+
+.phone-flag {
+  font-size: 12px;
+  font-weight: 800;
+  background: #E5E7EB;
+  padding: 2px 4px;
+  border-radius: 4px;
+  color: #4B5563;
+}
+
+.phone-field {
+  flex: 1;
+  width: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  color: #1A1D27;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.phone-field::placeholder {
+  color: #9CA3AF;
+  letter-spacing: normal;
+}
+
+/* Discrete OTP fields styling */
+.otp-digit-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.otp-digit-field {
+  width: 100%;
+  height: 56px;
+  border-radius: 12px;
+  border: 1.5px solid #E5E7EB;
+  background: #F9FAFB;
+  text-align: center;
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: #1A1D27;
+  transition: all 0.2s ease;
+}
+
+.otp-digit-field:focus {
+  border-color: #E30613;
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(227, 6, 19, 0.08);
+}
+
+.otp-digit-field::placeholder {
+  color: #D1D5DB;
+}
+
+/* Timer row */
+.otp-timer-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -8px;
+}
+
+.otp-timer-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: #9BA1B2;
+}
+
+.otp-resend-btn {
+  font-size: 13px;
+  font-weight: 700;
+  color: #E30613;
+  cursor: pointer;
+  border: none;
+  background: none;
+  transition: opacity 0.2s;
+  padding: 0;
+}
+
+.otp-resend-btn:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+.step-help {
+  margin: -8px 0 0;
+  font-size: 13px;
+  color: #5F6577;
+  line-height: 1.5;
+}
+
+.submit-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 12px;
+  border: none;
+  background: #E30613;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(227, 6, 19, 0.2);
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #C40510;
+  box-shadow: 0 6px 16px rgba(227, 6, 19, 0.3);
+  transform: translateY(-1px);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  background: #E5E7EB;
+  color: #9CA3AF;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.login-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+
+.text-btn {
+  background: transparent;
+  color: #5F6577;
+  border: none;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.text-btn:hover {
+  color: #1A1D27;
+}
+
+.login-footer {
+  margin-top: 32px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  border-top: 1px solid #F0F1F4;
+  padding-top: 24px;
+}
+
+.back-landing-link {
+  color: #E30613 !important;
+  font-weight: 700 !important;
+}
+
+.back-landing-link:hover {
+  opacity: 0.8;
+}
+
+.bypass-container {
+  width: 100%;
+}
+
+.bypass-link-btn {
+  background: none;
+  border: none;
+  color: #9BA1B2;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+.bypass-link-btn:hover {
+  color: #5F6577;
+  background: #F3F4F6;
+}
+
+.login-powered-by {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #9BA1B2;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.login-powered-by-logo {
+  width: 64px;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .screen-container.login-screen {
+    padding: 20px 16px;
+  }
+
+  .login-card {
+    padding: 28px 24px;
+  }
+}
