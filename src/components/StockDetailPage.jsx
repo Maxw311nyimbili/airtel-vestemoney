@@ -153,6 +153,28 @@ export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExe
     setHoveredPoint(closest);
   };
 
+  const handleTouchMove = (e) => {
+    if (e.touches && e.touches.length > 0) {
+      const touch = e.touches[0];
+      const svgEl = e.currentTarget;
+      const rect = svgEl.getBoundingClientRect();
+      const mouseX = touch.clientX - rect.left;
+      const scaleX = svgWidth / rect.width;
+      const xInSvg = mouseX * scaleX;
+
+      let closest = points[0];
+      let minDiff = Math.abs(points[0].x - xInSvg);
+      for (let i = 1; i < points.length; i++) {
+        const diff = Math.abs(points[i].x - xInSvg);
+        if (diff < minDiff) {
+          minDiff = diff;
+          closest = points[i];
+        }
+      }
+      setHoveredPoint(closest);
+    }
+  };
+
   const handleMouseLeave = () => {
     setHoveredPoint(null);
   };
@@ -222,6 +244,9 @@ export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExe
                   className="trading-svg"
                   onMouseMove={handleMouseMove}
                   onMouseLeave={handleMouseLeave}
+                  onTouchStart={handleTouchMove}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleMouseLeave}
                   style={{ width: '100%', height: 'auto', display: 'block' }}
                 >
                   <defs>
