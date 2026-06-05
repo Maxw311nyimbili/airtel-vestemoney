@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: CI Pipeline
 
 on:
   push:
@@ -11,10 +11,10 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  build-and-deploy:
+  validate:
     runs-on: ubuntu-latest
 
     steps:
@@ -30,14 +30,7 @@ jobs:
     - name: Install Dependencies
       run: npm install
 
-    - name: Build Production Bundle
-      run: npx vite build --base=./
+    - name: Verify Production Build Compiles
+      run: npm run build
       env:
         NODE_ENV: production
-
-    - name: Deploy to GitHub Pages
-      if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        folder: dist
-        branch: gh-pages
