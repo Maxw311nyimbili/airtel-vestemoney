@@ -6,13 +6,17 @@ on:
   pull_request:
     branches: [ main ]
 
+# Opt into Node.js 24 for runner actions to avoid deprecation warnings
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
-# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# Allow only one concurrent deployment
 concurrency:
   group: "pages"
   cancel-in-progress: false
@@ -42,6 +46,8 @@ jobs:
     - name: Setup Pages
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
       uses: actions/configure-pages@v5
+      with:
+        enablement: true
 
     - name: Upload Artifact
       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
