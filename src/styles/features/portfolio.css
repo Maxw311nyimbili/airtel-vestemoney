@@ -1,0 +1,340 @@
+/* Portfolio Analytics Grid */
+.analytics-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.analytics-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 20px;
+}
+
+.analytics-card .label {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.analytics-card .value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 22px;
+  margin-bottom: 4px;
+}
+
+.analytics-card .change {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.analytics-card .change.positive {
+  color: var(--success);
+}
+
+.subsection-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 14px;
+  color: var(--text-primary);
+  margin-top: 24px;
+}
+
+/* Asset Allocation Rows */
+.asset-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.asset-row {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: var(--transition);
+}
+
+.asset-row:hover {
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-xs);
+}
+
+.asset-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.asset-bullet {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.asset-label {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.asset-sub {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.asset-right {
+  text-align: right;
+}
+
+.asset-value {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.asset-yield {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-red);
+}
+
+/* Transaction History Feed */
+.tx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tx-row {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.tx-row:hover {
+  border-color: var(--border-color);
+}
+
+.tx-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.tx-date {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.tx-amount {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.tx-amount.credit {
+  color: var(--primary-red);
+}
+
+.tx-amount.debit {
+  color: var(--danger);
+}
+
+/* Dividend Income Calculator */
+.calc-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 28px;
+  box-shadow: var(--shadow-sm);
+}
+
+.calc-card-title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--text-primary);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.calc-card-title svg {
+  color: var(--primary-red);
+  width: 18px;
+  height: 18px;
+}
+
+.calc-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.calc-field label {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  margin-bottom: 6px;
+}
+
+.calc-field select,
+.calc-field input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 600;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
+.calc-field select:focus,
+.calc-field input:focus {
+  border-color: var(--primary-red);
+  box-shadow: 0 0 0 3px var(--primary-red-10);
+}
+
+.calc-result {
+  background: var(--bg-body);
+  border-radius: var(--radius-sm);
+  padding: 20px;
+  text-align: center;
+}
+
+.calc-result-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary-red);
+  margin-bottom: 6px;
+}
+
+.calc-result-value {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 28px;
+  color: var(--text-primary);
+}
+
+/* Upcoming Dividend Calendar */
+.dividend-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dividend-row {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  padding: 18px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: var(--transition);
+}
+
+.dividend-row:hover {
+  border-color: var(--border-color);
+}
+
+.dividend-row-symbol {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 2px;
+}
+
+.dividend-row-date {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.dividend-row-rate {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 14px;
+  text-align: right;
+  margin-bottom: 2px;
+}
+
+.dividend-row-payout {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--primary-red);
+  text-align: right;
+}
+
+/* Responsive Overrides */
+@media (max-width: 768px) {
+  .calc-inputs {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .dividend-row {
+    padding: 14px 16px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  
+  .dividend-row-rate,
+  .dividend-row-payout {
+    text-align: left;
+  }
+}
+
+@media (max-width: 599px) {
+  .calc-field select,
+  .calc-field input {
+    padding: 8px 10px;
+    font-size: 13px;
+    height: 40px;
+  }
+
+  .calc-result {
+    padding: 16px;
+  }
+
+  .calc-result-value {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calc-field select,
+  .calc-field input {
+    padding: 6px 10px !important;
+    font-size: 12.5px !important;
+    height: 36px !important;
+  }
+}

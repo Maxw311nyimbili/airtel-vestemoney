@@ -1,0 +1,167 @@
+.banking-login-page {
+  min-height: 100vh;
+  width: 100%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  box-sizing: border-box;
+}
+
+.banking-login-container {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 75vh;
+  box-sizing: border-box;
+}
+
+@media (min-width: 600px) {
+  .banking-login-page {
+    background: #fafafa;
+  }
+  .banking-login-container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 12px 32px rgba(0,0,0,0.04);
+    border: 1px solid #f0f0f0;
+    min-height: auto;
+    gap: 32px;
+  }
+}
+
+.banking-login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 24px;
+  flex: 1;
+  justify-content: center;
+}
+
+.banking-login-title {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 700;
+  color: #000000;
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.banking-input-group {
+  width: 100%;
+}
+
+.banking-input-field {
+  width: 100%;
+  height: 52px;
+  border-radius: 14px;
+  border: 1.5px solid #d1d5db;
+  padding: 12px 18px;
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  background: #ffffff;
+  color: #000000;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+.banking-input-field:focus {
+  border-color: #E30613;
+  outline: none;
+}
+
+.banking-signup-btn {
+  width: 100%;
+  height: 52px;
+  border-radius: 14px;
+  background: #E30613;
+  color: #ffffff;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.banking-signup-btn:hover:not(:disabled) {
+  background: #C40510;
+}
+
+.banking-signup-btn:disabled {
+  background: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.banking-back-link {
+  background: none;
+  border: none;
+  color: #E30613;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  margin-top: 4px;
+}
+
+.banking-bypass-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.banking-bypass-btn {
+  background: none;
+  border: none;
+  color: #9ba1b2;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.banking-bypass-btn:hover {
+  color: #5f6577;
+}
+
+.banking-powered-by {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #9ba1b2;
+}
+
+.banking-powered-logo {
+  width: 60px;
+  height: auto;
+}
+
+.banking-login-header {
+  margin-bottom: 8px;
+}
+
+.login-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.login-back-btn:hover {
+  background: var(--border-light);
+}

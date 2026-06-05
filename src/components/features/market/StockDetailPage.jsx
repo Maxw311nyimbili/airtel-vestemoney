@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Icons } from './Icons';
-import { MOCK_STOCKS } from '../data/mockData';
+import { Icons } from '../../Icons';
+import { MOCK_STOCKS } from '../../../data/mockData';
 
 export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExecute, showToast }) {
   const { symbol } = useParams();
@@ -110,7 +110,6 @@ export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExe
   }, [linePath, points]);
 
   const trendColor = '#E30613';
-  const trendColorLight = 'rgba(227, 6, 19, 0.15)';
 
   // Current price to show (changes on scrub)
   const displayPrice = hoveredPoint ? hoveredPoint.value : stock.price;

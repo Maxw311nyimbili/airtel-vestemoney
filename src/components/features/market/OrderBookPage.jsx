@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { Icons } from './Icons';
-import { MOCK_STOCKS } from '../data/mockData';
+import { Icons } from '../../Icons';
+import { MOCK_STOCKS } from '../../../data/mockData';
 
 export default function OrderBookPage({ showToast }) {
   const { symbol } = useParams();
@@ -198,10 +198,10 @@ export default function OrderBookPage({ showToast }) {
                       {/* Depth visualizer bar overlay */}
                       <div
                         className="depth-bar-fill bid-bar"
-                        style={{ width: `${(row.numericBidVol / maxBidVol) * 100}%` }}
+                        style={{ width: `${(row.numericBidVol / maxBidVol) * 80}%` }}
                       />
                       <span className="row-val size">{row.volume}</span>
-                      <span className="row-val price bid-text">ZMW {row.bid}</span>
+                      <span className="row-val price bid-text" style={{ zIndex: 2 }}>ZMW {row.bid}</span>
                     </div>
                   ))}
                 </div>
@@ -220,10 +220,10 @@ export default function OrderBookPage({ showToast }) {
                       {/* Depth visualizer bar overlay */}
                       <div
                         className="depth-bar-fill ask-bar"
-                        style={{ width: `${(row.numericAskVol / maxAskVol) * 100}%` }}
+                        style={{ width: `${(row.numericAskVol / maxAskVol) * 80}%` }}
                       />
-                      <span className="row-val price ask-text">ZMW {row.ask}</span>
-                      <span className="row-val size" style={{ textAlign: 'right' }}>{row.askVolume}</span>
+                      <span className="row-val price ask-text" style={{ zIndex: 2 }}>ZMW {row.ask}</span>
+                      <span className="row-val size" style={{ textAlign: 'right', zIndex: 2 }}>{row.askVolume}</span>
                     </div>
                   ))}
                 </div>
@@ -231,65 +231,87 @@ export default function OrderBookPage({ showToast }) {
             </div>
           </div>
 
-          {/* Depth Chart Wall Visualizer */}
-          <div className="depth-chart-panel">
-            <div className="panel-header-title">Depth Wall Chart</div>
-            
-            <div className="svg-depth-container">
-              <svg viewBox={`0 0 ${svgWidth} ${svgHeight}`} className="depth-svg">
-                {/* Background grid */}
-                <line x1="0" y1={svgHeight - chartPadding.bottom} x2={svgWidth} y2={svgHeight - chartPadding.bottom} stroke="#D1D5DB" strokeWidth="1" />
-                <line x1={svgWidth / 2} y1={chartPadding.top} x2={svgWidth / 2} y2={svgHeight - chartPadding.bottom} stroke="#9BA1B2" strokeWidth="1" strokeDasharray="3 3" />
+          {/* Depth Chart Panel */}
+          <div className="depth-chart-panel" style={{ marginBottom: '24px' }}>
+            <div className="panel-header-title">Market Depth Chart</div>
+            <div className="depth-chart-container" style={{ position: 'relative' }}>
+              <svg
+                viewBox={`0 0 ${svgWidth} ${svgHeight}`}
+                className="depth-svg"
+                style={{ width: '100%', height: 'auto', display: 'block' }}
+              >
+                <defs>
+                  <linearGradient id="bid-depth-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#10B981" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#10B981" stopOpacity="0.00" />
+                  </linearGradient>
+                  <linearGradient id="ask-depth-grad" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#EF4444" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#EF4444" stopOpacity="0.00" />
+                  </linearGradient>
+                </defs>
 
-                {/* Bids Wall Polygon (Airtel Red) */}
-                <path d={depthPoints.bidPath} fill="rgba(227, 6, 19, 0.12)" stroke="#E30613" strokeWidth="2" />
-                
-                {/* Asks Wall Polygon (Grey) */}
-                <path d={depthPoints.askPath} fill="rgba(95, 101, 119, 0.12)" stroke="#5F6577" strokeWidth="2" />
+                {/* Horizontal Grid lines */}
+                <line x1={chartPadding.left} y1={chartPadding.top} x2={svgWidth - chartPadding.right} y2={chartPadding.top} stroke="#E5E7EB" strokeWidth="0.75" strokeDasharray="3 3" />
+                <line x1={chartPadding.left} y1={(svgHeight - chartPadding.bottom + chartPadding.top) / 2} x2={svgWidth - chartPadding.right} y2={(svgHeight - chartPadding.bottom + chartPadding.top) / 2} stroke="#E5E7EB" strokeWidth="0.75" strokeDasharray="3 3" />
+                <line x1={chartPadding.left} y1={svgHeight - chartPadding.bottom} x2={svgWidth - chartPadding.right} y2={svgHeight - chartPadding.bottom} stroke="#D1D5DB" strokeWidth="1" />
 
-                {/* Mid labels */}
-                <text x={svgWidth / 2} y={svgHeight - 6} textAnchor="middle" fill="#5F6577" fontSize="10" fontWeight="700">
-                  ZMW {stock.price.toFixed(2)} (Mid Market)
+                {/* Bid Wall Shape */}
+                {depthPoints.bidPath && <path d={depthPoints.bidPath} fill="url(#bid-depth-grad)" stroke="#10B981" strokeWidth="2" strokeLinejoin="round" />}
+                {/* Ask Wall Shape */}
+                {depthPoints.askPath && <path d={depthPoints.askPath} fill="url(#ask-depth-grad)" stroke="#EF4444" strokeWidth="2" strokeLinejoin="round" />}
+
+                {/* Midline separator */}
+                <line x1={svgWidth / 2} y1={chartPadding.top} x2={svgWidth / 2} y2={svgHeight - chartPadding.bottom} stroke="#9BA1B2" strokeWidth="1" strokeDasharray="2 4" />
+
+                {/* X-Axis Labels */}
+                <text x={chartPadding.left} y={svgHeight - 4} textAnchor="start" fill="#9BA1B2" fontSize="9" fontWeight="600">
+                  ZMW {depthPoints.bids[depthPoints.bids.length - 1]?.price.toFixed(2) || '0.00'}
                 </text>
-                <text x={chartPadding.left} y={svgHeight - 6} textAnchor="start" fill="#9BA1B2" fontSize="9" fontWeight="600">
-                  ZMW {depthPoints.bids && depthPoints.bids.length > 0 ? depthPoints.bids[depthPoints.bids.length - 1].price.toFixed(2) : ''}
+                <text x={svgWidth / 2} y={svgHeight - 4} textAnchor="middle" fill="#1A1D27" fontSize="9" fontWeight="700">
+                  Spread Mid: ZMW {((parseFloat(stock.orderBook.bestBid) + parseFloat(stock.orderBook.bestAsk)) / 2).toFixed(2)}
                 </text>
-                <text x={svgWidth - chartPadding.right} y={svgHeight - 6} textAnchor="end" fill="#9BA1B2" fontSize="9" fontWeight="600">
-                  ZMW {depthPoints.asks && depthPoints.asks.length > 0 ? depthPoints.asks[depthPoints.asks.length - 1].price.toFixed(2) : ''}
+                <text x={svgWidth - chartPadding.right} y={svgHeight - 4} textAnchor="end" fill="#9BA1B2" fontSize="9" fontWeight="600">
+                  ZMW {depthPoints.asks[depthPoints.asks.length - 1]?.price.toFixed(2) || '0.00'}
                 </text>
               </svg>
             </div>
-            
-            <div className="depth-legend">
-              <div className="legend-item"><span className="legend-dot bid" /> Cumulative Buy Orders</div>
-              <div className="legend-item"><span className="legend-dot ask" /> Cumulative Sell Orders</div>
+
+            <div className="depth-legend" style={{ marginTop: '14px' }}>
+              <div className="legend-item">
+                <div className="legend-dot" style={{ background: '#10B981' }} />
+                <span>Bids (Cumulative: {(depthData.bids[depthData.bids.length - 1]?.cumulative || 0).toLocaleString()} vol)</span>
+              </div>
+              <div className="legend-item">
+                <div className="legend-dot" style={{ background: '#EF4444' }} />
+                <span>Asks (Cumulative: {(depthData.asks[depthData.asks.length - 1]?.cumulative || 0).toLocaleString()} vol)</span>
+              </div>
             </div>
           </div>
+        </div>
 
-          {/* Recent Live Execution Feed */}
-          <div className="recent-trades-panel">
-            <div className="panel-header-title">Live Executed Trades</div>
-            
-            <div className="trades-table-wrapper">
-              <div className="trades-table-header">
-                <span>Time</span>
-                <span>Type</span>
-                <span>Price</span>
-                <span style={{ textAlign: 'right' }}>Size</span>
+        {/* Recent Trades Table */}
+        <div className="recent-trades-panel">
+          <div className="panel-header-title">Recent Trade History Feed (Live)</div>
+          <div className="trades-table-header">
+            <span>Execution Time</span>
+            <span>Trade Type</span>
+            <span>Traded Price</span>
+            <span style={{ textAlign: 'right' }}>Order Size</span>
+          </div>
+          <div className="order-rows-container">
+            {mockTrades.map(trade => (
+              <div key={trade.id} className="trade-item-row">
+                <span style={{ color: '#9BA1B2' }}>{trade.time}</span>
+                <span>
+                  <span className={`trade-type ${trade.type}`} style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase' }}>
+                    {trade.type}
+                  </span>
+                </span>
+                <span className="trade-price">ZMW {trade.price.toFixed(2)}</span>
+                <span className="trade-size" style={{ textAlign: 'right' }}>{trade.size.toLocaleString()}</span>
               </div>
-              <div className="trades-list-container">
-                {mockTrades.map(trade => (
-                  <div key={trade.id} className="trade-item-row">
-                    <span className="trade-time">{trade.time}</span>
-                    <span className={`trade-type ${trade.type}`}>
-                      {trade.type.toUpperCase()}
-                    </span>
-                    <span className="trade-price">ZMW {trade.price.toFixed(2)}</span>
-                    <span className="trade-size" style={{ textAlign: 'right' }}>{trade.size}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </div>

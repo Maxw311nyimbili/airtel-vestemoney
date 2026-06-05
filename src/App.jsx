@@ -1,96 +1,83 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { HashRouter, Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 
-import LandingPage from './components/LandingPage';
-import LoginScreen from './components/LoginScreen';
-import MainDashboard from './components/MainDashboard';
-import PortfolioDashboard from './components/PortfolioDashboard';
-import MarketDashboard from './components/MarketDashboard';
-import DividendDashboard from './components/DividendDashboard';
-import StockDetailPage from './components/StockDetailPage';
-import OrderBookPage from './components/OrderBookPage';
-import Sidebar from './components/Sidebar';
+// Layout Components
+import Header from './components/layout/Header';
 
-import airtelLogo from './images/airtel_logo.png';
+// Features Components
+import LandingPage from './components/features/splash/LandingPage';
+import LoginScreen from './components/features/auth/LoginScreen';
+import MainDashboard from './components/features/dashboard/MainDashboard';
+import PortfolioDashboard from './components/features/portfolio/PortfolioDashboard';
+import MarketDashboard from './components/features/market/MarketDashboard';
+import StockDetailPage from './components/features/market/StockDetailPage';
+import OrderBookPage from './components/features/market/OrderBookPage';
+import DividendDashboard from './components/features/dividends/DividendDashboard';
+
+// Data and Assets
 import { MOCK_STOCKS } from './data/mockData';
 import { Icons } from './components/Icons';
 
+// Custom State Hooks
+import { useWallet } from './hooks/useWallet';
+import { usePortfolio } from './hooks/usePortfolio';
+
 function AppLayout({
-  phoneNumber,
-  setPhoneNumber,
-  walletBalance,
-  setWalletBalance,
-  sharesOwned,
-  setSharesOwned,
-  showToast,
-  isLoggedIn,
-  setIsLoggedIn
+  useWalletHook,
+  showToast
 }) {
+  const {
+    isLoggedIn,
+    phoneNumber,
+    setPhoneNumber,
+    walletBalance,
+    setWalletBalance,
+    sharesOwned,
+    setSharesOwned,
+    setIsLoggedIn,
+    executeTrade
+  } = useWalletHook;
+
+  const {
+    portfolioAssets,
+    dividendEarnings
+  } = usePortfolio(sharesOwned);
+
   const location = useLocation();
   const navigate = useNavigate();
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [activeTradeStock, setActiveTradeStock] = useState(null);
+  const [tradeType, setTradeType] = useState('buy');
+  const [tradeQty, setTradeQty] = useState(100);
 
-  const navItems = useMemo(() => [
-    { path: '/dashboard', label: 'Dashboard', icon: <Icons.Home /> },
-    { path: '/portfolio', label: 'Portfolio', icon: <Icons.Portfolio /> },
-    { path: '/market', label: 'Market', icon: <Icons.Market /> },
-    { path: '/dividend', label: 'Dividends', icon: <Icons.Dividend /> },
-  ], []);
-
-  const portfolioAssets = useMemo(() => {
-    let equitiesVal = 0;
-    MOCK_STOCKS.forEach(stock => {
-      if (stock.type === 'equities' && sharesOwned[stock.symbol]) {
-        equitiesVal += sharesOwned[stock.symbol] * stock.price;
-      }
-    });
-    const bondsVal = 3500.00;
-    const savingsVal = 850.00;
-    return {
-      equities: equitiesVal,
-      bonds: bondsVal,
-      savings: savingsVal,
-      total: equitiesVal + bondsVal + savingsVal
-    };
-  }, [sharesOwned]);
-
-  const dividendEarnings = useMemo(() => {
-    let monthlyEarning = 0;
-    MOCK_STOCKS.forEach(stock => {
-      if (stock.type === 'equities' && sharesOwned[stock.symbol]) {
-        monthlyEarning += (sharesOwned[stock.symbol] * stock.price * (stock.yield / 100)) / 12;
-      }
-    });
-    return { monthlyEstimated: monthlyEarning };
-  }, [sharesOwned]);
-
-  const handleTradeExecute = (type, symbol, qty, cost) => {
-    if (type === 'buy') {
-      setWalletBalance(prev => prev - cost);
-      setSharesOwned(prev => ({
-        ...prev,
-        [symbol]: (prev[symbol] || 0) + parseInt(qty)
-      }));
-    } else {
-      setWalletBalance(prev => prev + cost);
-      setSharesOwned(prev => ({
-        ...prev,
-        [symbol]: (prev[symbol] || 0) - parseInt(qty)
-      }));
+  const triggerTrade = (symbol, type = 'buy') => {
+    const stock = MOCK_STOCKS.find(s => s.symbol.toUpperCase() === symbol.toUpperCase());
+    if (stock) {
+      setActiveTradeStock(stock);
+      setTradeType(type);
+      setTradeQty(100);
     }
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    showToast('Account locked');
-    navigate('/login');
+  const handleDrawerConfirm = () => {
+    if (!activeTradeStock) return;
+    
+    const result = executeTrade(tradeType, activeTradeStock.symbol, tradeQty);
+    if (!result.success) {
+      showToast(result.error);
+      return;
+    }
+
+    showToast(`${tradeType === 'buy' ? 'Bought' : 'Sold'} ${tradeQty} shares of ${activeTradeStock.symbol}!`);
+    setActiveTradeStock(null);
   };
 
   if (location.pathname === '/') {
     return <LandingPage />;
   }
 
-  if (location.pathname === '/login') {
+  const isLoginScreen = location.pathname === '/login';
+
+  if (isLoginScreen) {
     return (
       <LoginScreen
         phoneNumber={phoneNumber}
@@ -101,44 +88,14 @@ function AppLayout({
     );
   }
 
-  // Guard routing - redirect to login if not authenticated
   if (!isLoggedIn) {
     return <Navigate to="/login" replace />;
   }
 
-  // Otherwise render sidebar + main content layout
   return (
     <div className="app-layout">
-      <Sidebar
-        phoneNumber={phoneNumber}
-        currentPath={location.pathname}
-        onNavigate={(path) => {
-          navigate(path);
-          setSidebarOpen(false);
-        }}
-        onLogout={handleLogout}
-        isOpen={sidebarOpen}
-        onClose={() => setSidebarOpen(false)}
-      />
-
-      {/* Mobile Header */}
-      <div className="mobile-header">
-        <button className="hamburger-btn" onClick={() => setSidebarOpen(true)}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-        <div className="mobile-brand">
-          <img src={airtelLogo} alt="Airtel logo" className="mobile-brand-icon" />
-        </div>
-        <button
-          className="back-btn"
-          style={{ width: 36, height: 36, border: 'none', background: 'transparent' }}
-          onClick={() => showToast('No new alerts')}
-        >
-          <Icons.Bell />
-        </button>
-      </div>
+      {/* Airtel Brand Header Component */}
+      <Header showToast={showToast} onLogout={setIsLoggedIn} />
 
       <main className="main-content">
         <Routes>
@@ -151,6 +108,8 @@ function AppLayout({
                 portfolioTotal={portfolioAssets.total}
                 dividendMonthly={dividendEarnings.monthlyEstimated}
                 showToast={showToast}
+                triggerTrade={triggerTrade}
+                onLogout={setIsLoggedIn}
               />
             }
           />
@@ -164,6 +123,7 @@ function AppLayout({
                 portfolioBonds={portfolioAssets.bonds}
                 portfolioSavings={portfolioAssets.savings}
                 showToast={showToast}
+                triggerTrade={triggerTrade}
               />
             }
           />
@@ -173,8 +133,9 @@ function AppLayout({
               <MarketDashboard
                 walletBalance={walletBalance}
                 sharesOwned={sharesOwned}
-                onTradeExecute={handleTradeExecute}
+                onTradeExecute={executeTrade}
                 showToast={showToast}
+                triggerTrade={triggerTrade}
               />
             }
           />
@@ -184,7 +145,7 @@ function AppLayout({
               <StockDetailPage
                 walletBalance={walletBalance}
                 sharesOwned={sharesOwned}
-                onTradeExecute={handleTradeExecute}
+                onTradeExecute={(type, sym, qty) => executeTrade(type, sym, qty)}
                 showToast={showToast}
               />
             }
@@ -193,9 +154,6 @@ function AppLayout({
             path="/market/:symbol/orderbook"
             element={
               <OrderBookPage
-                walletBalance={walletBalance}
-                sharesOwned={sharesOwned}
-                onTradeExecute={handleTradeExecute}
                 showToast={showToast}
               />
             }
@@ -213,43 +171,99 @@ function AppLayout({
         </Routes>
       </main>
 
-      {/* Mobile Bottom Navigation Bar */}
-      <nav className="mobile-bottom-nav">
-        {navItems.map(item => {
-          const isActive = location.pathname === item.path || 
-            (item.path === '/market' && location.pathname.startsWith('/market/'));
-          return (
-            <button
-              key={item.path}
-              className={`mobile-nav-item ${isActive ? 'active' : ''}`}
-              onClick={() => navigate(item.path)}
-            >
-              <div className="mobile-nav-icon">{item.icon}</div>
-              <span className="mobile-nav-label">{item.label}</span>
-            </button>
-          );
-        })}
-      </nav>
+
+
+      {/* Slide-Up Trade Drawer overlay */}
+      {activeTradeStock && (
+        <>
+          <div className="trade-drawer-overlay" onClick={() => setActiveTradeStock(null)} />
+          <div className="trade-drawer">
+            <div className="trade-drawer-header">
+              <h3>Confirm Order</h3>
+              <button className="trade-drawer-close" onClick={() => setActiveTradeStock(null)}>×</button>
+            </div>
+
+            <div className="trade-drawer-body">
+              <div className="trade-drawer-stock-info">
+                <span className="trade-drawer-symbol">{activeTradeStock.symbol}</span>
+                <span className="trade-drawer-name">{activeTradeStock.name}</span>
+                <span className="trade-drawer-price">ZMW {activeTradeStock.price.toFixed(2)}</span>
+              </div>
+
+              <div className="trade-drawer-tabs">
+                <button
+                  className={`trade-drawer-tab buy ${tradeType === 'buy' ? 'active' : ''}`}
+                  onClick={() => setTradeType('buy')}
+                >
+                  Buy
+                </button>
+                <button
+                  className={`trade-drawer-tab sell ${tradeType === 'sell' ? 'active' : ''}`}
+                  onClick={() => setTradeType('sell')}
+                >
+                  Sell
+                </button>
+              </div>
+
+              <div className="trade-drawer-balance-info">
+                {tradeType === 'buy' ? (
+                  <span>Airtel Balance: ZMW {walletBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+                ) : (
+                  <span>Owned: {sharesOwned[activeTradeStock.symbol] || 0} shares</span>
+                )}
+              </div>
+
+              <div className="trade-drawer-qty-selector">
+                <label>Quantity</label>
+                <div className="qty-input-row">
+                  <button onClick={() => setTradeQty(q => Math.max(1, q - 10))}>-10</button>
+                  <input
+                    type="number"
+                    min="1"
+                    value={tradeQty}
+                    onChange={(e) => setTradeQty(Math.max(1, parseInt(e.target.value) || 1))}
+                  />
+                  <button onClick={() => setTradeQty(q => q + 10)}>+10</button>
+                </div>
+
+                <div className="qty-presets">
+                  {[10, 50, 100, 500].map(preset => (
+                    <button key={preset} onClick={() => setTradeQty(preset)}>
+                      {preset}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="trade-drawer-summary">
+                <div className="summary-row">
+                  <span>Est. Price:</span>
+                  <span>ZMW {activeTradeStock.price.toFixed(2)}</span>
+                </div>
+                <div className="summary-row total">
+                  <span>Total {tradeType === 'buy' ? 'Cost' : 'Proceeds'}:</span>
+                  <span>ZMW {(activeTradeStock.price * tradeQty).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+                </div>
+              </div>
+
+              <button className="trade-drawer-confirm-btn" onClick={handleDrawerConfirm} style={{ width: '100%' }}>
+                Confirm {tradeType === 'buy' ? 'Purchase' : 'Sale'}
+              </button>
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 }
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState('978541220');
-  const [walletBalance, setWalletBalance] = useState(1280.50);
+  const walletHook = useWallet();
   const [toast, setToast] = useState('');
-  const [sharesOwned, setSharesOwned] = useState({
-    ATEL: 1200,
-    CEC: 850,
-    ZCCM: 100,
-    ZMBF: 400,
-    PUMA: 0
-  });
 
   const showToast = (message) => setToast(message);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (toast) {
       const timer = setTimeout(() => setToast(''), 3000);
       return () => clearTimeout(timer);
@@ -268,15 +282,8 @@ export default function App() {
       )}
 
       <AppLayout
-        phoneNumber={phoneNumber}
-        setPhoneNumber={setPhoneNumber}
-        walletBalance={walletBalance}
-        setWalletBalance={setWalletBalance}
-        sharesOwned={sharesOwned}
-        setSharesOwned={setSharesOwned}
+        useWalletHook={walletHook}
         showToast={showToast}
-        isLoggedIn={isLoggedIn}
-        setIsLoggedIn={setIsLoggedIn}
       />
     </HashRouter>
   );
