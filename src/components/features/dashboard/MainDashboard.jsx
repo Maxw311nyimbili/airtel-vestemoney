@@ -2,32 +2,33 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MOCK_STOCKS } from '../../../data/mockData';
 
+// ─── Mini sparkline SVG ───────────────────────────────────────────
+function Sparkline({ data, positive }) {
+  if (!data || data.length < 2) return null;
+  const w = 64, h = 28;
+  const min = Math.min(...data);
+  const max = Math.max(...data);
+  const range = max - min || 1;
+  const pts = data.map((v, i) => {
+    const x = (i / (data.length - 1)) * w;
+    const y = h - ((v - min) / range) * (h - 4) - 2;
+    return `${x},${y}`;
+  }).join(' ');
+  const color = positive ? '#16A34A' : '#E30613';
+  return (
+    <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill="none">
+      <polyline points={pts} stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 // ─── Help / FAQ data ─────────────────────────────────────────────
 const FAQ = [
-  {
-    q: 'What is the Lusaka Securities Exchange (LuSE)?',
-    a: 'LuSE is Zambia\'s official stock exchange where shares of publicly listed companies are bought and sold.'
-  },
-  {
-    q: 'How do I buy shares?',
-    a: 'Tap the LuSE Market card, pick any company, and press Buy. Payment is deducted from your Airtel Money wallet.'
-  },
-  {
-    q: 'What are dividends?',
-    a: 'Dividends are cash rewards companies pay to shareholders from their profits, usually once or twice a year.'
-  },
-  {
-    q: 'Is my investment safe?',
-    a: 'Investments are held through Veste Money, a licensed Zambian broker. Share values can go up or down.'
-  },
-  {
-    q: 'How do I withdraw my money?',
-    a: 'Sell your shares in the LuSE Market section. Proceeds are credited back to your Airtel Money wallet.'
-  },
-  {
-    q: 'What is a government bond?',
-    a: 'A bond is a loan you give to the Zambian government. They pay you guaranteed interest and return your money at maturity.'
-  },
+  { q: 'What is the Lusaka Securities Exchange (LuSE)?', a: 'LuSE is Zambia\'s official stock exchange where shares of publicly listed companies are bought and sold.' },
+  { q: 'How do I buy shares?', a: 'Tap Buy Shares, pick any company, and confirm. Payment is deducted from your Airtel Money wallet.' },
+  { q: 'What are dividends?', a: 'Dividends are cash rewards companies pay to shareholders from their profits, usually once or twice a year.' },
+  { q: 'Is my investment safe?', a: 'Investments are held through Veste Money, a licensed Zambian broker. Share values can go up or down.' },
+  { q: 'How do I withdraw my money?', a: 'Sell your shares in the LuSE Market section. Proceeds are credited back to your Airtel Money wallet.' },
 ];
 
 // ─── Main component ──────────────────────────────────────────────
@@ -45,21 +46,20 @@ export default function MainDashboard({
   const navigate = useNavigate();
   const [helpOpen, setHelpOpen] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
+  const [hideValue, setHideValue] = useState(false);
 
-  // Portfolio P&L
-  const costBasis    = portfolioTotal * 0.871;
-  const pnlValue     = portfolioTotal - costBasis;
-  const pnlPct       = ((pnlValue / costBasis) * 100).toFixed(2);
+  // P&L
+  const costBasis     = portfolioTotal * 0.871;
+  const pnlValue      = portfolioTotal - costBasis;
+  const pnlPct        = ((pnlValue / costBasis) * 100).toFixed(2);
   const isPnlPositive = pnlValue >= 0;
 
-  // Top movers (sorted by abs change, pick top 3)
-  const topMovers = [...MOCK_STOCKS.filter(s => s.type === 'equities')]
-    .sort((a, b) => Math.abs(b.change) - Math.abs(a.change))
-    .slice(0, 4);
+  // Popular stocks — top 6
+  const popularStocks = [...MOCK_STOCKS.filter(s => s.type === 'equities')].slice(0, 6);
 
   return (
     <>
-      <div className="screen-container dashboard-screen slide-in-right" style={{ background: 'var(--bg-body)' }}>
+      <div className="screen-container dashboard-screen slide-in-right">
         <div className="dash-wrapper">
 
           {/* ── Greeting ── */}
@@ -67,122 +67,118 @@ export default function MainDashboard({
             <span className="dash-greeting-text">Welcome, {userName || 'there'}</span>
           </div>
 
-          {/* ── Portfolio summary card ── */}
-          <div className="invest-portfolio-card">
-            <div className="invest-card-pattern" />
-            <div className="invest-card-top-row">
-              <span className="invest-card-label">Overall Portfolio</span>
-              <span className="invest-card-badge">LuSE</span>
-            </div>
-            <div className="invest-card-value-row">
-              <span className="invest-card-value">
-                ZMW {portfolioTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+          {/* ── Portfolio card ── */}
+          <div className="dash-port-card">
+            <span className="dash-port-label">Portfolio Value</span>
+            <div className="dash-port-value-row">
+              <span className="dash-port-value">
+                {hideValue
+                  ? 'ZMW ••••••'
+                  : `ZMW ${portfolioTotal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
               </span>
+              <button className="dash-port-eye" onClick={() => setHideValue(v => !v)} aria-label="Toggle visibility">
+                {hideValue ? (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                    <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                    <line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                ) : (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                    <circle cx="12" cy="12" r="3"/>
+                  </svg>
+                )}
+              </button>
             </div>
-            <div className="invest-card-stats">
-              <div className="invest-card-stat">
-                <span className="invest-stat-label">Invested</span>
-                <span className="invest-stat-val">
-                  ZMW {costBasis.toLocaleString('en-US', { maximumFractionDigits: 0 })}
+            <div className="dash-port-stats">
+              <div className="dash-port-stat">
+                <span className="dash-port-stat-lbl">Invested</span>
+                <span className="dash-port-stat-val">ZMW {costBasis.toLocaleString('en-US', { maximumFractionDigits: 0 })}</span>
+              </div>
+              <div className="dash-port-stat-sep" />
+              <div className="dash-port-stat">
+                <span className="dash-port-stat-lbl">Profit / Loss</span>
+                <span className={`dash-port-stat-val ${isPnlPositive ? 'gain-up' : 'gain-dn'}`}>
+                  {isPnlPositive ? '+' : ''}ZMW {Math.abs(pnlValue).toLocaleString('en-US', { maximumFractionDigits: 2 })}
                 </span>
               </div>
-              <div className="invest-card-divider" />
-              <div className="invest-card-stat">
-                <span className="invest-stat-label">Profit / Loss</span>
-                <span className={`invest-stat-val ${isPnlPositive ? 'invest-stat-profit' : 'invest-stat-loss'}`}>
-                  {isPnlPositive ? '▲' : '▼'} ZMW {Math.abs(pnlValue).toLocaleString('en-US', { maximumFractionDigits: 2 })}
-                </span>
-              </div>
-              <div className="invest-card-divider" />
-              <div className="invest-card-stat">
-                <span className="invest-stat-label">Return</span>
-                <span className={`invest-stat-val ${isPnlPositive ? 'invest-stat-profit' : 'invest-stat-loss'}`}>
+              <div className="dash-port-stat-sep" />
+              <div className="dash-port-stat">
+                <span className="dash-port-stat-lbl">Return</span>
+                <span className={`dash-port-stat-val ${isPnlPositive ? 'gain-up' : 'gain-dn'}`}>
                   {isPnlPositive ? '+' : ''}{pnlPct}%
                 </span>
               </div>
             </div>
           </div>
 
-          {/* ── 2×2 Service cards ── */}
-          <div className="service-cards-grid">
-
-            <button className="svc-card" onClick={() => navigate('/portfolio')}>
-              <div className="svc-card-icon svc-icon-portfolio">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="7" width="20" height="14" rx="2"/>
-                  <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-                  <line x1="12" y1="12" x2="12" y2="16"/>
-                  <line x1="10" y1="14" x2="14" y2="14"/>
-                </svg>
-              </div>
-              <span className="svc-card-title">My Portfolio</span>
-              <span className="svc-card-desc">View your holdings &amp; bonds</span>
+          {/* ── Quick Actions ── */}
+          <div className="dash-quick-actions">
+            <button className="dash-qa-btn qa-market" onClick={() => navigate('/market')}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+                <polyline points="16 7 22 7 22 13"/>
+              </svg>
+              <span>LuSE Market</span>
             </button>
 
-            <button className="svc-card" onClick={() => navigate('/dividend')}>
-              <div className="svc-card-icon svc-icon-dividend">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M12 6v6l4 2"/>
-                  <path d="M8.5 14.5A4 4 0 0 0 12 16a4 4 0 0 0 3.5-1.5"/>
-                </svg>
-              </div>
-              <span className="svc-card-title">Dividends</span>
-              <span className="svc-card-desc">Track your cash payouts</span>
+            <button className="dash-qa-btn qa-dividend" onClick={() => navigate('/dividend')}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 6v6l4 2"/>
+              </svg>
+              <span>Dividend</span>
             </button>
 
-            <button className="svc-card" onClick={() => navigate('/market')}>
-              <div className="svc-card-icon svc-icon-market">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-                  <polyline points="16 7 22 7 22 13"/>
-                </svg>
-              </div>
-              <span className="svc-card-title">LuSE Market</span>
-              <span className="svc-card-desc">Buy &amp; sell shares</span>
+            <button className="dash-qa-btn qa-portfolio" onClick={() => navigate('/portfolio')}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="7" width="20" height="14" rx="2"/>
+                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+              </svg>
+              <span>My Portfolio</span>
             </button>
 
-            <button className="svc-card" onClick={() => setHelpOpen(true)}>
-              <div className="svc-card-icon svc-icon-help">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <circle cx="12" cy="12" r="10"/>
-                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                  <line x1="12" y1="17" x2="12.01" y2="17"/>
-                </svg>
-              </div>
-              <span className="svc-card-title">Help &amp; FAQ</span>
-              <span className="svc-card-desc">Guides &amp; support</span>
+            <button className="dash-qa-btn qa-help" onClick={() => setHelpOpen(true)}>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <line x1="12" y1="17" x2="12.01" y2="17"/>
+              </svg>
+              <span>Help</span>
             </button>
-
           </div>
 
-          {/* ── Top Movers ── */}
+          {/* ── Popular Stocks ── */}
           <div className="dash-section">
             <div className="dash-section-header">
-              <span className="dash-section-title">Top Movers Today</span>
-              <button className="dash-section-link" onClick={() => navigate('/market')}>See all</button>
+              <span className="dash-section-title">Popular Stocks</span>
+              <button className="dash-section-link" onClick={() => navigate('/market')}>See All</button>
             </div>
-            <div className="movers-list">
-              {topMovers.map(stock => (
-                <div key={stock.symbol} className="mover-row" onClick={() => navigate(`/market/${stock.symbol}`)}>
-                  <div className="mover-logo" style={{ background: stock.color }}>
+
+            <div className="dash-stocks-list">
+              {popularStocks.map(stock => (
+                <div key={stock.symbol} className="dash-stock-row" onClick={() => navigate(`/market/${stock.symbol}`)}>
+                  <div className="dash-stock-logo" style={{ background: stock.color }}>
                     {stock.symbol.slice(0, 3)}
                   </div>
-                  <div className="mover-info">
-                    <span className="mover-sym">{stock.symbol}</span>
-                    <span className="mover-name">{stock.name.split(' ').slice(0, 2).join(' ')}</span>
+                  <div className="dash-stock-info">
+                    <span className="dash-stock-sym">{stock.symbol}</span>
+                    <span className="dash-stock-name">{stock.name}</span>
                   </div>
-                  <div className="mover-right">
-                    <span className="mover-price">ZMW {stock.price.toFixed(2)}</span>
-                    <span className={`mover-change ${stock.change >= 0 ? 'chg-up' : 'chg-dn'}`}>
-                      {stock.change >= 0 ? '▲' : '▼'} {Math.abs(stock.change).toFixed(2)}%
+                  <div className="dash-stock-spark">
+                    <Sparkline data={stock.trend} positive={stock.change >= 0} />
+                  </div>
+                  <div className="dash-stock-right">
+                    <span className="dash-stock-price">ZMW {stock.price.toFixed(2)}</span>
+                    <span className={`dash-stock-chg ${stock.change >= 0 ? 'chg-up' : 'chg-dn'}`}>
+                      {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)}%
                     </span>
                   </div>
                 </div>
               ))}
             </div>
           </div>
-
 
         </div>
       </div>
@@ -224,9 +220,7 @@ export default function MainDashboard({
                       <polyline points="6 9 12 15 18 9"/>
                     </svg>
                   </button>
-                  {openFaq === i && (
-                    <div className="faq-answer">{item.a}</div>
-                  )}
+                  {openFaq === i && <div className="faq-answer">{item.a}</div>}
                 </div>
               ))}
             </div>
