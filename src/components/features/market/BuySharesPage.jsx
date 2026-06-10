@@ -5,45 +5,178 @@ import { MOCK_STOCKS } from '../../../data/mockData';
 import airtelLogo from '../../../images/airtel_logo.png';
 
 const PRESETS = [50, 100, 500, 1000];
+const FEE_RATE = 0.015;
 
+function genOrderId() {
+  return 'INV' + Math.random().toString(36).substr(2, 9).toUpperCase();
+}
+
+/* ── Step 1: Order Review ── */
+function OrderReview({ stock, amount, shares, onBack, onContinue }) {
+  const fees  = amount * FEE_RATE;
+  const total = amount + fees;
+  const rows = [
+    { label: 'Order Type',       value: 'Buy',  cls: 'orev-type-buy' },
+    { label: 'Stock',            value: stock.name },
+    { label: 'Current Price',    value: `ZMW ${stock.price.toFixed(2)}` },
+    { label: 'Amount',           value: `ZMW ${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}` },
+    { label: 'Estimated Shares', value: `${shares} Shares` },
+    { label: 'Fees (1.5%)',      value: `ZMW ${fees.toFixed(2)}` },
+  ];
+  return (
+    <div className="order-modal-overlay">
+      <div className="order-modal-header">
+        <button className="back-btn" onClick={onBack}><Icons.ChevronLeft /></button>
+        <span className="order-modal-title">Order Review</span>
+      </div>
+      <div className="order-modal-body">
+        <div className="orev-rows">
+          {rows.map(r => (
+            <div key={r.label} className="orev-row">
+              <span className="orev-label">{r.label}</span>
+              <span className={`orev-value ${r.cls || ''}`}>{r.value}</span>
+            </div>
+          ))}
+          <div className="orev-row orev-total">
+            <span className="orev-label">Total</span>
+            <span className="orev-value">ZMW {total.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+          </div>
+        </div>
+        <div className="orev-pay-section">
+          <span className="orev-pay-label">Pay with</span>
+          <div className="orev-pay-row">
+            <img src={airtelLogo} alt="Airtel" className="orev-pay-logo" />
+            <span className="orev-pay-name">Airtel Money</span>
+          </div>
+        </div>
+      </div>
+      <div className="order-modal-footer">
+        <button className="order-cta-btn" onClick={onContinue}>Continue to PIN</button>
+      </div>
+    </div>
+  );
+}
+
+/* ── Step 2: PIN Entry ── */
+function PinEntry({ onBack, onSuccess }) {
+  const [pin, setPin] = useState('');
+  const handleKey = (key) => {
+    if (key === 'del') { setPin(p => p.slice(0, -1)); return; }
+    if (pin.length >= 4) return;
+    const next = pin + key;
+    setPin(next);
+    if (next.length === 4) setTimeout(onSuccess, 350);
+  };
+  const keys = ['1','2','3','4','5','6','7','8','9','','0','del'];
+  return (
+    <div className="order-modal-overlay">
+      <div className="order-modal-header">
+        <button className="back-btn" onClick={onBack}><Icons.ChevronLeft /></button>
+        <span className="order-modal-title">Enter Airtel PIN</span>
+      </div>
+      <div className="pin-modal-body">
+        <p className="pin-modal-subtitle">Enter your Airtel Money PIN to complete the transaction</p>
+        <div className="pin-dots">
+          {[0,1,2,3].map(i => <div key={i} className={`pin-dot ${i < pin.length ? 'filled' : ''}`} />)}
+        </div>
+        <button className="pin-forgot">Forgot PIN?</button>
+        <div className="pin-numpad">
+          {keys.map((k, i) =>
+            k === '' ? <div key={i} className="pin-key empty" /> :
+            k === 'del' ? (
+              <button key={i} className="pin-key pin-del" onClick={() => handleKey('del')}>
+                <svg width="22" height="16" viewBox="0 0 24 18" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M9 3H21a1 1 0 011 1v10a1 1 0 01-1 1H9l-6-6 6-6z"/>
+                  <line x1="13" y1="8" x2="17" y2="12"/><line x1="17" y1="8" x2="13" y2="12"/>
+                </svg>
+              </button>
+            ) : (
+              <button key={i} className="pin-key" onClick={() => handleKey(k)}>{k}</button>
+            )
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Step 3: Success ── */
+function OrderSuccess({ stock, amount, shares, orderId, onViewPortfolio, onBackHome }) {
+  const fees  = amount * FEE_RATE;
+  const total = amount + fees;
+  const now   = new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
+  const rows  = [
+    { label: 'Amount Paid',   value: `ZMW ${total.toLocaleString('en-US', { minimumFractionDigits: 2 })}` },
+    { label: 'Stock',         value: stock.name },
+    { label: 'Shares Bought', value: `${shares} Shares` },
+    { label: 'Order ID',      value: orderId },
+    { label: 'Date & Time',   value: now },
+  ];
+  return (
+    <div className="order-modal-overlay success-overlay">
+      <div className="success-top">
+        <div className="success-check-circle">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="20 6 9 17 4 12" />
+          </svg>
+        </div>
+        <h2 className="success-heading">Order Successful!</h2>
+        <p className="success-sub-text">You have successfully bought {shares} shares of {stock.name}.</p>
+      </div>
+      <div className="success-card">
+        {rows.map(r => (
+          <div key={r.label} className="orev-row">
+            <span className="orev-label">{r.label}</span>
+            <span className="orev-value">{r.value}</span>
+          </div>
+        ))}
+      </div>
+      <div className="success-actions">
+        <button className="order-cta-btn" onClick={onViewPortfolio}>View Portfolio</button>
+        <button className="success-home-btn" onClick={onBackHome}>Back to Home</button>
+      </div>
+    </div>
+  );
+}
+
+/* ── Main Page ── */
 export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecute, showToast }) {
   const { symbol } = useParams();
-  const navigate = useNavigate();
+  const navigate   = useNavigate();
   const stock = useMemo(
     () => MOCK_STOCKS.find(s => s.symbol.toUpperCase() === symbol?.toUpperCase()),
     [symbol]
   );
 
   const [selectedAmount, setSelectedAmount] = useState(100);
-  const [customMode, setCustomMode] = useState(false);
-  const [customValue, setCustomValue] = useState('');
-  const [confirmed, setConfirmed] = useState(false);
+  const [customMode,     setCustomMode]     = useState(false);
+  const [customValue,    setCustomValue]    = useState('');
+  const [step,           setStep]           = useState('select');
+  const [orderId,        setOrderId]        = useState('');
 
   if (!stock) return null;
 
-  const investAmount = customMode ? (parseFloat(customValue) || 0) : selectedAmount;
+  const investAmount    = customMode ? (parseFloat(customValue) || 0) : selectedAmount;
   const estimatedShares = investAmount > 0 ? Math.floor(investAmount / stock.price) : 0;
-  const canBuy = investAmount > 0 && investAmount <= walletBalance && estimatedShares >= 1;
+  const canBuy          = investAmount > 0 && investAmount <= walletBalance && estimatedShares >= 1;
 
   const handleReviewOrder = () => {
     if (!canBuy) {
-      if (investAmount > walletBalance) showToast('Insufficient Airtel Money balance.');
-      else showToast('Enter a valid investment amount.');
+      showToast(investAmount > walletBalance ? 'Insufficient Airtel Money balance.' : 'Enter a valid investment amount.');
       return;
     }
-    setConfirmed(true);
+    setStep('review');
   };
 
-  const handleConfirm = () => {
+  const handlePinSuccess = () => {
+    const id = genOrderId();
+    setOrderId(id);
     onTradeExecute('buy', stock.symbol, estimatedShares);
-    showToast(`Bought ${estimatedShares} shares of ${stock.symbol}!`);
-    navigate(`/market/${stock.symbol}`);
+    setStep('success');
   };
 
   return (
     <div className="screen-container slide-in-right sd-page">
-
-      {/* ── Header ── */}
       <div className="pf-header">
         <button className="back-btn" onClick={() => navigate(`/market/${stock.symbol}`)}>
           <Icons.ChevronLeft />
@@ -52,12 +185,8 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
       </div>
 
       <div className="trade-page-body">
-
-        {/* ── Stock summary card ── */}
         <div className="trade-stock-card">
-          <div className="trade-stock-logo" style={{ background: stock.color }}>
-            {stock.symbol.slice(0, 3)}
-          </div>
+          <div className="trade-stock-logo" style={{ background: stock.color }}>{stock.symbol.slice(0,3)}</div>
           <div className="trade-stock-info">
             <span className="trade-stock-name">{stock.name}</span>
             <span className="trade-stock-price-lbl">Current Price</span>
@@ -68,43 +197,30 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
           </span>
         </div>
 
-        {/* ── Amount to invest ── */}
         <div className="trade-section">
           <span className="trade-section-title">Amount to Invest</span>
           <div className="trade-presets">
             {PRESETS.map(amt => (
-              <button
-                key={amt}
+              <button key={amt}
                 className={`trade-preset-btn ${!customMode && selectedAmount === amt ? 'active' : ''}`}
-                onClick={() => { setCustomMode(false); setSelectedAmount(amt); }}
-              >
+                onClick={() => { setCustomMode(false); setSelectedAmount(amt); }}>
                 ZMW {amt.toLocaleString()}
               </button>
             ))}
-            <button
-              className={`trade-preset-btn ${customMode ? 'active' : ''}`}
-              onClick={() => { setCustomMode(true); setSelectedAmount(0); }}
-            >
+            <button className={`trade-preset-btn ${customMode ? 'active' : ''}`}
+              onClick={() => { setCustomMode(true); setSelectedAmount(0); }}>
               Custom Amount
             </button>
           </div>
           {customMode && (
             <div className="trade-custom-input-wrap">
               <span className="trade-custom-prefix">ZMW</span>
-              <input
-                type="number"
-                className="trade-custom-input"
-                placeholder="0.00"
-                value={customValue}
-                onChange={e => setCustomValue(e.target.value)}
-                autoFocus
-                min="0"
-              />
+              <input type="number" className="trade-custom-input" placeholder="0.00"
+                value={customValue} onChange={e => setCustomValue(e.target.value)} autoFocus min="0" />
             </div>
           )}
         </div>
 
-        {/* ── Estimated shares ── */}
         <div className="trade-section trade-est-row">
           <div>
             <span className="trade-section-title">Estimated Shares</span>
@@ -113,7 +229,6 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
           <span className="trade-est-value">{estimatedShares} Shares</span>
         </div>
 
-        {/* ── Payment method ── */}
         <div className="trade-section">
           <span className="trade-section-title">Payment Method</span>
           <div className="trade-payment-row">
@@ -122,41 +237,34 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
             </div>
             <div className="trade-payment-info">
               <span className="trade-payment-name">Airtel Money</span>
-              <span className="trade-payment-bal">Available Balance: ZMW {walletBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
+              <span className="trade-payment-bal">Available: ZMW {walletBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
             </div>
             <div className="trade-payment-check">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#ffffff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="20 6 9 17 4 12" />
               </svg>
             </div>
           </div>
         </div>
-
       </div>
 
-      {/* ── Review Order / Confirm ── */}
       <div className="sd-bottom-bar">
-        {!confirmed ? (
-          <button
-            className={`trade-review-btn ${canBuy ? '' : 'disabled'}`}
-            onClick={handleReviewOrder}
-          >
-            Review Order
-          </button>
-        ) : (
-          <div className="trade-confirm-area">
-            <div className="trade-confirm-summary">
-              <span>Buying <strong>{estimatedShares} shares</strong> of <strong>{stock.symbol}</strong></span>
-              <span>Total: <strong>ZMW {investAmount.toLocaleString('en-US', { minimumFractionDigits: 2 })}</strong></span>
-            </div>
-            <div className="trade-confirm-btns">
-              <button className="trade-cancel-btn" onClick={() => setConfirmed(false)}>Cancel</button>
-              <button className="trade-confirm-btn" onClick={handleConfirm}>Confirm Buy</button>
-            </div>
-          </div>
-        )}
+        <button className={`trade-review-btn ${canBuy ? '' : 'disabled'}`} onClick={handleReviewOrder}>
+          Review Order
+        </button>
       </div>
 
+      {step === 'review' && (
+        <OrderReview stock={stock} amount={investAmount} shares={estimatedShares}
+          onBack={() => setStep('select')} onContinue={() => setStep('pin')} />
+      )}
+      {step === 'pin' && (
+        <PinEntry onBack={() => setStep('review')} onSuccess={handlePinSuccess} />
+      )}
+      {step === 'success' && (
+        <OrderSuccess stock={stock} amount={investAmount} shares={estimatedShares} orderId={orderId}
+          onViewPortfolio={() => navigate('/portfolio')} onBackHome={() => navigate('/dashboard')} />
+      )}
     </div>
   );
 }

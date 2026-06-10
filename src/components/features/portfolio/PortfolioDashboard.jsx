@@ -169,7 +169,7 @@ export default function PortfolioDashboard({
                   {/* Trade button */}
                   <button
                     className="pf-trade-btn"
-                    onClick={e => { e.stopPropagation(); triggerTrade(stock.symbol); }}
+                    onClick={e => { e.stopPropagation(); navigate(`/market/${stock.symbol}`); }}
                   >
                     Trade
                   </button>
