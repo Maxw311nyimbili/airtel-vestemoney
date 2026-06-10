@@ -294,8 +294,8 @@ export default function OrderBookPage({ showToast }) {
               >
                 <defs>
                   <linearGradient id="bid-depth-grad" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="0%" stopColor="#10B981" stopOpacity="0.25" />
-                    <stop offset="100%" stopColor="#10B981" stopOpacity="0.00" />
+                    <stop offset="0%" stopColor="#1A1D23" stopOpacity="0.25" />
+                    <stop offset="100%" stopColor="#1A1D23" stopOpacity="0.00" />
                   </linearGradient>
                   <linearGradient id="ask-depth-grad" x1="0" y1="0" x2="0" y2="1">
                     <stop offset="0%" stopColor="#EF4444" stopOpacity="0.25" />
@@ -309,7 +309,7 @@ export default function OrderBookPage({ showToast }) {
                 <line x1={chartPadding.left} y1={svgHeight - chartPadding.bottom} x2={svgWidth - chartPadding.right} y2={svgHeight - chartPadding.bottom} stroke="#D1D5DB" strokeWidth="1" />
 
                 {/* Bid Wall Shape */}
-                {depthPoints.bidPath && <path d={depthPoints.bidPath} fill="url(#bid-depth-grad)" stroke="#10B981" strokeWidth="2" strokeLinejoin="round" />}
+                {depthPoints.bidPath && <path d={depthPoints.bidPath} fill="url(#bid-depth-grad)" stroke="#1A1D23" strokeWidth="2" strokeLinejoin="round" />}
                 {/* Ask Wall Shape */}
                 {depthPoints.askPath && <path d={depthPoints.askPath} fill="url(#ask-depth-grad)" stroke="#EF4444" strokeWidth="2" strokeLinejoin="round" />}
 
@@ -331,7 +331,7 @@ export default function OrderBookPage({ showToast }) {
 
             <div className="depth-legend" style={{ marginTop: '14px' }}>
               <div className="legend-item">
-                <div className="legend-dot" style={{ background: '#10B981' }} />
+                <div className="legend-dot" style={{ background: '#1A1D23' }} />
                 <span>Buy Orders Depth ({(depthData.bids[depthData.bids.length - 1]?.cumulative || 0).toLocaleString()} shares)</span>
               </div>
               <div className="legend-item">

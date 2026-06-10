@@ -103,7 +103,7 @@ export default function PortfolioDashboard({
           </div>
 
           <div className="pf-bucket">
-            <div className="pf-bucket-icon" style={{ background: '#F0FDF4', color: '#16A34A' }}>
+            <div className="pf-bucket-icon" style={{ background: '#F4F5F7', color: '#1A1D23' }}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/>
                 <path d="M12 8v4l3 3"/>

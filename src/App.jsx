@@ -12,6 +12,8 @@ import MainDashboard from './components/features/dashboard/MainDashboard';
 import PortfolioDashboard from './components/features/portfolio/PortfolioDashboard';
 import MarketDashboard from './components/features/market/MarketDashboard';
 import StockDetailPage from './components/features/market/StockDetailPage';
+import BuySharesPage from './components/features/market/BuySharesPage';
+import SellSharesPage from './components/features/market/SellSharesPage';
 import OrderBookPage from './components/features/market/OrderBookPage';
 import DividendDashboard from './components/features/dividends/DividendDashboard';
 import SettingsPage from './components/features/settings/SettingsPage';
@@ -140,6 +142,28 @@ function AppLayout({ useWalletHook, showToast }) {
             path="/market/:symbol"
             element={
               <StockDetailPage
+                walletBalance={walletBalance}
+                sharesOwned={sharesOwned}
+                onTradeExecute={(type, sym, qty) => executeTrade(type, sym, qty)}
+                showToast={showToast}
+              />
+            }
+          />
+          <Route
+            path="/market/:symbol/buy"
+            element={
+              <BuySharesPage
+                walletBalance={walletBalance}
+                sharesOwned={sharesOwned}
+                onTradeExecute={(type, sym, qty) => executeTrade(type, sym, qty)}
+                showToast={showToast}
+              />
+            }
+          />
+          <Route
+            path="/market/:symbol/sell"
+            element={
+              <SellSharesPage
                 walletBalance={walletBalance}
                 sharesOwned={sharesOwned}
                 onTradeExecute={(type, sym, qty) => executeTrade(type, sym, qty)}

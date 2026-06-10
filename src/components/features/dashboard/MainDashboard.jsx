@@ -14,7 +14,7 @@ function Sparkline({ data, positive }) {
     const y = h - ((v - min) / range) * (h - 4) - 2;
     return `${x},${y}`;
   }).join(' ');
-  const color = positive ? '#16A34A' : '#E30613';
+  const color = positive ? '#4B5563' : '#E30613';
   return (
     <svg width={w} height={h} viewBox={`0 0 ${w} ${h}`} fill="none">
       <polyline points={pts} stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

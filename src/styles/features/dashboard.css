@@ -22,9 +22,9 @@
 /* ── Portfolio card ── */
 .dash-port-card {
   background: #E30613;
-  border-radius: 16px;
-  padding: 20px;
-  margin-bottom: 20px;
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 14px;
   box-shadow: 0 8px 24px rgba(227,6,19,0.22);
   position: relative;
   overflow: hidden;
@@ -46,7 +46,7 @@
   color: rgba(255,255,255,0.8);
   letter-spacing: 0.01em;
   display: block;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .dash-port-value-row {
@@ -57,7 +57,7 @@
 }
 
 .dash-port-value {
-  font-size: 30px;
+  font-size: 26px;
   font-weight: 800;
   color: #ffffff;
   letter-spacing: -0.5px;
@@ -81,7 +81,7 @@
   gap: 0;
   background: rgba(0,0,0,0.15);
   border-radius: 10px;
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
 .dash-port-stat {
@@ -111,13 +111,13 @@
   color: #ffffff;
 }
 
-.dash-port-stat-val.gain-up { color: #86EFAC; }
+.dash-port-stat-val.gain-up { color: rgba(255,255,255,0.85); }
 .dash-port-stat-val.gain-dn { color: #FCA5A5; }
 
 /* ── Quick Actions ── */
 .dash-quick-actions {
   display: flex;
-  gap: 8px;
+  gap: 6px;
   margin-bottom: 24px;
 }
 
@@ -128,8 +128,8 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
-  padding: 12px 4px;
-  border-radius: 12px;
+  padding: 10px 4px;
+  border-radius: 10px;
   border: none;
   cursor: pointer;
   font-family: inherit;
@@ -153,20 +153,20 @@
 }
 
 .qa-market    { background: #E30613; color: #ffffff; }
-.qa-dividend  { background: #16A34A; color: #ffffff; }
-.qa-portfolio { background: #7C3AED; color: #ffffff; }
+.qa-dividend  { background: #2D3142; color: #ffffff; }
+.qa-portfolio { background: #2D3142; color: #ffffff; }
 .qa-help      { background: #F4F5F7; color: #1A1D23; }
 
 /* ── Section header ── */
 .dash-section {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .dash-section-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .dash-section-title {
@@ -200,7 +200,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-bottom: 1px solid #F4F5F7;
   cursor: pointer;
   transition: background 0.15s;
@@ -215,8 +215,8 @@
 }
 
 .dash-stock-logo {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -272,6 +272,9 @@
   font-size: 12px;
   font-weight: 600;
 }
+
+.dash-stock-chg.chg-up { color: #4B5563; }
+.dash-stock-chg.chg-dn { color: #E30613; }
 
 .balance-hero-card {
   background: #E30613;
@@ -549,7 +552,7 @@
 /* ── Dashboard wrapper ── */
 .dash-wrapper {
   max-width: 100%;
-  padding: 0 16px 96px;
+  padding: 0 14px 96px;
 }
 
 
@@ -825,7 +828,7 @@
   font-weight: 800;
 }
 
-.invest-stat-profit { color: #86EFAC; }
+.invest-stat-profit { color: rgba(255,255,255,0.85); }
 .invest-stat-loss   { color: #FCA5A5; }
 
 .invest-card-divider {
@@ -1089,7 +1092,7 @@
 }
 
 /* ── Change colours ── */
-.chg-up { color: #16A34A; }
+.chg-up { color: #1A1D23; }
 .chg-dn { color: var(--primary-red); }
 
 /* ── Empty state ── */
@@ -1150,7 +1153,7 @@
   flex-shrink: 0;
 }
 
-.activity-icon-green { background: #ECFDF5; color: #10B981; }
+.activity-icon-green { background: #F4F5F7; color: #1A1D23; }
 .activity-icon-red   { background: #FEF2F2; color: #EF4444; }
 
 .activity-info {
@@ -1182,7 +1185,7 @@
   flex-shrink: 0;
 }
 
-.amount-green  { color: #10B981; }
+.amount-green  { color: #1A1D23; }
 .amount-default { color: var(--text-primary); }
 
 /* ── Dividend tab ── */
@@ -1288,7 +1291,7 @@
 .dividend-est-positive {
   font-size: 12px;
   font-weight: 700;
-  color: #10B981;
+  color: #1A1D23;
 }
 
 .dividend-no-shares {
@@ -1333,7 +1336,7 @@
   flex-shrink: 0;
 }
 
-.market-open { background: #10B981; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
+.market-open { background: #1A1D23; box-shadow: 0 0 0 3px rgba(16,185,129,0.2); }
 .market-closed { background: #9BA1B2; }
 
 .market-status-text {
@@ -1363,7 +1366,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 12px 14px;
+  padding: 10px 12px;
   border-bottom: 1px solid var(--border-light);
   cursor: pointer;
   transition: background 0.15s ease;
