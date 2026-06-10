@@ -294,8 +294,7 @@
 
 /* ── Dashboard wrapper ── */
 .dash-wrapper {
-  max-width: 540px;
-  margin: 0 auto;
+  max-width: 100%;
   padding: 0 16px 96px;
 }
 

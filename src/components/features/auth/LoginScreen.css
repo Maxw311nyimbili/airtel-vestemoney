@@ -51,11 +51,10 @@
 }
 
 .otp-airtel-logo {
-  height: 32px;
+  height: 44px;
   width: auto;
-  /* Make logo appear white on red */
-  filter: brightness(0) invert(1);
   object-fit: contain;
+  filter: brightness(0) invert(1);
 }
 
 .otp-header-text {
@@ -308,8 +307,9 @@
 }
 
 .otp-veste-logo {
-  height: 16px;
+  height: 22px;
   width: auto;
+  object-fit: contain;
   opacity: 0.6;
 }
 

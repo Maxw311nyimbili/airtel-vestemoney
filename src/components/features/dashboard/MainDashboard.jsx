@@ -64,7 +64,7 @@ export default function MainDashboard({
 
           {/* ── Greeting ── */}
           <div className="dash-greeting">
-            <span className="dash-greeting-text">Welcome, {userName || 'there'} 👋</span>
+            <span className="dash-greeting-text">Welcome, {userName || 'there'}</span>
           </div>
 
           {/* ── Portfolio summary card ── */}

@@ -52,19 +52,18 @@
 }
 
 .splash-logo-airtel {
-  height: 32px;
+  height: 42px;
   width: auto;
   object-fit: contain;
-  /* make white logo visible on red bg */
   filter: brightness(0) invert(1);
 }
 
 .splash-logo-veste {
-  height: 22px;
+  height: 56px;
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 .splash-logo-divider {
@@ -242,9 +241,9 @@
 }
 
 .splash-powered-logo {
-  height: 16px;
+  height: 32px;
   width: auto;
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 /* ── Compact screens ── */
@@ -260,8 +259,8 @@
   }
 }
 
-/* ── Desktop / Tablet ── */
-@media (min-width: 640px) {
+/* ── Desktop only ── */
+@media (min-width: 1024px) {
   .splash-page {
     flex-direction: row;
     align-items: stretch;

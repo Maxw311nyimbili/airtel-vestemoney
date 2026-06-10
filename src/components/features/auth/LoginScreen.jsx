@@ -127,7 +127,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
         </button>
 
         <div className="otp-header-brand">
-          <img src={airtelLogo} alt="Airtel logo" className="otp-airtel-logo" />
+          <img src={airtelLogo} alt="Airtel" className="otp-airtel-logo" />
         </div>
 
         <div className="otp-header-text">
@@ -232,7 +232,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
         <div className="otp-footer">
           <div className="otp-powered">
             <span>Powered by</span>
-            <img src={vesteLogo} alt="Veste logo" className="otp-veste-logo" />
+            <img src={vesteLogo} alt="Veste Money" className="otp-veste-logo" />
           </div>
         </div>
       </div>
