@@ -1,3 +1,7 @@
+/* ============================
+   LANDING PAGE – AIRTEL INVEST
+   ============================ */
+
 .splash-page {
   height: 100vh;
   height: 100dvh;
@@ -5,75 +9,161 @@
   display: flex;
   flex-direction: column;
   background: #ffffff;
-  position: relative;
   overflow: hidden;
-  box-sizing: border-box;
 }
 
-.splash-hero-image {
+/* ── Hero ─────────────────────────────── */
+.splash-hero {
+  position: relative;
   flex: 1;
-  width: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   min-height: 0;
-}
-
-.splash-bottom-card {
-  background: #ffffff;
-  border-radius: 36px 36px 0 0;
-  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.08);
-  padding: 32px 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.splash-hero-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(155deg, #C40510 0%, #E30613 55%, #9F050D 100%);
+}
+
+/* Subtle radial overlays */
+.splash-hero-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 15% 85%, rgba(255,255,255,0.08) 0%, transparent 55%),
+    radial-gradient(ellipse at 85% 15%, rgba(255,255,255,0.06) 0%, transparent 55%);
+}
+
+/* ── Logos bar ── */
+.splash-logos {
   position: relative;
-  z-index: 10;
-  margin-top: -36px; /* pull overlay up on image */
-  box-sizing: border-box;
-  flex-shrink: 0;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 24px 0;
+  align-self: flex-start;
 }
 
-/* Split screen layout on desktop/laptop viewports */
-@media (min-width: 1024px) {
-  .splash-page {
-    flex-direction: row;
-    align-items: stretch;
-    min-height: 100vh;
-  }
-
-  .splash-hero-image {
-    flex: 1;
-    min-height: 100vh;
-    height: 100vh;
-  }
-
-  .splash-bottom-card {
-    width: 480px;
-    height: 100vh;
-    border-radius: 0;
-    margin-top: 0;
-    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.04);
-    justify-content: center;
-    padding: 40px;
-  }
-}
-
-.splash-brand {
-  margin-bottom: 4px;
-}
-
-.splash-logo {
-  height: 44px;
+.splash-logo-airtel {
+  height: 32px;
   width: auto;
   object-fit: contain;
-  display: block;
+  /* make white logo visible on red bg */
+  filter: brightness(0) invert(1);
 }
 
-.splash-signup-btn {
+.splash-logo-veste {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.85;
+}
+
+.splash-logo-divider {
+  width: 1px;
+  height: 20px;
+  background: rgba(255,255,255,0.35);
+}
+
+/* ── Hero image area ── */
+.splash-image-area {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px 24px;
+}
+
+/* The actual hero photo — add src to this img tag */
+.splash-hero-img {
+  width: 100%;
+  max-width: 360px;
+  height: 100%;
+  max-height: 280px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 20px 48px rgba(0,0,0,0.3);
+}
+
+/* Placeholder shown until user supplies their own image */
+.splash-hero-img-placeholder {
   width: 100%;
   max-width: 320px;
+  height: 200px;
+  border: 2px dashed rgba(255,255,255,0.35);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: rgba(255,255,255,0.5);
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ── Bottom Card ─────────────────────────────── */
+.splash-bottom-card {
+  background: #ffffff;
+  border-radius: 28px 28px 0 0;
+  box-shadow: 0 -6px 24px rgba(0,0,0,0.08);
+  padding: 12px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  z-index: 10;
+}
+
+.splash-card-handle {
+  width: 36px;
+  height: 4px;
+  background: #E5E7EB;
+  border-radius: 2px;
+  margin-bottom: 20px;
+}
+
+.splash-title {
+  font-size: 26px;
+  font-weight: 800;
+  color: #1A1D27;
+  margin: 0 0 8px;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+.splash-subtitle {
+  font-size: 13px;
+  color: #5F6577;
+  text-align: center;
+  line-height: 1.55;
+  max-width: 280px;
+  margin: 0 0 20px;
+}
+
+/* ── Buttons ── */
+.splash-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 10px;
+}
+
+.splash-btn-primary {
+  width: 100%;
   height: 52px;
   border-radius: 14px;
   background: #E30613;
@@ -82,70 +172,130 @@
   font-weight: 700;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(227, 6, 19, 0.25);
-  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(227,6,19,0.28);
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  font-family: inherit;
 }
 
-.splash-signup-btn:hover {
+.splash-btn-primary:active {
   background: #C40510;
+  transform: scale(0.98);
 }
 
-/* Horizontal input placeholder matching the screenshot */
-.splash-input-placeholder {
+.splash-btn-outline {
   width: 100%;
-  max-width: 320px;
   height: 52px;
   border-radius: 14px;
-  border: 1.5px solid #d1d5db;
   background: #ffffff;
   color: #1A1D27;
-  font-family: var(--font-body);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
+  border: 1.5px solid #E5E7EB;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  box-sizing: border-box;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+  font-family: inherit;
 }
 
-.splash-input-placeholder:hover {
-  background: #f9fafb;
-  border-color: #9ca3af;
+.splash-btn-outline:active {
+  border-color: #E30613;
+  color: #E30613;
+  background: #FFF1F2;
 }
 
-.text-red-500 h2 {
-  font-family: var(--font-display);
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  font-size: 24px;
-  margin: 4px 0;
-}
-
-.text-black {
-  color: #5F6577 !important;
-  font-size: 11px;
-  text-align: center;
-  line-height: 1.4;
+.splash-btn-ghost {
+  background: none;
+  border: none;
+  color: #9BA1B2;
+  font-size: 13px;
   font-weight: 500;
-  display: block;
-  max-width: 280px;
+  cursor: pointer;
+  padding: 8px 12px;
+  margin-bottom: 12px;
+  font-family: inherit;
+  text-decoration: underline;
+  text-decoration-color: #D1D5DB;
+  text-underline-offset: 3px;
 }
 
-.splash-powered-by {
+/* ── Footer ── */
+.splash-footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   gap: 6px;
+}
+
+.splash-terms {
   font-size: 11px;
-  color: #9ba1b2;
-  margin-top: 8px;
+  color: #C4C9D4;
   text-align: center;
+  max-width: 260px;
+  line-height: 1.4;
+}
+
+.splash-powered {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  color: #C4C9D4;
 }
 
 .splash-powered-logo {
-  width: 60px;
-  height: auto;
+  height: 16px;
+  width: auto;
+  opacity: 0.5;
+}
+
+/* ── Compact screens ── */
+@media (max-height: 640px) {
+  .splash-hero-img-placeholder {
+    height: 140px;
+  }
+  .splash-subtitle {
+    display: none;
+  }
+  .splash-bottom-card {
+    padding: 12px 24px 20px;
+  }
+}
+
+/* ── Desktop / Tablet ── */
+@media (min-width: 640px) {
+  .splash-page {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .splash-hero {
+    flex: 1;
+    min-height: 100vh;
+    justify-content: flex-start;
+  }
+
+  .splash-logos {
+    padding: 32px 32px 0;
+  }
+
+  .splash-image-area {
+    padding: 32px;
+  }
+
+  .splash-hero-img-placeholder {
+    max-width: 420px;
+    height: 320px;
+  }
+
+  .splash-bottom-card {
+    width: 400px;
+    min-height: 100vh;
+    border-radius: 0;
+    box-shadow: -4px 0 24px rgba(0,0,0,0.06);
+    justify-content: center;
+    padding: 48px 40px;
+  }
+
+  .splash-card-handle {
+    display: none;
+  }
 }

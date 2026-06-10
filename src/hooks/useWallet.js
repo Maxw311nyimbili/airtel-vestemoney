@@ -3,6 +3,7 @@ import { StocksService } from '../services/api';
 
 export function useWallet() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('Mercy');
   const [phoneNumber, setPhoneNumber] = useState('978541220');
   const [walletBalance, setWalletBalance] = useState(1280.50);
   const [sharesOwned, setSharesOwned] = useState({
@@ -45,6 +46,8 @@ export function useWallet() {
   return {
     isLoggedIn,
     setIsLoggedIn,
+    userName,
+    setUserName,
     phoneNumber,
     setPhoneNumber,
     walletBalance,

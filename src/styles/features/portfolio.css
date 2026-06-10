@@ -1,165 +1,338 @@
-/* Portfolio Analytics Grid */
-.analytics-row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
+/* ═══════════════════════════════════════════════════════════════
+   Portfolio Dashboard — mobile-first, single-focus cards
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Page wrapper ── */
+.pf-wrapper {
+  padding: 0 0 40px;
 }
 
-.analytics-card {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 20px;
-}
-
-.analytics-card .label {
-  font-size: 12px;
-  color: var(--text-tertiary);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 8px;
-}
-
-.analytics-card .value {
-  font-family: var(--font-display);
-  font-weight: 800;
-  font-size: 22px;
-  margin-bottom: 4px;
-}
-
-.analytics-card .change {
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.analytics-card .change.positive {
-  color: var(--success);
-}
-
-.subsection-title {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 16px;
-  margin-bottom: 14px;
-  color: var(--text-primary);
-  margin-top: 24px;
-}
-
-/* Asset Allocation Rows */
-.asset-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 28px;
-}
-
-.asset-row {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  padding: 16px 20px;
+/* ── Header bar ── */
+.pf-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 12px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border-light);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.pf-header-title {
+  flex: 1;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--text-primary);
+  letter-spacing: -0.3px;
+}
+
+.pf-header-action {
+  background: none;
+  border: 1.5px solid var(--primary-red);
+  color: var(--primary-red);
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 20px;
+  cursor: pointer;
   transition: var(--transition);
 }
 
-.asset-row:hover {
+.pf-header-action:hover {
+  background: var(--primary-red);
+  color: #fff;
+}
+
+/* ── Hero value card ── */
+.pf-hero-card {
+  position: relative;
+  margin: 16px 16px 0;
+  background: linear-gradient(135deg, #E30613 0%, #B8040F 100%);
+  border-radius: 18px;
+  padding: 22px 20px 18px;
+  color: #fff;
+  overflow: hidden;
+}
+
+.pf-hero-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 80% 20%, rgba(255,255,255,0.12) 0%, transparent 50%),
+                    radial-gradient(circle at 10% 80%, rgba(0,0,0,0.08) 0%, transparent 40%);
+  pointer-events: none;
+}
+
+.pf-hero-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  opacity: 0.75;
+  margin-bottom: 6px;
+}
+
+.pf-hero-value {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 30px;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+
+.pf-hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  background: rgba(0,0,0,0.18);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.pf-hero-stat {
+  flex: 1;
+  padding: 10px 12px;
+}
+
+.pf-stat-sep {
+  width: 1px;
+  height: 32px;
+  background: rgba(255,255,255,0.25);
+}
+
+.pf-stat-lbl {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  opacity: 0.65;
+  margin-bottom: 3px;
+}
+
+.pf-stat-val {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.pf-profit { color: #86EFAC; }
+.pf-loss   { color: #FCA5A5; }
+
+/* ── Section label ── */
+.pf-section-label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-tertiary);
+  padding: 20px 16px 10px;
+  margin: 0;
+}
+
+/* ── Asset buckets (single column, icon + name + value + % change) ── */
+.pf-buckets {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.pf-bucket {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 14px 16px;
+  transition: var(--transition);
+}
+
+.pf-bucket:hover {
   border-color: var(--border-color);
   box-shadow: var(--shadow-xs);
 }
 
-.asset-left {
+.pf-bucket-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
   display: flex;
   align-items: center;
-  gap: 14px;
-}
-
-.asset-bullet {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
+  justify-content: center;
   flex-shrink: 0;
 }
 
-.asset-label {
+.pf-bucket-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.pf-bucket-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.pf-bucket-name {
+  display: block;
+  font-size: 13px;
   font-weight: 600;
-  font-size: 14px;
+  color: var(--text-secondary);
   margin-bottom: 2px;
 }
 
-.asset-sub {
-  font-size: 12px;
-  color: var(--text-tertiary);
-}
-
-.asset-right {
-  text-align: right;
-}
-
-.asset-value {
+.pf-bucket-value {
+  display: block;
   font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 800;
+  font-size: 16px;
+  color: var(--text-primary);
 }
 
-.asset-yield {
+.pf-bucket-chg {
   font-size: 12px;
-  font-weight: 600;
-  color: var(--primary-red);
-}
-
-/* Transaction History Feed */
-.tx-list {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.tx-row {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-sm);
-  padding: 16px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  transition: var(--transition);
-}
-
-.tx-row:hover {
-  border-color: var(--border-color);
-}
-
-.tx-title {
-  font-weight: 600;
-  font-size: 14px;
-  margin-bottom: 2px;
-}
-
-.tx-date {
-  font-size: 12px;
-  color: var(--text-tertiary);
-}
-
-.tx-amount {
-  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 14px;
   white-space: nowrap;
 }
 
-.tx-amount.credit {
-  color: var(--primary-red);
+.chg-up { color: #16A34A; }
+.chg-dn { color: var(--primary-red); }
+
+/* ── Holdings list ── */
+.pf-holdings {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
 }
 
-.tx-amount.debit {
-  color: var(--danger);
+.pf-holding-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 12px 14px;
+  cursor: pointer;
+  transition: var(--transition);
 }
 
-/* Dividend Income Calculator */
+.pf-holding-card:hover {
+  border-color: var(--border-color);
+  box-shadow: var(--shadow-xs);
+}
+
+.pf-holding-logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: 0.3px;
+  flex-shrink: 0;
+}
+
+.pf-holding-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.pf-holding-sym {
+  display: block;
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.pf-holding-qty {
+  display: block;
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 500;
+  margin-top: 1px;
+}
+
+.pf-holding-right {
+  text-align: right;
+}
+
+.pf-holding-val {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.pf-holding-chg {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+.pf-trade-btn {
+  background: var(--primary-red);
+  color: #fff;
+  border: none;
+  padding: 7px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  flex-shrink: 0;
+  margin-left: 4px;
+}
+
+.pf-trade-btn:hover {
+  background: var(--primary-red-dark, #B8040F);
+}
+
+/* ── Empty state ── */
+.pf-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 36px 16px;
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.pf-empty-cta {
+  background: var(--primary-red);
+  color: #fff;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 24px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 4px;
+}
+
+.pf-empty-cta:hover {
+  opacity: 0.88;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   Dividend Page — retained from original
+   ═══════════════════════════════════════════════════════════════ */
+
 .calc-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-light);
@@ -214,12 +387,14 @@
   background: var(--bg-surface);
   color: var(--text-primary);
   transition: var(--transition);
+  box-sizing: border-box;
 }
 
 .calc-field select:focus,
 .calc-field input:focus {
   border-color: var(--primary-red);
   box-shadow: 0 0 0 3px var(--primary-red-10);
+  outline: none;
 }
 
 .calc-result {
@@ -245,7 +420,6 @@
   color: var(--text-primary);
 }
 
-/* Upcoming Dividend Calendar */
 .dividend-list {
   display: flex;
   flex-direction: column;
@@ -263,9 +437,7 @@
   transition: var(--transition);
 }
 
-.dividend-row:hover {
-  border-color: var(--border-color);
-}
+.dividend-row:hover { border-color: var(--border-color); }
 
 .dividend-row-symbol {
   font-weight: 600;
@@ -293,20 +465,20 @@
   text-align: right;
 }
 
-/* Responsive Overrides */
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .calc-inputs {
     grid-template-columns: 1fr;
     gap: 12px;
   }
-  
+
   .dividend-row {
     padding: 14px 16px;
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
   }
-  
+
   .dividend-row-rate,
   .dividend-row-payout {
     text-align: left;
@@ -321,20 +493,8 @@
     height: 40px;
   }
 
-  .calc-result {
-    padding: 16px;
-  }
+  .calc-result { padding: 16px; }
+  .calc-result-value { font-size: 22px; }
 
-  .calc-result-value {
-    font-size: 22px;
-  }
-}
-
-@media (max-width: 480px) {
-  .calc-field select,
-  .calc-field input {
-    padding: 6px 10px !important;
-    font-size: 12.5px !important;
-    height: 36px !important;
-  }
+  .pf-hero-value { font-size: 26px; }
 }

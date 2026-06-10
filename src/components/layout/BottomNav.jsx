@@ -7,16 +7,17 @@ export default function BottomNav() {
   const navigate = useNavigate();
 
   const navItems = useMemo(() => [
-    { path: '/dashboard', label: 'Dashboard', icon: <Icons.Home /> },
+    { path: '/dashboard', label: 'Home',      icon: <Icons.Home />      },
     { path: '/portfolio', label: 'Portfolio', icon: <Icons.Portfolio /> },
-    { path: '/market', label: 'Market', icon: <Icons.Market /> },
-    { path: '/dividend', label: 'Dividends', icon: <Icons.Dividend /> },
+    { path: '/market',    label: 'Market',    icon: <Icons.Market />    },
+    { path: '/dividend',  label: 'Dividends', icon: <Icons.Dividend />  },
+    { path: '/settings',  label: 'Settings',  icon: <Icons.Settings />  },
   ], []);
 
   return (
     <nav className="mobile-bottom-nav">
       {navItems.map(item => {
-        const isActive = location.pathname === item.path || 
+        const isActive = location.pathname === item.path ||
           (item.path === '/market' && location.pathname.startsWith('/market/'));
         return (
           <button

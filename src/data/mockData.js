@@ -372,7 +372,7 @@ export const MOCK_STOCKS = [
     type: 'equities',
     color: '#9F050D',
     marketOpen: '09:45 AM',
-    availableShares: '#E30613',
+    availableShares: '4.3M',
     sector: 'Consumer',
     trend: [6.95, 6.90, 6.88, 6.85, 6.81, 6.85, 6.82, 6.80, 6.83, 6.80],
     open: 6.86,
@@ -407,7 +407,7 @@ export const MOCK_STOCKS = [
     prevClose: 2.50,
     dayLow: 2.44,
     dayHigh: 2.56,
-    volume: '#5F6577',
+    volume: '5.3K',
     orderBook: {
       bestBid: '2.46',
       speed: 'Low',
@@ -497,7 +497,7 @@ export const MOCK_STOCKS = [
       speed: 'Low',
       bestAsk: '5.24',
       rows: [
-        { volume: '#E30613', bid: '5.15', ask: '5.24', askVolume: '850' },
+        { volume: '1.2K', bid: '5.15', ask: '5.24', askVolume: '850' },
         { volume: '700', bid: '5.12', ask: '5.26', askVolume: '1.0K' },
         { volume: '450', bid: '5.09', ask: '5.28', askVolume: '600' }
       ]
@@ -643,60 +643,6 @@ export const MOCK_STOCKS = [
       ]
     }
   },
-  {
-    symbol: 'GRZ10Y',
-    name: 'GRZ 10-Yr Government Bond',
-    price: 100.00,
-    change: 0.15,
-    yield: 23.50,
-    type: 'bonds',
-    color: '#E30613',
-    marketOpen: '08:00 AM',
-    availableShares: '12.2M',
-    sector: 'Government',
-    open: 99.85,
-    prevClose: 99.85,
-    dayLow: 99.50,
-    dayHigh: 100.00,
-    volume: '42.7K',
-    orderBook: {
-      bestBid: '99.90',
-      speed: 'Medium',
-      bestAsk: '100.02',
-      rows: [
-        { volume: '3.8K', bid: '99.90', ask: '100.02', askVolume: '3.2K' },
-        { volume: '2.4K', bid: '99.88', ask: '100.04', askVolume: '2.9K' },
-        { volume: '1.5K', bid: '99.86', ask: '100.06', askVolume: '2.1K' }
-      ]
-    }
-  },
-  {
-    symbol: 'GRZ364',
-    name: 'GRZ 364-Day Treasury Bill',
-    price: 82.50,
-    change: 0.00,
-    yield: 18.00,
-    type: 'bonds',
-    color: '#5F6577',
-    marketOpen: '08:00 AM',
-    availableShares: '6.9M',
-    sector: 'Government',
-    open: 82.50,
-    prevClose: 82.50,
-    dayLow: 82.10,
-    dayHigh: 82.60,
-    volume: '27.6K',
-    orderBook: {
-      bestBid: '82.48',
-      speed: 'Low',
-      bestAsk: '82.52',
-      rows: [
-        { volume: '2.0K', bid: '82.48', ask: '82.52', askVolume: '1.7K' },
-        { volume: '1.3K', bid: '82.46', ask: '82.54', askVolume: '1.2K' },
-        { volume: '870', bid: '82.44', ask: '82.56', askVolume: '980' }
-      ]
-    }
-  }
 ];
 
 export const MOCK_TRANSACTIONS = [

@@ -1,84 +1,247 @@
-.banking-login-page {
+/* ============================
+   LOGIN / OTP – AIRTEL STYLE
+   ============================ */
+
+.otp-page {
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
+  display: flex;
+  flex-direction: column;
   background: #ffffff;
+}
+
+/* ── Red Header ─────────────────────────────── */
+.otp-header {
+  background: linear-gradient(135deg, #C40510 0%, #E30613 100%);
+  padding: 48px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  border-radius: 0 0 36px 36px;
+  box-shadow: 0 8px 32px rgba(227,6,19,0.25);
+}
+
+.otp-back-btn {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px 24px;
-  box-sizing: border-box;
+  cursor: pointer;
+  transition: background 0.2s ease;
 }
 
-.banking-login-container {
-  width: 100%;
-  max-width: 360px;
+.otp-back-btn:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.otp-header-brand {
+  display: flex;
+  justify-content: center;
+  padding-top: 8px;
+}
+
+.otp-airtel-logo {
+  height: 32px;
+  width: auto;
+  /* Make logo appear white on red */
+  filter: brightness(0) invert(1);
+  object-fit: contain;
+}
+
+.otp-header-text {
+  text-align: center;
+}
+
+.otp-header-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0 0 8px;
+  letter-spacing: -0.3px;
+}
+
+.otp-header-sub {
+  font-size: 13.5px;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.otp-header-sub strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+/* ── Body ─────────────────────────────── */
+.otp-body {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  min-height: 75vh;
-  box-sizing: border-box;
+  padding: 32px 24px 24px;
 }
 
-@media (min-width: 600px) {
-  .banking-login-page {
-    background: #fafafa;
-  }
-  .banking-login-container {
-    background: #ffffff;
-    padding: 40px;
-    border-radius: 24px;
-    box-shadow: 0 12px 32px rgba(0,0,0,0.04);
-    border: 1px solid #f0f0f0;
-    min-height: auto;
-    gap: 32px;
-  }
-}
-
-.banking-login-form {
+.otp-form {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 24px;
+  gap: 20px;
   flex: 1;
-  justify-content: center;
 }
 
-.banking-login-title {
-  font-family: var(--font-body);
-  font-size: 22px;
-  font-weight: 700;
-  color: #000000;
-  text-align: center;
-  margin-bottom: 4px;
-}
-
-.banking-input-group {
-  width: 100%;
-}
-
-.banking-input-field {
-  width: 100%;
-  height: 52px;
+/* ── Phone Input ─────────────────────────────── */
+.otp-phone-field {
+  display: flex;
+  align-items: center;
+  border: 2px solid #E5E7EB;
   border-radius: 14px;
-  border: 1.5px solid #d1d5db;
-  padding: 12px 18px;
-  font-size: 16px;
-  font-weight: 600;
-  text-align: center;
+  overflow: hidden;
   background: #ffffff;
-  color: #000000;
-  box-sizing: border-box;
   transition: border-color 0.2s ease;
+  height: 58px;
 }
 
-.banking-input-field:focus {
+.otp-phone-field:focus-within {
   border-color: #E30613;
-  outline: none;
+  box-shadow: 0 0 0 3px rgba(227,6,19,0.1);
 }
 
-.banking-signup-btn {
+.otp-phone-prefix {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 14px;
+  background: #F9FAFB;
+  height: 100%;
+  border-right: 2px solid #E5E7EB;
+  flex-shrink: 0;
+}
+
+.otp-flag {
+  font-size: 18px;
+  line-height: 1;
+}
+
+.otp-prefix-code {
+  font-size: 16px;
+  font-weight: 700;
+  color: #1A1D27;
+  white-space: nowrap;
+}
+
+.otp-phone-input {
+  flex: 1;
+  height: 100%;
+  border: none;
+  background: transparent;
+  padding: 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1A1D27;
+  letter-spacing: 2px;
+  font-family: var(--font-body);
+}
+
+.otp-phone-input::placeholder {
+  color: #D1D5DB;
+  letter-spacing: 1px;
+  font-weight: 400;
+}
+
+/* ── OTP Boxes ─────────────────────────────── */
+.otp-boxes-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  padding: 8px 0;
+}
+
+.otp-box {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  border: 2px solid #E5E7EB;
+  background: #F9FAFB;
+  font-size: 26px;
+  font-weight: 800;
+  color: #1A1D27;
+  text-align: center;
+  font-family: var(--font-display);
+  cursor: text;
+  transition: all 0.2s ease;
+  outline: none;
+  caret-color: #E30613;
+}
+
+.otp-box:focus {
+  border-color: #E30613;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(227,6,19,0.12);
+  transform: scale(1.04);
+}
+
+.otp-box.otp-box-filled {
+  border-color: #E30613;
+  background: #FFF1F2;
+  color: #E30613;
+}
+
+/* ── Timer + Resend ─────────────────────────────── */
+.otp-timer-row {
+  display: flex;
+  justify-content: center;
+  min-height: 24px;
+}
+
+.otp-timer-text {
+  font-size: 13.5px;
+  color: #9BA1B2;
+  font-weight: 500;
+}
+
+.otp-timer-count {
+  font-weight: 700;
+  color: #5F6577;
+}
+
+.otp-resend-btn {
+  background: none;
+  border: none;
+  color: #E30613;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--font-body);
+  padding: 0;
+}
+
+.otp-resend-btn:hover {
+  text-decoration: underline;
+}
+
+/* ── Hint text ─────────────────────────────── */
+.otp-hint {
+  font-size: 12.5px;
+  color: #9BA1B2;
+  text-align: center;
+  line-height: 1.4;
+  margin-top: -8px;
+}
+
+/* ── Primary Button ─────────────────────────────── */
+.otp-primary-btn {
   width: 100%;
-  height: 52px;
+  height: 54px;
   border-radius: 14px;
   background: #E30613;
   color: #ffffff;
@@ -86,82 +249,98 @@
   font-weight: 700;
   border: none;
   cursor: pointer;
-  transition: background 0.2s ease;
-}
-
-.banking-signup-btn:hover:not(:disabled) {
-  background: #C40510;
-}
-
-.banking-signup-btn:disabled {
-  background: #e5e7eb;
-  color: #9ca3af;
-  cursor: not-allowed;
-}
-
-.banking-back-link {
-  background: none;
-  border: none;
-  color: #E30613;
-  font-weight: 600;
-  font-size: 13px;
-  cursor: pointer;
-  text-align: center;
+  box-shadow: 0 4px 16px rgba(227,6,19,0.28);
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
   margin-top: 4px;
 }
 
-.banking-bypass-container {
+.otp-primary-btn:hover:not(:disabled) {
+  background: #C40510;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(227,6,19,0.35);
+}
+
+.otp-primary-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.otp-primary-btn:disabled {
+  background: #F3F4F6;
+  color: #D1D5DB;
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+/* ── Change phone link ─────────────────────────────── */
+.otp-change-phone {
+  background: none;
+  border: none;
+  color: #9BA1B2;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+  font-family: var(--font-body);
+  padding: 4px;
+}
+
+.otp-change-phone:hover {
+  color: #5F6577;
+}
+
+/* ── Footer ─────────────────────────────── */
+.otp-footer {
+  margin-top: auto;
+  padding-top: 24px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px;
-  margin-top: 32px;
+  gap: 8px;
 }
 
-.banking-bypass-btn {
-  background: none;
-  border: none;
-  color: #9ba1b2;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.banking-bypass-btn:hover {
-  color: #5f6577;
-}
-
-.banking-powered-by {
+.otp-powered {
   display: flex;
   align-items: center;
   gap: 6px;
   font-size: 11px;
-  color: #9ba1b2;
+  color: #9BA1B2;
 }
 
-.banking-powered-logo {
-  width: 60px;
-  height: auto;
+.otp-veste-logo {
+  height: 16px;
+  width: auto;
+  opacity: 0.6;
 }
 
-.banking-login-header {
-  margin-bottom: 8px;
-}
+/* ── Desktop / Tablet ─────────────────────────────── */
+@media (min-width: 600px) {
+  .otp-page {
+    background: #F5F6FA;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 24px;
+  }
 
-.login-back-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--bg-surface);
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  cursor: pointer;
-  transition: var(--transition);
-}
+  .otp-page > * {
+    width: 100%;
+    max-width: 420px;
+  }
 
-.login-back-btn:hover {
-  background: var(--border-light);
+  .otp-header {
+    border-radius: 24px 24px 0 0;
+    padding: 48px 40px 36px;
+  }
+
+  .otp-body {
+    background: #ffffff;
+    border-radius: 0 0 24px 24px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    padding: 36px 40px 32px;
+    flex: unset;
+  }
+
+  .otp-form {
+    flex: unset;
+  }
 }

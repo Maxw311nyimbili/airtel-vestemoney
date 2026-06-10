@@ -1,7 +1,29 @@
-import React, { useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS } from '../../../data/mockData';
+
+function InfoTip({ title, content }) {
+  const [show, setShow] = useState(false);
+  return (
+    <>
+      <button 
+        type="button" 
+        className="jargon-help-icon" 
+        onClick={(e) => { e.stopPropagation(); setShow(!show); }}
+        style={{ marginLeft: '6px' }}
+      >
+        ?
+      </button>
+      {show && (
+        <div className="jargon-tooltip-card" onClick={(e) => e.stopPropagation()} style={{ marginTop: '8px', marginBottom: '8px', textAlign: 'left', fontWeight: 'normal' }}>
+          <p style={{ margin: 0 }}><strong>{title}:</strong> {content}</p>
+          <button type="button" className="close-btn" onClick={() => setShow(false)}>Dismiss</button>
+        </div>
+      )}
+    </>
+  );
+}
 
 export default function OrderBookPage({ showToast }) {
   const { symbol } = useParams();
@@ -22,7 +44,7 @@ export default function OrderBookPage({ showToast }) {
               <Icons.ChevronLeft />
             </button>
             <div>
-              <h1>Order book not found</h1>
+              <h1>Offers not found</h1>
             </div>
           </div>
         </div>
@@ -148,18 +170,37 @@ export default function OrderBookPage({ showToast }) {
             <Icons.ChevronLeft />
           </button>
           <div>
-            <h1>{stock.symbol} Order Book</h1>
-            <p className="page-description">Real-time market depth and trade execution feed for {stock.name}.</p>
+            <h1>{stock.symbol} Buyer &amp; Seller Offers</h1>
+            <p className="page-description">Real-time buyer offers and seller proposals for {stock.name}.</p>
           </div>
-          <button className="header-action-text" onClick={() => showToast('Order book depth refreshed')}>
-            Refresh Depth
+          <button className="header-action-text" onClick={() => showToast('Offers list refreshed')}>
+            Refresh Offers
           </button>
+        </div>
+
+        {/* Jargon Explainer Banner */}
+        <div style={{ 
+          background: 'var(--primary-red-light)', 
+          borderLeft: '4px solid var(--primary-red)', 
+          padding: '16px', 
+          borderRadius: 'var(--radius-sm)', 
+          marginBottom: '24px', 
+          fontSize: '13px', 
+          lineHeight: '1.5',
+          color: 'var(--text-primary)'
+        }}>
+          <strong>💡 How to read this page:</strong> This page shows lists of offers from other investors on the market.
+          <ul style={{ margin: '8px 0 0 16px', padding: 0 }}>
+            <li><strong>Buy Offers (Bids):</strong> Prices other investors are willing to pay to buy shares.</li>
+            <li><strong>Sell Offers (Asks):</strong> Prices other investors are asking to sell their shares.</li>
+            <li>Trades happen automatically when a buyer's price and a seller's price match!</li>
+          </ul>
         </div>
 
         {/* Market Price Header Summary */}
         <div className="orderbook-price-bar">
           <div className="price-stat">
-            <span className="stat-label">LATEST TRADED PRICE</span>
+            <span className="stat-label">LATEST DEAL PRICE</span>
             <div className="stat-val-row">
               <strong className="stat-price">ZMW {stock.price.toFixed(2)}</strong>
               <span className={`stat-change ${stock.change >= 0 ? 'up' : 'down'}`}>
@@ -168,29 +209,37 @@ export default function OrderBookPage({ showToast }) {
             </div>
           </div>
           <div className="price-stat">
-            <span className="stat-label">SPREAD</span>
-            <strong className="stat-value">
+            <span className="stat-label" style={{ display: 'inline-flex', alignItems: 'center' }}>
+              PRICE GAP (SPREAD)
+              <InfoTip title="Price Gap (Spread)" content="The difference between the lowest selling price and the highest buying price. A smaller gap means trading is active and quick." />
+            </span>
+            <strong className="stat-value" style={{ display: 'block' }}>
               ZMW {(parseFloat(stock.orderBook.bestAsk) - parseFloat(stock.orderBook.bestBid)).toFixed(2)}
             </strong>
           </div>
           <div className="price-stat">
-            <span className="stat-label">MARKET SPEED</span>
-            <strong className="stat-value speed-badge">{stock.orderBook.speed}</strong>
+            <span className="stat-label">TRADING ACTIVITY</span>
+            <strong className="stat-value speed-badge" style={{ display: 'block', textTransform: 'capitalize' }}>
+              {stock.orderBook.speed === 'High' ? 'Very Busy' : stock.orderBook.speed === 'Medium' ? 'Moderate' : 'Slow'}
+            </strong>
           </div>
         </div>
 
         <div className="orderbook-content-grid">
           {/* Main Order Book Depth Tables */}
           <div className="orderbook-tables-panel">
-            <div className="panel-header-title">Market Depth (Bids & Asks)</div>
+            <div className="panel-header-title">Current Market Offers</div>
             
             <div className="double-side-tables">
               {/* Bids Column */}
               <div className="orderbook-side bids-side">
-                <div className="side-title bid-text">Bids (Buy Orders)</div>
+                <div className="side-title bid-text" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  Buy Offers (Bids)
+                  <InfoTip title="Buy Offers (Bids)" content="Offers from people who want to buy shares, showing the price they want to pay and the number of shares they want to buy." />
+                </div>
                 <div className="table-header-row">
-                  <span>Size</span>
-                  <span style={{ textAlign: 'right' }}>Bid Price</span>
+                  <span>Shares Amount</span>
+                  <span style={{ textAlign: 'right' }}>Buyer Price</span>
                 </div>
                 <div className="order-rows-container">
                   {rows.map((row, idx) => (
@@ -209,10 +258,13 @@ export default function OrderBookPage({ showToast }) {
 
               {/* Asks Column */}
               <div className="orderbook-side asks-side">
-                <div className="side-title ask-text">Asks (Sell Orders)</div>
+                <div className="side-title ask-text" style={{ display: 'inline-flex', alignItems: 'center' }}>
+                  Sell Offers (Asks)
+                  <InfoTip title="Sell Offers (Asks)" content="Offers from people who want to sell their shares, showing the price they want to get and the number of shares they are selling." />
+                </div>
                 <div className="table-header-row">
-                  <span>Ask Price</span>
-                  <span style={{ textAlign: 'right' }}>Size</span>
+                  <span>Seller Price</span>
+                  <span style={{ textAlign: 'right' }}>Shares Amount</span>
                 </div>
                 <div className="order-rows-container">
                   {rows.map((row, idx) => (
@@ -233,7 +285,7 @@ export default function OrderBookPage({ showToast }) {
 
           {/* Depth Chart Panel */}
           <div className="depth-chart-panel" style={{ marginBottom: '24px' }}>
-            <div className="panel-header-title">Market Depth Chart</div>
+            <div className="panel-header-title">Offers Visual Depth</div>
             <div className="depth-chart-container" style={{ position: 'relative' }}>
               <svg
                 viewBox={`0 0 ${svgWidth} ${svgHeight}`}
@@ -269,7 +321,7 @@ export default function OrderBookPage({ showToast }) {
                   ZMW {depthPoints.bids[depthPoints.bids.length - 1]?.price.toFixed(2) || '0.00'}
                 </text>
                 <text x={svgWidth / 2} y={svgHeight - 4} textAnchor="middle" fill="#1A1D27" fontSize="9" fontWeight="700">
-                  Spread Mid: ZMW {((parseFloat(stock.orderBook.bestBid) + parseFloat(stock.orderBook.bestAsk)) / 2).toFixed(2)}
+                  Middle price: ZMW {((parseFloat(stock.orderBook.bestBid) + parseFloat(stock.orderBook.bestAsk)) / 2).toFixed(2)}
                 </text>
                 <text x={svgWidth - chartPadding.right} y={svgHeight - 4} textAnchor="end" fill="#9BA1B2" fontSize="9" fontWeight="600">
                   ZMW {depthPoints.asks[depthPoints.asks.length - 1]?.price.toFixed(2) || '0.00'}
@@ -280,11 +332,11 @@ export default function OrderBookPage({ showToast }) {
             <div className="depth-legend" style={{ marginTop: '14px' }}>
               <div className="legend-item">
                 <div className="legend-dot" style={{ background: '#10B981' }} />
-                <span>Bids (Cumulative: {(depthData.bids[depthData.bids.length - 1]?.cumulative || 0).toLocaleString()} vol)</span>
+                <span>Buy Orders Depth ({(depthData.bids[depthData.bids.length - 1]?.cumulative || 0).toLocaleString()} shares)</span>
               </div>
               <div className="legend-item">
                 <div className="legend-dot" style={{ background: '#EF4444' }} />
-                <span>Asks (Cumulative: {(depthData.asks[depthData.asks.length - 1]?.cumulative || 0).toLocaleString()} vol)</span>
+                <span>Sell Orders Depth ({(depthData.asks[depthData.asks.length - 1]?.cumulative || 0).toLocaleString()} shares)</span>
               </div>
             </div>
           </div>
@@ -292,12 +344,12 @@ export default function OrderBookPage({ showToast }) {
 
         {/* Recent Trades Table */}
         <div className="recent-trades-panel">
-          <div className="panel-header-title">Recent Trade History Feed (Live)</div>
+          <div className="panel-header-title">Recent Real-Time Deals Feed</div>
           <div className="trades-table-header">
-            <span>Execution Time</span>
-            <span>Trade Type</span>
-            <span>Traded Price</span>
-            <span style={{ textAlign: 'right' }}>Order Size</span>
+            <span>Deal Time</span>
+            <span>Type</span>
+            <span>Deal Price</span>
+            <span style={{ textAlign: 'right' }}>Shares Amount</span>
           </div>
           <div className="order-rows-container">
             {mockTrades.map(trade => (
@@ -305,7 +357,7 @@ export default function OrderBookPage({ showToast }) {
                 <span style={{ color: '#9BA1B2' }}>{trade.time}</span>
                 <span>
                   <span className={`trade-type ${trade.type}`} style={{ padding: '2px 8px', borderRadius: '4px', fontSize: '10px', fontWeight: '700', textTransform: 'uppercase' }}>
-                    {trade.type}
+                    {trade.type === 'buy' ? 'bought' : 'sold'}
                   </span>
                 </span>
                 <span className="trade-price">ZMW {trade.price.toFixed(2)}</span>

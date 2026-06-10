@@ -1,0 +1,174 @@
+/* ============================
+   SETTINGS PAGE
+   ============================ */
+
+.stg-wrapper {
+  padding: 16px 16px 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Profile card ── */
+.stg-profile-card {
+  background: #E30613;
+  border-radius: 16px;
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.stg-profile-card::before {
+  content: '';
+  position: absolute;
+  top: -30px; right: -30px;
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+}
+
+.stg-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.stg-avatar svg {
+  width: 28px;
+  height: 28px;
+}
+
+.stg-profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 1;
+}
+
+.stg-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.stg-phone {
+  font-size: 13px;
+  color: rgba(255,255,255,0.8);
+}
+
+/* ── Section rows ── */
+.stg-section {
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #F0F0F0;
+  margin-bottom: 4px;
+}
+
+.stg-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  cursor: pointer;
+  border-bottom: 1px solid #F4F5F7;
+  transition: background 0.15s;
+}
+
+.stg-row:last-child {
+  border-bottom: none;
+}
+
+.stg-row:active {
+  background: #F9FAFB;
+}
+
+.stg-row-static {
+  cursor: default;
+}
+
+.stg-row-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: #FFF1F2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #E30613;
+  flex-shrink: 0;
+}
+
+.stg-row-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.stg-row-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stg-row-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary, #1A1D23);
+}
+
+.stg-row-sub {
+  font-size: 12px;
+  color: var(--text-muted, #5F6577);
+}
+
+.stg-row svg:last-child {
+  width: 16px;
+  height: 16px;
+  color: #C4C9D4;
+  flex-shrink: 0;
+}
+
+/* ── Logout ── */
+.stg-logout-area {
+  margin-top: 16px;
+  padding: 0 0 20px;
+}
+
+.stg-logout-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px;
+  background: #FFF1F2;
+  color: #E30613;
+  border: 1.5px solid #FECDD3;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.stg-logout-btn:active {
+  background: #FFE4E6;
+  border-color: #E30613;
+}
+
+.stg-logout-btn svg {
+  width: 18px;
+  height: 18px;
+}
