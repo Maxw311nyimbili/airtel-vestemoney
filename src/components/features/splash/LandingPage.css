@@ -86,14 +86,16 @@
 
 /* The actual hero photo — add src to this img tag */
 .splash-hero-img {
-  width: 100%;
-  max-width: 360px;
-  height: 100%;
-  max-height: 280px;
+  width: 95%;
+  max-width: 520px;
+  height: auto;
+  max-height: 420px;
   object-fit: cover;
-  border-radius: 20px;
+  border-radius: 24px;
   box-shadow: 0 20px 48px rgba(0,0,0,0.3);
+  transition: all 0.3s ease-in-out;
 }
+
 
 /* Placeholder shown until user supplies their own image */
 .splash-hero-img-placeholder {
@@ -251,11 +253,23 @@
   .splash-hero-img-placeholder {
     height: 140px;
   }
+  .splash-hero-img {
+    max-height: 240px;
+  }
   .splash-subtitle {
     display: none;
   }
   .splash-bottom-card {
     padding: 12px 24px 20px;
+  }
+}
+
+/* ── Tablet only ── */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .splash-hero-img {
+    width: 92%;
+    max-width: 680px;
+    max-height: 520px;
   }
 }
 
@@ -286,8 +300,9 @@
   }
 
   .splash-hero-img {
-    max-width: 720px;
-    max-height: 540px;
+    width: 90%;
+    max-width: 1000px;
+    max-height: 75vh;
   }
 
   .splash-bottom-card {

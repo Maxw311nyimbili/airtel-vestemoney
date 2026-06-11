@@ -39,6 +39,7 @@ export const MOCK_STOCKS = [
     yield: 8.50,
     type: 'equities',
     color: '#5F6577',
+    logo: zanacoLogo,
     marketOpen: '09:45 AM',
     availableShares: '6.2M',
     sector: 'Financials',
