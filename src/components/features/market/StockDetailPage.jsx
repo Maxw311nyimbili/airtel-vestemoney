@@ -186,12 +186,9 @@ export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExe
         {/* ── Stats table ── */}
         <div className="sd-stats-table">
           {[
-            ['Open',          `ZMW ${stock.open.toFixed(2)}`],
-            ['Prev Close',    `ZMW ${stock.prevClose.toFixed(2)}`],
-            ['52 Week High',  `ZMW ${stock.dayHigh.toFixed(2)}`],
-            ['52 Week Low',   `ZMW ${stock.dayLow.toFixed(2)}`],
-            ['Volume',        stock.volume],
-            ['Dividend Yield',`${stock.yield}%`],
+            ['Opening',        `ZMW ${stock.open.toFixed(2)}`],
+            ['Closing',        `ZMW ${stock.prevClose.toFixed(2)}`],
+            ['Trading Volume',  stock.volume],
           ].map(([label, value]) => (
             <div key={label} className="sd-stat-row">
               <span className="sd-stat-lbl">{label}</span>
