@@ -285,6 +285,11 @@
     height: 320px;
   }
 
+  .splash-hero-img {
+    max-width: 720px;
+    max-height: 540px;
+  }
+
   .splash-bottom-card {
     width: 400px;
     min-height: 100vh;
