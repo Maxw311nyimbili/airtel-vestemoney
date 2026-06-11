@@ -11,7 +11,7 @@ export function usePortfolio(sharesOwned) {
         equitiesVal += sharesOwned[stock.symbol] * stock.price;
       }
     });
-    const bondsVal = 3500.00;
+    const bondsVal = 0;
     const savingsVal = 850.00;
     return {
       equities: equitiesVal,

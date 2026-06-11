@@ -107,22 +107,6 @@ export default function PortfolioDashboard({
           </div>
 
           <div className="pf-bucket">
-            <div className="pf-bucket-icon" style={{ background: 'var(--primary-red-light)', color: 'var(--primary-red)' }}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="7" width="20" height="14" rx="2"/>
-                <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
-              </svg>
-            </div>
-            <div className="pf-bucket-body">
-              <span className="pf-bucket-name">Government Bonds</span>
-              <span className="pf-bucket-value">
-                ZMW {portfolioBonds.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </span>
-            </div>
-            <span className="pf-bucket-chg chg-up">▲ 23.5%</span>
-          </div>
-
-          <div className="pf-bucket">
             <div className="pf-bucket-icon" style={{ background: '#F4F5F7', color: '#1A1D23' }}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="12" cy="12" r="10"/>
