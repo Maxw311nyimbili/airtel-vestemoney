@@ -38,6 +38,7 @@ function AppLayout({ useWalletHook, showToast }) {
     setPhoneNumber,
     csdAccountNumber,
     tradingAccountNumber,
+    atsNumber,
     walletBalance,
     setWalletBalance,
     sharesOwned,
@@ -222,6 +223,7 @@ function AppLayout({ useWalletHook, showToast }) {
                 phoneNumber={phoneNumber}
                 csdAccountNumber={csdAccountNumber}
                 tradingAccountNumber={tradingAccountNumber}
+                atsNumber={atsNumber}
                 onLogout={setIsLoggedIn}
                 showToast={showToast}
                 isGuest={isGuest}

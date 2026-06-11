@@ -8,6 +8,7 @@ export function useWallet() {
   const [phoneNumber, setPhoneNumber] = useState('978541220');
   const [csdAccountNumber] = useState('CSD-0048213');
   const [tradingAccountNumber] = useState('VM-ZM-77042');
+  const [atsNumber] = useState('ATS-008149');
   const [walletBalance, setWalletBalance] = useState(1280.50);
   const [sharesOwned, setSharesOwned] = useState({
     ATEL: 1200,
@@ -57,6 +58,7 @@ export function useWallet() {
     setPhoneNumber,
     csdAccountNumber,
     tradingAccountNumber,
+    atsNumber,
     walletBalance,
     setWalletBalance,
     sharesOwned,

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import GuestLock from '../../shared/GuestLock';
 
-export default function SettingsPage({ userName, phoneNumber, csdAccountNumber, tradingAccountNumber, onLogout, showToast, isGuest }) {
+export default function SettingsPage({ userName, phoneNumber, csdAccountNumber, tradingAccountNumber, atsNumber, onLogout, showToast, isGuest }) {
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -76,6 +76,16 @@ export default function SettingsPage({ userName, phoneNumber, csdAccountNumber, 
             </div>
           </div>
 
+          <div className="stg-row stg-row-static" onClick={() => copyValue('ATS number', atsNumber)}>
+            <div className="stg-row-icon">
+              <Icons.Hash />
+            </div>
+            <div className="stg-row-body">
+              <span className="stg-row-title">ATS Number</span>
+              <span className="stg-row-sub stg-row-mono">{atsNumber}</span>
+            </div>
+          </div>
+
           <div className="stg-row stg-row-static">
             <div className="stg-row-icon">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -84,7 +94,7 @@ export default function SettingsPage({ userName, phoneNumber, csdAccountNumber, 
             </div>
             <div className="stg-row-body">
               <span className="stg-row-title">What are these for?</span>
-              <span className="stg-row-sub">Your CSD and trading account numbers identify you on the Lusaka Securities Exchange. You may be asked for these when contacting support.</span>
+              <span className="stg-row-sub">Your CSD, trading, and ATS numbers identify you on the Lusaka Securities Exchange. You may be asked for these when contacting support.</span>
             </div>
           </div>
         </div>

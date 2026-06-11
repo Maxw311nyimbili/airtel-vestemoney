@@ -135,12 +135,12 @@ export default function MainDashboard({
           <div className="dash-quick-actions">
             <button className="dash-qa-btn qa-buy" onClick={() => navigate('/market')}>
               <Icons.ArrowDownToLine />
-              <span>Buy</span>
+              <span>Buy Shares</span>
             </button>
 
             <button className="dash-qa-btn qa-sell" onClick={() => navigate('/portfolio')}>
               <Icons.ArrowUpFromLine />
-              <span>Sell</span>
+              <span>Sell Shares</span>
             </button>
 
             <button className="dash-qa-btn qa-watchlist" onClick={() => navigate('/watchlist')}>
