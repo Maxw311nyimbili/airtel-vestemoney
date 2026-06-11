@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS } from '../../../data/mockData';
-import airtelLogo from '../../../images/airtel_logo.png';
+import paymentLogo from '../../../images/payment_logo.png';
 import GuestLock from '../../shared/GuestLock';
 import StockLogo from '../../StockLogo';
 
@@ -47,7 +47,7 @@ function OrderReview({ stock, qty, proceeds, onBack, onContinue }) {
         <div className="orev-pay-section">
           <span className="orev-pay-label">Proceeds go to</span>
           <div className="orev-pay-row">
-            <img src={airtelLogo} alt="Airtel" className="orev-pay-logo" />
+            <img src={paymentLogo} alt="Payment" className="orev-pay-logo" style={{ objectFit: 'contain' }} />
             <span className="orev-pay-name">Airtel Money</span>
           </div>
         </div>
@@ -178,6 +178,8 @@ export default function SellSharesPage({ walletBalance, sharesOwned, onTradeExec
   const owned   = sharesOwned[stock.symbol] || 0;
   const qty     = customMode ? (parseInt(customValue) || 0) : (selectedQty || 0);
   const proceeds= qty * stock.price;
+  const fees    = proceeds * FEE_RATE;
+  const net     = proceeds - fees;
   const canSell = qty > 0 && qty <= owned;
 
   const handleReviewOrder = () => {
@@ -254,23 +256,42 @@ export default function SellSharesPage({ walletBalance, sharesOwned, onTradeExec
           )}
         </div>
 
-        <div className="trade-section trade-est-row">
-          <div>
-            <span className="trade-section-title">Estimated Proceeds</span>
-            <span className="trade-est-note">Estimated, may change at execution</span>
+        {/* ── Order summary breakdown ── */}
+        <div className="trade-section">
+          <span className="trade-section-title">Order Summary</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>Share Price</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {stock.price.toFixed(2)}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>Number of Shares</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>{qty} Shares</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>Gross Proceeds</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {proceeds.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>Taxes &amp; Fees (1.5%)</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {fees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
+            <div style={{ height: 1, background: '#F0F0F0', margin: '4px 0' }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, fontWeight: 800, color: '#E30613' }}>
+              <span>Net Proceeds (Airtel Payout)</span>
+              <span>ZMW {net.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
           </div>
-          <span className="trade-est-value">ZMW {proceeds.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
         </div>
 
         <div className="trade-section">
           <span className="trade-section-title">Proceeds go to</span>
           <div className="trade-payment-row">
             <div className="trade-payment-logo">
-              <img src={airtelLogo} alt="Airtel" style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
+              <img src={paymentLogo} alt="Payment" style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
             </div>
             <div className="trade-payment-info">
               <span className="trade-payment-name">Airtel Money</span>
-              <span className="trade-payment-bal">Current Balance: ZMW {walletBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
             </div>
             <div className="trade-payment-check">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">

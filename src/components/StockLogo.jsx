@@ -8,14 +8,47 @@ import React from 'react';
 export default function StockLogo({ stock, className }) {
   if (stock?.logo) {
     return (
-      <div className={className} style={{ background: '#ffffff', border: '1px solid #F0F0F0' }}>
-        <img src={stock.logo} alt={stock.name || stock.symbol} className="stock-logo-img" />
+      <div 
+        className={className} 
+        style={{ 
+          background: '#ffffff', 
+          border: '1px solid #E5E7EB',
+          borderRadius: '50%',
+          overflow: 'hidden',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: '2px'
+        }}
+      >
+        <img 
+          src={stock.logo} 
+          alt={stock.name || stock.symbol} 
+          className="stock-logo-img" 
+          style={{ 
+            width: '100%', 
+            height: '100%', 
+            objectFit: 'contain',
+            borderRadius: '50%'
+          }} 
+        />
       </div>
     );
   }
 
   return (
-    <div className={className} style={{ background: stock?.color }}>
+    <div 
+      className={className} 
+      style={{ 
+        background: stock?.color,
+        borderRadius: '50%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#ffffff',
+        fontWeight: 'bold'
+      }}
+    >
       {stock?.symbol?.slice(0, 3)}
     </div>
   );

@@ -1,5 +1,13 @@
 import zambeefLogo from '../images/optimized/zambeef_logo.png';
 import zanacoLogo from '../images/optimized/zanaco_logo.png';
+import zmfaLogo from '../images/ZMFA_logo.png';
+import dczmLogo from '../images/dotcom_zambia_logo.png';
+import pumaLogo from '../images/puma_logo.png';
+import chilLogo from '../images/chilanga_logo.png';
+import cecLogo from '../images/CEC_logo.png';
+import zmreLogo from '../images/ZMRE_logo.png';
+import batzLogo from '../images/BATZ_logo.png';
+import mapsLogo from '../images/MAPS_logo.png';
 
 export const MOCK_STOCKS = [
   {
@@ -68,6 +76,7 @@ export const MOCK_STOCKS = [
     yield: 4.80,
     type: 'equities',
     color: '#C40510',
+    logo: zmfaLogo,
     marketOpen: '09:45 AM',
     availableShares: '3.8M',
     sector: 'Industrial',
@@ -96,6 +105,7 @@ export const MOCK_STOCKS = [
     yield: 3.20,
     type: 'equities',
     color: '#B80510',
+    logo: dczmLogo,
     marketOpen: '09:45 AM',
     availableShares: '12.4M',
     sector: 'Technology',
@@ -124,6 +134,7 @@ export const MOCK_STOCKS = [
     yield: 11.20,
     type: 'equities',
     color: '#9F050D',
+    logo: pumaLogo,
     marketOpen: '09:45 AM',
     availableShares: '4.6M',
     sector: 'Energy',
@@ -152,6 +163,7 @@ export const MOCK_STOCKS = [
     yield: 9.10,
     type: 'equities',
     color: '#8B030D',
+    logo: chilLogo,
     marketOpen: '09:45 AM',
     availableShares: '5.1M',
     sector: 'Construction',
@@ -180,6 +192,7 @@ export const MOCK_STOCKS = [
     yield: 6.50,
     type: 'equities',
     color: '#EF4444',
+    logo: cecLogo,
     marketOpen: '09:45 AM',
     availableShares: '9.4M',
     sector: 'Energy',
@@ -208,6 +221,7 @@ export const MOCK_STOCKS = [
     yield: 7.20,
     type: 'equities',
     color: '#9BA1B2',
+    logo: zmreLogo,
     marketOpen: '09:45 AM',
     availableShares: '7.1M',
     sector: 'Insurance',
@@ -236,6 +250,7 @@ export const MOCK_STOCKS = [
     yield: 8.10,
     type: 'equities',
     color: '#475569',
+    logo: batzLogo,
     marketOpen: '09:45 AM',
     availableShares: '2.9M',
     sector: 'Tobacco',
@@ -264,6 +279,7 @@ export const MOCK_STOCKS = [
     yield: 5.80,
     type: 'equities',
     color: '#E30613',
+    logo: mapsLogo,
     marketOpen: '09:45 AM',
     availableShares: '5.5M',
     sector: 'Financials',
@@ -516,6 +532,7 @@ export const MOCK_STOCKS = [
     yield: 9.38,
     type: 'equities',
     color: '#E30613',
+    logo: cecLogo,
     marketOpen: '09:45 AM',
     availableShares: '3.1M',
     sector: 'Energy',

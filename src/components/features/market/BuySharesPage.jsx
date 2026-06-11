@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS } from '../../../data/mockData';
-import airtelLogo from '../../../images/airtel_logo.png';
+import paymentLogo from '../../../images/payment_logo.png';
 import GuestLock from '../../shared/GuestLock';
 import StockLogo from '../../StockLogo';
 
@@ -22,7 +22,7 @@ function OrderReview({ stock, amount, shares, onBack, onContinue }) {
     { label: 'Stock',            value: stock.name },
     { label: 'Current Price',    value: `ZMW ${stock.price.toFixed(2)}` },
     { label: 'Amount',           value: `ZMW ${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}` },
-    { label: 'Estimated Shares', value: `${shares} Shares` },
+    { label: 'Number of Shares', value: `${shares} Shares` },
     { label: 'Fees (1.5%)',      value: `ZMW ${fees.toFixed(2)}` },
   ];
   return (
@@ -47,7 +47,7 @@ function OrderReview({ stock, amount, shares, onBack, onContinue }) {
         <div className="orev-pay-section">
           <span className="orev-pay-label">Pay with</span>
           <div className="orev-pay-row">
-            <img src={airtelLogo} alt="Airtel" className="orev-pay-logo" />
+            <img src={paymentLogo} alt="Payment" className="orev-pay-logo" style={{ objectFit: 'contain' }} />
             <span className="orev-pay-name">Airtel Money</span>
           </div>
         </div>
@@ -150,7 +150,7 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
     [symbol]
   );
 
-  const [selectedAmount, setSelectedAmount] = useState(100);
+  const [selectedQty,    setSelectedQty]    = useState(100);
   const [customMode,     setCustomMode]     = useState(false);
   const [customValue,    setCustomValue]    = useState('');
   const [step,           setStep]           = useState('select');
@@ -175,13 +175,15 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
     );
   }
 
-  const investAmount    = customMode ? (parseFloat(customValue) || 0) : selectedAmount;
-  const estimatedShares = investAmount > 0 ? Math.floor(investAmount / stock.price) : 0;
-  const canBuy          = investAmount > 0 && investAmount <= walletBalance && estimatedShares >= 1;
+  const qty   = customMode ? (parseInt(customValue) || 0) : selectedQty;
+  const gross = qty * stock.price;
+  const fees  = gross * FEE_RATE;
+  const total = gross + fees;
+  const canBuy = qty > 0 && total <= walletBalance;
 
   const handleReviewOrder = () => {
     if (!canBuy) {
-      showToast(investAmount > walletBalance ? 'Insufficient Airtel Money balance.' : 'Enter a valid investment amount.');
+      showToast(total > walletBalance ? 'Insufficient Airtel Money balance.' : 'Enter a valid number of shares.');
       return;
     }
     setStep('review');
@@ -190,7 +192,7 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
   const handlePinSuccess = () => {
     const id = genOrderId();
     setOrderId(id);
-    onTradeExecute('buy', stock.symbol, estimatedShares);
+    onTradeExecute('buy', stock.symbol, qty);
     setStep('success');
   };
 
@@ -217,46 +219,65 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
         </div>
 
         <div className="trade-section">
-          <span className="trade-section-title">Amount to Invest</span>
+          <span className="trade-section-title">Number of Shares to Buy</span>
           <div className="trade-presets">
-            {PRESETS.map(amt => (
-              <button key={amt}
-                className={`trade-preset-btn ${!customMode && selectedAmount === amt ? 'active' : ''}`}
-                onClick={() => { setCustomMode(false); setSelectedAmount(amt); }}>
-                ZMW {amt.toLocaleString()}
+            {PRESETS.map(presetQty => (
+              <button key={presetQty}
+                className={`trade-preset-btn ${!customMode && selectedQty === presetQty ? 'active' : ''}`}
+                onClick={() => { setCustomMode(false); setSelectedQty(presetQty); }}>
+                {presetQty} shares
               </button>
             ))}
             <button className={`trade-preset-btn ${customMode ? 'active' : ''}`}
-              onClick={() => { setCustomMode(true); setSelectedAmount(0); }}>
-              Custom Amount
+              onClick={() => { setCustomMode(true); setSelectedQty(0); }}>
+              Custom Shares
             </button>
           </div>
           {customMode && (
             <div className="trade-custom-input-wrap">
-              <span className="trade-custom-prefix">ZMW</span>
-              <input type="number" className="trade-custom-input" placeholder="0.00"
-                value={customValue} onChange={e => setCustomValue(e.target.value)} autoFocus min="0" />
+              <input type="number" className="trade-custom-input" placeholder="Number of shares"
+                value={customValue} onChange={e => setCustomValue(e.target.value)} autoFocus min="1" />
+              <span className="trade-custom-suffix">shares</span>
             </div>
           )}
         </div>
 
-        <div className="trade-section trade-est-row">
-          <div>
-            <span className="trade-section-title">Estimated Shares</span>
-            <span className="trade-est-note">Estimated, may change at execution</span>
+        {/* ── Order summary breakdown ── */}
+        <div className="trade-section">
+          <span className="trade-section-title">Order Summary</span>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>Share Price</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {stock.price.toFixed(2)}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>Number of Shares</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>{qty} Shares</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>Subtotal (Gross)</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {gross.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>Taxes &amp; Fees (1.5%)</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {fees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
+            <div style={{ height: 1, background: '#F0F0F0', margin: '4px 0' }} />
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, fontWeight: 800, color: '#E30613' }}>
+              <span>Total Cost</span>
+              <span>ZMW {total.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
           </div>
-          <span className="trade-est-value">{estimatedShares} Shares</span>
         </div>
 
         <div className="trade-section">
           <span className="trade-section-title">Payment Method</span>
           <div className="trade-payment-row">
             <div className="trade-payment-logo">
-              <img src={airtelLogo} alt="Airtel" style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
+              <img src={paymentLogo} alt="Payment" style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
             </div>
             <div className="trade-payment-info">
               <span className="trade-payment-name">Airtel Money</span>
-              <span className="trade-payment-bal">Available: ZMW {walletBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
             </div>
             <div className="trade-payment-check">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -274,14 +295,14 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
       </div>
 
       {step === 'review' && (
-        <OrderReview stock={stock} amount={investAmount} shares={estimatedShares}
+        <OrderReview stock={stock} amount={gross} shares={qty}
           onBack={() => setStep('select')} onContinue={() => setStep('pin')} />
       )}
       {step === 'pin' && (
         <PinEntry onBack={() => setStep('review')} onSuccess={handlePinSuccess} />
       )}
       {step === 'success' && (
-        <OrderSuccess stock={stock} amount={investAmount} shares={estimatedShares} orderId={orderId}
+        <OrderSuccess stock={stock} amount={gross} shares={qty} orderId={orderId}
           onViewPortfolio={() => navigate('/portfolio')} onBackHome={() => navigate('/dashboard')} />
       )}
     </div>
