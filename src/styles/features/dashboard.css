@@ -154,7 +154,7 @@
 
 .qa-buy       { background: #E30613; color: #ffffff; }
 .qa-sell      { background: #ffffff; color: #E30613; border: 1.5px solid #FFE0E0; }
-.qa-dividend  { background: #ffffff; color: #E30613; border: 1.5px solid #FFE0E0; }
+.qa-watchlist { background: #ffffff; color: #E30613; border: 1.5px solid #FFE0E0; }
 .qa-portfolio { background: #E30613; color: #ffffff; }
 
 /* ── Section header ── */

@@ -143,12 +143,9 @@ export default function MainDashboard({
               <span>Sell</span>
             </button>
 
-            <button className="dash-qa-btn qa-dividend" onClick={() => navigate('/dividend')}>
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 6v6l4 2"/>
-              </svg>
-              <span>Dividend</span>
+            <button className="dash-qa-btn qa-watchlist" onClick={() => navigate('/watchlist')}>
+              <Icons.Star />
+              <span>Watchlist</span>
             </button>
 
             <button className="dash-qa-btn qa-portfolio" onClick={() => navigate('/portfolio')}>
@@ -158,45 +155,6 @@ export default function MainDashboard({
               </svg>
               <span>My Portfolio</span>
             </button>
-          </div>
-
-          {/* ── Your Watchlist ── */}
-          <div className="dash-section">
-            <div className="dash-section-header">
-              <span className="dash-section-title">Your Watchlist</span>
-            </div>
-
-            {watchlistStocks.length === 0 ? (
-              <div className="stock-row-empty">
-                <Icons.Star />
-                <span>Tap the star on any security to track it here</span>
-                <button className="stock-row-empty-btn" onClick={() => navigate('/market')}>
-                  Browse LuSE Market
-                </button>
-              </div>
-            ) : (
-              <div className="dash-watchlist-summary" onClick={() => navigate('/watchlist')}>
-                <div className="dash-watchlist-summary-left">
-                  <div className="dash-watchlist-avatars">
-                    {watchlistStocks.slice(0, 3).map(stock => (
-                      <StockLogo key={stock.symbol} stock={stock} className="dash-watchlist-avatar" />
-                    ))}
-                  </div>
-                  <div className="dash-watchlist-summary-text">
-                    <span className="dash-watchlist-summary-count">
-                      {watchlistStocks.length} {watchlistStocks.length === 1 ? 'security' : 'securities'} watched
-                    </span>
-                    <span className="dash-watchlist-summary-sub">
-                      {watchlistStocks.map(s => s.symbol).join(' · ')}
-                    </span>
-                  </div>
-                </div>
-                <button className="dash-watchlist-summary-btn" onClick={(e) => { e.stopPropagation(); navigate('/watchlist'); }}>
-                  View
-                  <Icons.ChevronRight />
-                </button>
-              </div>
-            )}
           </div>
 
           {/* ── Popular Stocks ── */}

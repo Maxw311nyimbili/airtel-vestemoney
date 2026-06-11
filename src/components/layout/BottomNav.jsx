@@ -10,7 +10,7 @@ export default function BottomNav() {
     { path: '/dashboard', label: 'Home',      icon: <Icons.Home />      },
     { path: '/portfolio', label: 'Portfolio', icon: <Icons.Portfolio /> },
     { path: '/market',    label: 'Market',    icon: <Icons.Plus />      },
-    { path: '/dividend',  label: 'Dividends', icon: <Icons.Coins />     },
+    { path: '/watchlist', label: 'Watchlist', icon: <Icons.Star />      },
     { path: '/settings',  label: 'Account',   icon: <Icons.Settings />  },
   ], []);
 
