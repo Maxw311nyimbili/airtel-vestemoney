@@ -46,9 +46,6 @@ export default function LandingPage({ setIsLoggedIn, setIsGuest }) {
           <button className="splash-btn-primary" onClick={() => navigate('/login')}>
             Get Started
           </button>
-          <button className="splash-btn-outline" onClick={() => navigate('/login')}>
-            Log In
-          </button>
         </div>
 
         <button className="splash-btn-ghost" onClick={handleGuestContinue}>
