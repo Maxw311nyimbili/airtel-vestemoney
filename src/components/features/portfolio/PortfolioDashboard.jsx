@@ -86,43 +86,6 @@ export default function PortfolioDashboard({
           </div>
         </div>
 
-        {/* ── Asset buckets ── */}
-        <p className="pf-section-label">Where your money is</p>
-        <div className="pf-buckets">
-
-          <div className="pf-bucket">
-            <div className="pf-bucket-icon" style={{ background: '#FFF1F2', color: '#E30613' }}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
-                <polyline points="16 7 22 7 22 13"/>
-              </svg>
-            </div>
-            <div className="pf-bucket-body">
-              <span className="pf-bucket-name">Company Shares</span>
-              <span className="pf-bucket-value">
-                ZMW {portfolioEquities.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </span>
-            </div>
-            <span className="pf-bucket-chg chg-up">▲ 14.2%</span>
-          </div>
-
-          <div className="pf-bucket">
-            <div className="pf-bucket-icon" style={{ background: '#F4F5F7', color: '#1A1D23' }}>
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <path d="M12 8v4l3 3"/>
-              </svg>
-            </div>
-            <div className="pf-bucket-body">
-              <span className="pf-bucket-name">Flexible Savings</span>
-              <span className="pf-bucket-value">
-                ZMW {portfolioSavings.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-              </span>
-            </div>
-            <span className="pf-bucket-chg chg-up">▲ 8.5%</span>
-          </div>
-
-        </div>
 
         {/* ── Holdings ── */}
         <p className="pf-section-label" style={{ marginTop: '28px' }}>My Shares</p>

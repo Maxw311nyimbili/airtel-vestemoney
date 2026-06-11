@@ -12,7 +12,7 @@ export function usePortfolio(sharesOwned) {
       }
     });
     const bondsVal = 0;
-    const savingsVal = 850.00;
+    const savingsVal = 0;
     return {
       equities: equitiesVal,
       bonds: bondsVal,
