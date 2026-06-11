@@ -4,7 +4,7 @@ import airtelLogo from '../../../images/airtel_logo.png';
 import vesteLogo from '../../../images/Veste.money logo.png';
 import './LoginScreen.css';
 
-export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, setIsLoggedIn }) {
+export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, setIsLoggedIn, setIsGuest }) {
   const navigate = useNavigate();
   const [step, setStep] = useState(1); // 1 = phone, 2 = otp
   const [otp, setOtp] = useState(['', '', '', '']);
@@ -91,6 +91,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
 
   const handleOtpVerify = (code) => {
     // In demo any 4-digit code works
+    if (setIsGuest) setIsGuest(false);
     setIsLoggedIn(true);
     showToast('Verified! Welcome to Airtel Invest.');
     navigate('/dashboard');

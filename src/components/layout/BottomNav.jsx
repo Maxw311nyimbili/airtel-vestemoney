@@ -9,9 +9,9 @@ export default function BottomNav() {
   const navItems = useMemo(() => [
     { path: '/dashboard', label: 'Home',      icon: <Icons.Home />      },
     { path: '/portfolio', label: 'Portfolio', icon: <Icons.Portfolio /> },
-    { path: '/market',    label: 'Market',    icon: <Icons.Market />    },
-    { path: '/dividend',  label: 'Dividends', icon: <Icons.Dividend />  },
-    { path: '/settings',  label: 'Settings',  icon: <Icons.Settings />  },
+    { path: '/market',    label: 'Market',    icon: <Icons.Plus />      },
+    { path: '/dividend',  label: 'Dividends', icon: <Icons.Coins />     },
+    { path: '/settings',  label: 'Account',   icon: <Icons.Settings />  },
   ], []);
 
   return (

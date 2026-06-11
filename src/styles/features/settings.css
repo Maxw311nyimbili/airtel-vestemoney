@@ -133,6 +133,14 @@
   color: var(--text-muted, #5F6577);
 }
 
+.stg-row-mono {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: var(--text-primary, #1A1D23);
+}
+
 .stg-row svg:last-child {
   width: 16px;
   height: 16px;

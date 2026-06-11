@@ -3,6 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS } from '../../../data/mockData';
 import airtelLogo from '../../../images/airtel_logo.png';
+import GuestLock from '../../shared/GuestLock';
+import StockLogo from '../../StockLogo';
 
 const PRESETS = [50, 100, 500, 1000];
 const FEE_RATE = 0.015;
@@ -140,7 +142,7 @@ function OrderSuccess({ stock, amount, shares, orderId, onViewPortfolio, onBackH
 }
 
 /* ── Main Page ── */
-export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecute, showToast }) {
+export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecute, showToast, isGuest }) {
   const { symbol } = useParams();
   const navigate   = useNavigate();
   const stock = useMemo(
@@ -155,6 +157,23 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
   const [orderId,        setOrderId]        = useState('');
 
   if (!stock) return null;
+
+  if (isGuest) {
+    return (
+      <div className="screen-container slide-in-right" style={{ background: 'var(--bg-body)' }}>
+        <div className="pf-header">
+          <button className="back-btn" onClick={() => navigate(-1)}>
+            <Icons.ChevronLeft />
+          </button>
+          <span className="pf-header-title">Buy {stock.symbol}</span>
+        </div>
+        <GuestLock
+          title="Sign in to invest"
+          message="Create an account or sign in to buy shares and grow your portfolio."
+        />
+      </div>
+    );
+  }
 
   const investAmount    = customMode ? (parseFloat(customValue) || 0) : selectedAmount;
   const estimatedShares = investAmount > 0 ? Math.floor(investAmount / stock.price) : 0;
@@ -186,7 +205,7 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
 
       <div className="trade-page-body">
         <div className="trade-stock-card">
-          <div className="trade-stock-logo" style={{ background: stock.color }}>{stock.symbol.slice(0,3)}</div>
+          <StockLogo stock={stock} className="trade-stock-logo" />
           <div className="trade-stock-info">
             <span className="trade-stock-name">{stock.name}</span>
             <span className="trade-stock-price-lbl">Current Price</span>

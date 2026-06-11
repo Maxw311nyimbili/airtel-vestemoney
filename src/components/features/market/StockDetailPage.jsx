@@ -2,8 +2,9 @@ import React, { useMemo, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS } from '../../../data/mockData';
+import StockLogo from '../../StockLogo';
 
-export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExecute, showToast }) {
+export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExecute, showToast, watchlist, toggleWatchlist }) {
   const { symbol } = useParams();
   const navigate = useNavigate();
   const stock = useMemo(
@@ -93,15 +94,22 @@ export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExe
         </button>
         <span className="pf-header-title">{stock.name.split(' ').slice(0, 3).join(' ')}</span>
         {owned > 0 && <span className="sd-owned-chip">{owned.toLocaleString()} owned</span>}
+        {toggleWatchlist && (
+          <button
+            className={`sd-star-btn ${watchlist && watchlist.includes(stock.symbol) ? 'active' : ''}`}
+            onClick={() => toggleWatchlist(stock.symbol)}
+            aria-label={watchlist && watchlist.includes(stock.symbol) ? 'Remove from watchlist' : 'Add to watchlist'}
+          >
+            {watchlist && watchlist.includes(stock.symbol) ? <Icons.StarFilled /> : <Icons.Star />}
+          </button>
+        )}
       </div>
 
       <div className="sd-wrapper">
 
         {/* ── Company identity ── */}
         <div className="sd-company-row">
-          <div className="sd-company-logo" style={{ background: stock.color }}>
-            {stock.symbol.slice(0, 3)}
-          </div>
+          <StockLogo stock={stock} className="sd-company-logo" />
           <div className="sd-company-info">
             <span className="sd-company-name">{stock.name}</span>
             <span className="sd-company-sym">{stock.symbol} · {stock.sector}</span>

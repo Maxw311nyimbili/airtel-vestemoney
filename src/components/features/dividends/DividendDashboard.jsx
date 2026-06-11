@@ -2,13 +2,32 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS, UPCOMING_DIVIDENDS } from '../../../data/mockData';
+import GuestLock from '../../shared/GuestLock';
 
 export default function DividendDashboard({
   sharesOwned,
   dividendEarnings,
   showToast,
+  isGuest,
 }) {
   const navigate = useNavigate();
+
+  if (isGuest) {
+    return (
+      <div className="screen-container slide-in-right" style={{ background: 'var(--bg-body)' }}>
+        <div className="pf-header">
+          <button className="back-btn" onClick={() => navigate('/dashboard')}>
+            <Icons.ChevronLeft />
+          </button>
+          <span className="pf-header-title">Dividends</span>
+        </div>
+        <GuestLock
+          title="Sign in to view your dividends"
+          message="Create an account or sign in to track dividend payouts and estimates on your holdings."
+        />
+      </div>
+    );
+  }
   const [calcStock,  setCalcStock]  = useState('ATEL');
   const [calcShares, setCalcShares] = useState(500);
 

@@ -3,8 +3,11 @@ import { StocksService } from '../services/api';
 
 export function useWallet() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isGuest, setIsGuest] = useState(false);
   const [userName, setUserName] = useState('Mercy');
   const [phoneNumber, setPhoneNumber] = useState('978541220');
+  const [csdAccountNumber] = useState('CSD-0048213');
+  const [tradingAccountNumber] = useState('VM-ZM-77042');
   const [walletBalance, setWalletBalance] = useState(1280.50);
   const [sharesOwned, setSharesOwned] = useState({
     ATEL: 1200,
@@ -46,10 +49,14 @@ export function useWallet() {
   return {
     isLoggedIn,
     setIsLoggedIn,
+    isGuest,
+    setIsGuest,
     userName,
     setUserName,
     phoneNumber,
     setPhoneNumber,
+    csdAccountNumber,
+    tradingAccountNumber,
     walletBalance,
     setWalletBalance,
     sharesOwned,

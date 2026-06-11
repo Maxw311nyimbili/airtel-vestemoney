@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS } from '../../../data/mockData';
@@ -31,21 +31,12 @@ export default function OrderBookPage({ showToast }) {
 
   const bestBid  = parseFloat(ob?.bestBid || 0);
   const bestAsk  = parseFloat(ob?.bestAsk || 0);
-  const spread   = (bestAsk - bestBid).toFixed(2);
   const midPrice = ((bestBid + bestAsk) / 2).toFixed(2);
 
-  const speedLabel = { High: 'Very Active', Medium: 'Moderate', Low: 'Quiet' }[ob?.speed] || 'Moderate';
-  const speedColor = { High: '#E30613', Medium: '#F59E0B', Low: '#9BA1B2' }[ob?.speed] || '#9BA1B2';
-
-  // Mock recent trades
-  const trades = useMemo(() => [
-    { id: 1, time: '15:19', price: stock.price,         qty: 450,   side: 'buy'  },
-    { id: 2, time: '15:18', price: stock.price - 0.02,  qty: 1200,  side: 'sell' },
-    { id: 3, time: '15:16', price: stock.price + 0.01,  qty: 850,   side: 'buy'  },
-    { id: 4, time: '15:14', price: stock.price,         qty: 300,   side: 'buy'  },
-    { id: 5, time: '15:11', price: stock.price - 0.01,  qty: 100,   side: 'sell' },
-    { id: 6, time: '15:08', price: stock.price + 0.03,  qty: 2000,  side: 'buy'  },
-  ], [stock]);
+  const lastPrice   = stock.prevClose ?? stock.price;
+  const latestPrice = stock.price;
+  const priceGap    = latestPrice - lastPrice;
+  const isGapUp     = priceGap >= 0;
 
   // Buy/sell pressure ratio
   const totalBid = parsed.reduce((s, r) => s + r.bidVol, 0);
@@ -69,17 +60,19 @@ export default function OrderBookPage({ showToast }) {
         <div className="ob-price-strip">
           <div className="ob-price-item">
             <span className="ob-price-lbl">Last Price</span>
-            <span className="ob-price-val">ZMW {stock.price.toFixed(2)}</span>
+            <span className="ob-price-val">ZMW {lastPrice.toFixed(2)}</span>
+          </div>
+          <div className="ob-price-divider" />
+          <div className="ob-price-item">
+            <span className="ob-price-lbl">Latest Price</span>
+            <span className="ob-price-val">ZMW {latestPrice.toFixed(2)}</span>
           </div>
           <div className="ob-price-divider" />
           <div className="ob-price-item">
             <span className="ob-price-lbl">Price Gap</span>
-            <span className="ob-price-val">ZMW {spread}</span>
-          </div>
-          <div className="ob-price-divider" />
-          <div className="ob-price-item">
-            <span className="ob-price-lbl">Activity</span>
-            <span className="ob-price-val" style={{ color: speedColor }}>{speedLabel}</span>
+            <span className="ob-price-val" style={{ color: isGapUp ? '#4B5563' : '#E30613' }}>
+              {isGapUp ? '+' : ''}{priceGap.toFixed(2)}
+            </span>
           </div>
         </div>
 
@@ -150,25 +143,6 @@ export default function OrderBookPage({ showToast }) {
           <div className="ob-midprice-line" />
           <span className="ob-midprice-label">Mid-price ZMW {midPrice}</span>
           <div className="ob-midprice-line" />
-        </div>
-
-        {/* ── Recent trades ── */}
-        <div className="ob-trades-section">
-          <span className="ob-trades-title">Recent Trades</span>
-          <div className="ob-trades-header">
-            <span>Time</span>
-            <span>Type</span>
-            <span>Price</span>
-            <span className="ob-right">Shares</span>
-          </div>
-          {trades.map(t => (
-            <div key={t.id} className="ob-trade-row">
-              <span className="ob-trade-time">{t.time}</span>
-              <span className={`ob-trade-badge ${t.side}`}>{t.side === 'buy' ? 'Bought' : 'Sold'}</span>
-              <span className={`ob-trade-price ${t.side}`}>ZMW {t.price.toFixed(2)}</span>
-              <span className="ob-right ob-trade-qty">{t.qty.toLocaleString()}</span>
-            </div>
-          ))}
         </div>
 
         {/* ── CTA ── */}

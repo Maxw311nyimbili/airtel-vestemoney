@@ -15,6 +15,7 @@ import StockDetailPage from './components/features/market/StockDetailPage';
 import BuySharesPage from './components/features/market/BuySharesPage';
 import SellSharesPage from './components/features/market/SellSharesPage';
 import OrderBookPage from './components/features/market/OrderBookPage';
+import WatchlistPage from './components/features/watchlist/WatchlistPage';
 import DividendDashboard from './components/features/dividends/DividendDashboard';
 import SettingsPage from './components/features/settings/SettingsPage';
 
@@ -25,13 +26,18 @@ import { Icons } from './components/Icons';
 // Custom State Hooks
 import { useWallet } from './hooks/useWallet';
 import { usePortfolio } from './hooks/usePortfolio';
+import { useWatchlist } from './hooks/useWatchlist';
 
 function AppLayout({ useWalletHook, showToast }) {
   const {
     isLoggedIn,
+    isGuest,
+    setIsGuest,
     userName,
     phoneNumber,
     setPhoneNumber,
+    csdAccountNumber,
+    tradingAccountNumber,
     walletBalance,
     setWalletBalance,
     sharesOwned,
@@ -41,6 +47,7 @@ function AppLayout({ useWalletHook, showToast }) {
   } = useWalletHook;
 
   const { portfolioAssets, dividendEarnings } = usePortfolio(sharesOwned);
+  const { watchlist, toggleWatchlist } = useWatchlist();
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -67,7 +74,7 @@ function AppLayout({ useWalletHook, showToast }) {
 
   // Landing page – always show without login check
   if (location.pathname === '/') {
-    return <LandingPage setIsLoggedIn={setIsLoggedIn} />;
+    return <LandingPage setIsLoggedIn={setIsLoggedIn} setIsGuest={setIsGuest} />;
   }
 
   // Login screen
@@ -78,6 +85,7 @@ function AppLayout({ useWalletHook, showToast }) {
         setPhoneNumber={setPhoneNumber}
         showToast={showToast}
         setIsLoggedIn={setIsLoggedIn}
+        setIsGuest={setIsGuest}
       />
     );
   }
@@ -89,7 +97,7 @@ function AppLayout({ useWalletHook, showToast }) {
 
   return (
     <div className="app-layout">
-      <Header showToast={showToast} onLogout={setIsLoggedIn} />
+      <Header showToast={showToast} onLogout={setIsLoggedIn} isGuest={isGuest} />
 
       <main className="main-content">
         <Routes>
@@ -109,6 +117,9 @@ function AppLayout({ useWalletHook, showToast }) {
                 showToast={showToast}
                 triggerTrade={triggerTrade}
                 onLogout={setIsLoggedIn}
+                isGuest={isGuest}
+                watchlist={watchlist}
+                toggleWatchlist={toggleWatchlist}
               />
             }
           />
@@ -123,6 +134,7 @@ function AppLayout({ useWalletHook, showToast }) {
                 portfolioSavings={portfolioAssets.savings}
                 showToast={showToast}
                 triggerTrade={triggerTrade}
+                isGuest={isGuest}
               />
             }
           />
@@ -135,6 +147,8 @@ function AppLayout({ useWalletHook, showToast }) {
                 onTradeExecute={executeTrade}
                 showToast={showToast}
                 triggerTrade={triggerTrade}
+                watchlist={watchlist}
+                toggleWatchlist={toggleWatchlist}
               />
             }
           />
@@ -146,6 +160,8 @@ function AppLayout({ useWalletHook, showToast }) {
                 sharesOwned={sharesOwned}
                 onTradeExecute={(type, sym, qty) => executeTrade(type, sym, qty)}
                 showToast={showToast}
+                watchlist={watchlist}
+                toggleWatchlist={toggleWatchlist}
               />
             }
           />
@@ -157,6 +173,7 @@ function AppLayout({ useWalletHook, showToast }) {
                 sharesOwned={sharesOwned}
                 onTradeExecute={(type, sym, qty) => executeTrade(type, sym, qty)}
                 showToast={showToast}
+                isGuest={isGuest}
               />
             }
           />
@@ -168,6 +185,7 @@ function AppLayout({ useWalletHook, showToast }) {
                 sharesOwned={sharesOwned}
                 onTradeExecute={(type, sym, qty) => executeTrade(type, sym, qty)}
                 showToast={showToast}
+                isGuest={isGuest}
               />
             }
           />
@@ -176,12 +194,23 @@ function AppLayout({ useWalletHook, showToast }) {
             element={<OrderBookPage showToast={showToast} />}
           />
           <Route
+            path="/watchlist"
+            element={
+              <WatchlistPage
+                watchlist={watchlist}
+                toggleWatchlist={toggleWatchlist}
+                sharesOwned={sharesOwned}
+              />
+            }
+          />
+          <Route
             path="/dividend"
             element={
               <DividendDashboard
                 sharesOwned={sharesOwned}
                 dividendEarnings={dividendEarnings}
                 showToast={showToast}
+                isGuest={isGuest}
               />
             }
           />
@@ -191,8 +220,11 @@ function AppLayout({ useWalletHook, showToast }) {
               <SettingsPage
                 userName={userName}
                 phoneNumber={phoneNumber}
+                csdAccountNumber={csdAccountNumber}
+                tradingAccountNumber={tradingAccountNumber}
                 onLogout={setIsLoggedIn}
                 showToast={showToast}
+                isGuest={isGuest}
               />
             }
           />

@@ -2,6 +2,8 @@ import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS } from '../../../data/mockData';
+import Sparkline from '../../Sparkline';
+import StockLogo from '../../StockLogo';
 
 export default function MarketDashboard({
   walletBalance,
@@ -9,6 +11,8 @@ export default function MarketDashboard({
   onTradeExecute,
   showToast,
   triggerTrade,
+  watchlist,
+  toggleWatchlist,
 }) {
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState('');
@@ -103,37 +107,44 @@ export default function MarketDashboard({
               </div>
             ) : filtered.map(stock => {
               const owned = sharesOwned[stock.symbol] || 0;
+              const inWatchlist = watchlist && watchlist.includes(stock.symbol);
               return (
-                <div key={stock.symbol} className="mkt-row">
+                <div key={stock.symbol} className="stock-row" onClick={() => navigate(`/market/${stock.symbol}`)}>
                   {/* Logo */}
-                  <div className="mkt-logo" style={{ background: stock.color }}>
-                    {stock.symbol.slice(0, 3)}
+                  <StockLogo stock={stock} className="stock-row-logo" />
+
+                  <div className="stock-row-body">
+                    <div className="stock-row-top">
+                      <span className="stock-row-sym">
+                        {stock.symbol}
+                        {owned > 0 && (
+                          <span className="stock-row-owned">{owned.toLocaleString()} owned</span>
+                        )}
+                      </span>
+                      <span className="stock-row-price">ZMW {stock.price.toFixed(2)}</span>
+                    </div>
+                    <div className="stock-row-bottom">
+                      <span className="stock-row-name">{stock.name}</span>
+                      <span className={`stock-row-chg ${stock.change >= 0 ? 'chg-up' : 'chg-dn'}`}>
+                        {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)}%
+                      </span>
+                    </div>
                   </div>
 
-                  {/* Info */}
-                  <div className="mkt-info">
-                    <span className="mkt-sym">{stock.symbol}</span>
-                    <span className="mkt-name">{stock.name}</span>
-                    {owned > 0 && (
-                      <span className="mkt-owned">{owned.toLocaleString()} owned</span>
-                    )}
+                  <div className="stock-row-spark">
+                    <Sparkline data={stock.trend} positive={stock.change >= 0} />
                   </div>
 
-                  {/* Price + change */}
-                  <div className="mkt-price-col">
-                    <span className="mkt-price">ZMW {stock.price.toFixed(2)}</span>
-                    <span className={`mkt-chg ${stock.change >= 0 ? 'chg-up' : 'chg-dn'}`}>
-                      {stock.change >= 0 ? '+' : ''}{stock.change.toFixed(2)}%
-                    </span>
-                  </div>
-
-                  {/* View button */}
-                  <button
-                    className="mkt-view-btn"
-                    onClick={() => navigate(`/market/${stock.symbol}`)}
-                  >
-                    View
-                  </button>
+                  {/* Watchlist star */}
+                  {toggleWatchlist && (
+                    <button
+                      className={`stock-row-star ${inWatchlist ? 'active' : ''}`}
+                      onClick={(e) => { e.stopPropagation(); toggleWatchlist(stock.symbol); }}
+                      aria-label={inWatchlist ? 'Remove from watchlist' : 'Add to watchlist'}
+                    >
+                      {inWatchlist ? <Icons.StarFilled /> : <Icons.Star />}
+                    </button>
+              )}
                 </div>
               );
             })}

@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS } from '../../../data/mockData';
+import GuestLock from '../../shared/GuestLock';
+import StockLogo from '../../StockLogo';
 
 export default function PortfolioDashboard({
   sharesOwned,
@@ -11,8 +13,26 @@ export default function PortfolioDashboard({
   portfolioSavings,
   showToast,
   triggerTrade,
+  isGuest,
 }) {
   const navigate = useNavigate();
+
+  if (isGuest) {
+    return (
+      <div className="screen-container slide-in-right" style={{ background: 'var(--bg-body)' }}>
+        <div className="pf-header">
+          <button className="back-btn" onClick={() => navigate('/dashboard')}>
+            <Icons.ChevronLeft />
+          </button>
+          <span className="pf-header-title">My Portfolio</span>
+        </div>
+        <GuestLock
+          title="Sign in to see your portfolio"
+          message="Create an account or sign in to track your holdings, returns, and profit & loss."
+        />
+      </div>
+    );
+  }
 
   const costBasis    = portfolioTotal * 0.871;
   const pnlValue     = portfolioTotal - costBasis;
@@ -146,9 +166,7 @@ export default function PortfolioDashboard({
                   onClick={() => navigate(`/market/${stock.symbol}`)}
                 >
                   {/* Logo */}
-                  <div className="pf-holding-logo" style={{ background: stock.color }}>
-                    {stock.symbol.slice(0, 3)}
-                  </div>
+                  <StockLogo stock={stock} className="pf-holding-logo" />
 
                   {/* Name + shares */}
                   <div className="pf-holding-info">

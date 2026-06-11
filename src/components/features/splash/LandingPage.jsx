@@ -2,12 +2,14 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import airtelLogo from '../../../images/airtel_logo.png';
 import vesteLogo from '../../../images/Veste.money logo.png';
+import heroImage from '../../../images/optimized/app_hero_picture.jpg';
 import './LandingPage.css';
 
-export default function LandingPage({ setIsLoggedIn }) {
+export default function LandingPage({ setIsLoggedIn, setIsGuest }) {
   const navigate = useNavigate();
 
   const handleGuestContinue = () => {
+    if (setIsGuest) setIsGuest(true);
     if (setIsLoggedIn) setIsLoggedIn(true);
     navigate('/dashboard');
   };
@@ -26,16 +28,8 @@ export default function LandingPage({ setIsLoggedIn }) {
           <img src={vesteLogo} alt="Veste Money" className="splash-logo-veste" />
         </div>
 
-        {/* Hero image placeholder — replace this div with <img src={...} className="splash-hero-img" /> */}
         <div className="splash-image-area">
-          <div className="splash-hero-img-placeholder">
-            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <rect x="3" y="3" width="18" height="18" rx="2"/>
-              <circle cx="8.5" cy="8.5" r="1.5"/>
-              <polyline points="21 15 16 10 5 21"/>
-            </svg>
-            <span>Your image goes here</span>
-          </div>
+          <img src={heroImage} alt="" className="splash-hero-img" />
         </div>
       </div>
 

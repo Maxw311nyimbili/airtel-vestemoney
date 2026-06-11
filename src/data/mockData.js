@@ -1,3 +1,6 @@
+import zambeefLogo from '../images/optimized/zambeef_logo.png';
+import zanacoLogo from '../images/optimized/zanaco_logo.png';
+
 export const MOCK_STOCKS = [
   {
     symbol: 'ZMBF',
@@ -7,6 +10,7 @@ export const MOCK_STOCKS = [
     yield: 5.41,
     type: 'equities',
     color: '#E30613',
+    logo: zambeefLogo,
     marketOpen: '09:45 AM',
     availableShares: '8.8M',
     sector: 'Consumer',

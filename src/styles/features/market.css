@@ -2053,6 +2053,51 @@
   border-color: #D1D5DB;
 }
 
+/* ── Watchlist star toggle (market list rows) ── */
+.mkt-star-btn {
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #C7CBD4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mkt-star-btn.active {
+  color: var(--primary-red, #E30613);
+}
+
+.mkt-star-btn svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Watchlist star toggle (stock detail header) ── */
+.sd-star-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  margin-left: auto;
+  cursor: pointer;
+  color: #C7CBD4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.sd-star-btn.active {
+  color: var(--primary-red, #E30613);
+}
+
+.sd-star-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    Dividends — clean mobile layout
    ═══════════════════════════════════════════════════════════════ */
@@ -2776,76 +2821,6 @@
 }
 
 /* ── Recent trades ── */
-.ob-trades-section {
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #F0F0F0;
-}
-
-.ob-trades-title {
-  display: block;
-  font-size: 14px;
-  font-weight: 700;
-  color: #1A1D23;
-  padding: 12px 14px 0;
-}
-
-.ob-trades-header {
-  display: grid;
-  grid-template-columns: 42px 56px 1fr auto;
-  padding: 8px 14px;
-  font-size: 10px;
-  color: #9BA1B2;
-  font-weight: 600;
-  text-transform: uppercase;
-  border-bottom: 1px solid #F4F5F7;
-}
-
-.ob-trade-row {
-  display: grid;
-  grid-template-columns: 42px 56px 1fr auto;
-  align-items: center;
-  padding: 10px 14px;
-  border-bottom: 1px solid #F9FAFB;
-  gap: 4px;
-}
-
-.ob-trade-row:last-child { border-bottom: none; }
-
-.ob-trade-time {
-  font-size: 11px;
-  color: #9BA1B2;
-}
-
-.ob-trade-badge {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 2px 6px;
-  border-radius: 4px;
-  display: inline-block;
-}
-
-.ob-trade-badge.buy  { background: rgba(45,49,66,0.08);  color: #2D3142; }
-.ob-trade-badge.sell { background: rgba(227,6,19,0.08);  color: #E30613; }
-
-.ob-trade-price {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.ob-trade-price.buy  { color: #2D3142; }
-.ob-trade-price.sell { color: #E30613; }
-
-.ob-trade-qty {
-  font-size: 12px;
-  font-weight: 600;
-  color: #1A1D23;
-}
-
-.ob-right { text-align: right; }
-
 /* ── CTA row ── */
 .ob-cta-row {
   display: grid;
