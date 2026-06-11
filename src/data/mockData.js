@@ -8,6 +8,18 @@ import cecLogo from '../images/CEC_logo.png';
 import zmreLogo from '../images/ZMRE_logo.png';
 import batzLogo from '../images/BATZ_logo.png';
 import mapsLogo from '../images/MAPS_logo.png';
+import aeciLogo from '../images/AECI_logo.png';
+import atelLogo from '../images/ATEL_logo.png';
+import bataLogo from '../images/BATA_logo.png';
+import klapLogo from '../images/KLAP_logo.png';
+import natbLogo from '../images/NATB_logo.png';
+import reizLogo from '../images/REIZ_logo.png';
+import scblLogo from '../images/SCBL_logo.png';
+import shopLogo from '../images/SHOP_logo.png';
+import zabrLogo from '../images/ZABR_logo.png';
+import zccmLogo from '../images/ZCCM_logo.png';
+import zfcoLogo from '../images/ZFCO_logo.png';
+import zsugLogo from '../images/ZSUG_logo.png';
 
 export const MOCK_STOCKS = [
   {
@@ -308,6 +320,7 @@ export const MOCK_STOCKS = [
     yield: 6.20,
     type: 'equities',
     color: '#5F6577',
+    logo: zabrLogo,
     marketOpen: '09:45 AM',
     availableShares: '3.2M',
     sector: 'Consumer',
@@ -336,6 +349,7 @@ export const MOCK_STOCKS = [
     yield: 7.80,
     type: 'equities',
     color: '#C40510',
+    logo: scblLogo,
     marketOpen: '09:45 AM',
     availableShares: '4.8M',
     sector: 'Financials',
@@ -364,6 +378,7 @@ export const MOCK_STOCKS = [
     yield: 5.90,
     type: 'equities',
     color: '#B80510',
+    logo: zfcoLogo,
     marketOpen: '09:45 AM',
     availableShares: '7.5M',
     sector: 'Forestry',
@@ -392,6 +407,7 @@ export const MOCK_STOCKS = [
     yield: 10.10,
     type: 'equities',
     color: '#9F050D',
+    logo: zsugLogo,
     marketOpen: '09:45 AM',
     availableShares: '4.3M',
     sector: 'Consumer',
@@ -420,6 +436,7 @@ export const MOCK_STOCKS = [
     yield: 9.50,
     type: 'equities',
     color: '#8B030D',
+    logo: reizLogo,
     marketOpen: '09:45 AM',
     availableShares: '3.4M',
     sector: 'Real Estate',
@@ -448,6 +465,7 @@ export const MOCK_STOCKS = [
     yield: 6.90,
     type: 'equities',
     color: '#EF4444',
+    logo: natbLogo,
     marketOpen: '09:45 AM',
     availableShares: '6.7M',
     sector: 'Consumer',
@@ -476,6 +494,7 @@ export const MOCK_STOCKS = [
     yield: 2.40,
     type: 'equities',
     color: '#9BA1B2',
+    logo: zccmLogo,
     marketOpen: '09:45 AM',
     availableShares: '1.2M',
     sector: 'Mining',
@@ -504,6 +523,7 @@ export const MOCK_STOCKS = [
     yield: 4.50,
     type: 'equities',
     color: '#475569',
+    logo: aeciLogo,
     marketOpen: '09:45 AM',
     availableShares: '2.1M',
     sector: 'Mining',
@@ -561,6 +581,7 @@ export const MOCK_STOCKS = [
     yield: 9.28,
     type: 'equities',
     color: '#5F6577',
+    logo: atelLogo,
     marketOpen: '09:45 AM',
     availableShares: '5.4M',
     sector: 'Telecom',
@@ -589,6 +610,7 @@ export const MOCK_STOCKS = [
     yield: 3.50,
     type: 'equities',
     color: '#C40510',
+    logo: shopLogo,
     marketOpen: '09:45 AM',
     availableShares: '1.9M',
     sector: 'Retail',
@@ -617,6 +639,7 @@ export const MOCK_STOCKS = [
     yield: 4.80,
     type: 'equities',
     color: '#B80510',
+    logo: klapLogo,
     marketOpen: '09:45 AM',
     availableShares: '8.2M',
     sector: 'Insurance',
@@ -645,6 +668,7 @@ export const MOCK_STOCKS = [
     yield: 5.20,
     type: 'equities',
     color: '#9F050D',
+    logo: bataLogo,
     marketOpen: '09:45 AM',
     availableShares: '6.4M',
     sector: 'Manufacturing',
