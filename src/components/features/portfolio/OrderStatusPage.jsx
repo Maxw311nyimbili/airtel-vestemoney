@@ -23,12 +23,8 @@ export default function OrderStatusPage({ sharesOwned, pendingTrades }) {
     );
   }
 
-  const qty         = sharesOwned[stock.symbol] || 0;
-  const value       = qty * stock.price;
-  const holdingCost = value * 0.871;
-  const holdingPnl  = value - holdingCost;
-  const holdingPct  = holdingCost > 0 ? ((holdingPnl / holdingCost) * 100).toFixed(2) : '0.00';
-  const isUp        = holdingPnl >= 0;
+  const qty   = sharesOwned[stock.symbol] || 0;
+  const value = qty * stock.price;
 
   const pending = pendingTrades && pendingTrades[stock.symbol];
   const action  = pending === 'sell' ? 'Sell' : 'Buy';
@@ -81,13 +77,6 @@ export default function OrderStatusPage({ sharesOwned, pendingTrades }) {
             <div className="summary-row">
               <span>Current Value:</span>
               <span>ZMW {value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
-            </div>
-            <div className="summary-row total">
-              <span>Profit / Loss:</span>
-              <span className={isUp ? 'pf-profit' : 'pf-loss'}>
-                {isUp ? '+' : ''}ZMW {Math.abs(holdingPnl).toLocaleString('en-US', { maximumFractionDigits: 2 })}
-                {' '}({isUp ? '+' : ''}{holdingPct}%)
-              </span>
             </div>
           </div>
         </div>

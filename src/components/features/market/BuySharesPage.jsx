@@ -6,7 +6,6 @@ import paymentLogo from '../../../images/payment_logo.png';
 import GuestLock from '../../shared/GuestLock';
 import StockLogo from '../../StockLogo';
 
-const PRESETS = [50, 100, 500, 1000];
 const FEE_RATE = 0.015;
 
 function genOrderId() {
@@ -150,9 +149,7 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
     [symbol]
   );
 
-  const [selectedQty,    setSelectedQty]    = useState(100);
-  const [customMode,     setCustomMode]     = useState(false);
-  const [customValue,    setCustomValue]    = useState('');
+  const [amount,         setAmount]         = useState('');
   const [step,           setStep]           = useState('select');
   const [orderId,        setOrderId]        = useState('');
 
@@ -175,7 +172,8 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
     );
   }
 
-  const qty   = customMode ? (parseInt(customValue) || 0) : selectedQty;
+  const amountValue = parseFloat(amount) || 0;
+  const qty   = stock.price > 0 ? Math.floor(amountValue / stock.price) : 0;
   const gross = qty * stock.price;
   const fees  = gross * FEE_RATE;
   const total = gross + fees;
@@ -183,7 +181,7 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
 
   const handleReviewOrder = () => {
     if (!canBuy) {
-      showToast(total > walletBalance ? 'Insufficient Airtel Money balance.' : 'Enter a valid number of shares.');
+      showToast(total > walletBalance ? 'Insufficient Airtel Money balance.' : 'Enter an amount to invest.');
       return;
     }
     setStep('review');
@@ -219,27 +217,16 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
         </div>
 
         <div className="trade-section">
-          <span className="trade-section-title">Number of Shares to Buy</span>
-          <div className="trade-presets">
-            {PRESETS.map(presetQty => (
-              <button key={presetQty}
-                className={`trade-preset-btn ${!customMode && selectedQty === presetQty ? 'active' : ''}`}
-                onClick={() => { setCustomMode(false); setSelectedQty(presetQty); }}>
-                {presetQty} shares
-              </button>
-            ))}
-            <button className={`trade-preset-btn ${customMode ? 'active' : ''}`}
-              onClick={() => { setCustomMode(true); setSelectedQty(0); }}>
-              Custom Shares
-            </button>
+          <span className="trade-section-title">Amount to Invest</span>
+          <div className="trade-custom-input-wrap">
+            <span className="trade-custom-prefix">ZMW</span>
+            <input type="number" className="trade-custom-input" placeholder="0.00"
+              value={amount} onChange={e => setAmount(e.target.value)} autoFocus min="0" inputMode="decimal" />
           </div>
-          {customMode && (
-            <div className="trade-custom-input-wrap">
-              <input type="number" className="trade-custom-input" placeholder="Number of shares"
-                value={customValue} onChange={e => setCustomValue(e.target.value)} autoFocus min="1" />
-              <span className="trade-custom-suffix">shares</span>
-            </div>
-          )}
+          <div className="trade-est-row" style={{ marginTop: 10 }}>
+            <span className="trade-est-note">Actual shares</span>
+            <span className="trade-est-value">{qty.toLocaleString()} {qty === 1 ? 'share' : 'shares'}</span>
+          </div>
         </div>
 
         {/* ── Order summary breakdown ── */}

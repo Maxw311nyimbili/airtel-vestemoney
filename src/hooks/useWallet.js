@@ -33,22 +33,31 @@ export function useWallet() {
       return { success: false, error: validation.error };
     }
 
+    // Payment is processed immediately via Airtel Money
     if (type === 'buy') {
       setWalletBalance(prev => prev - cost);
-      setSharesOwned(prev => ({
-        ...prev,
-        [symbol]: (prev[symbol] || 0) + parseInt(qty)
-      }));
     } else {
       setWalletBalance(prev => prev + cost);
-      setSharesOwned(prev => ({
-        ...prev,
-        [symbol]: Math.max(0, (prev[symbol] || 0) - parseInt(qty))
-      }));
     }
 
-    // Order is awaiting LuSE matching/settlement
+    // Order is awaiting LuSE matching/settlement — Shares Owned
+    // will not update until the order settles
     setPendingTrades(prev => ({ ...prev, [symbol]: type }));
+
+    setTimeout(() => {
+      setSharesOwned(prev => {
+        const current = prev[symbol] || 0;
+        const updated = type === 'buy'
+          ? current + parseInt(qty)
+          : Math.max(0, current - parseInt(qty));
+        return { ...prev, [symbol]: updated };
+      });
+      setPendingTrades(prev => {
+        const next = { ...prev };
+        delete next[symbol];
+        return next;
+      });
+    }, 8000);
 
     return { success: true, cost };
   };

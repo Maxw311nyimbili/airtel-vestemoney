@@ -254,6 +254,10 @@ export default function SellSharesPage({ walletBalance, sharesOwned, onTradeExec
               <span className="trade-custom-suffix">shares</span>
             </div>
           )}
+          <div className="trade-est-row" style={{ marginTop: 10 }}>
+            <span className="trade-est-note">Actual shares</span>
+            <span className="trade-est-value">{qty.toLocaleString()} {qty === 1 ? 'share' : 'shares'}</span>
+          </div>
         </div>
 
         {/* ── Order summary breakdown ── */}
