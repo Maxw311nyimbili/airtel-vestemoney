@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { HashRouter, Routes, Route, useLocation, useNavigate, Navigate } from 'react-router-dom';
 
-// Layout Components
+// Airtel Wealth & Trading Simulator Layout Components
 import Header from './components/layout/Header';
 import BottomNav from './components/layout/BottomNav';
 
