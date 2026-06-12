@@ -76,16 +76,6 @@ export default function OrderBookPage({ showToast }) {
           </div>
         </div>
 
-        {/* ── Plain-language explainer ── */}
-        <div className="ob-explainer">
-          <span className="ob-explainer-icon">💡</span>
-          <p>
-            <strong>Buyers</strong> are offering to pay up to <strong>ZMW {bestBid}</strong>.{' '}
-            <strong>Sellers</strong> are asking at least <strong>ZMW {bestAsk}</strong>.{' '}
-            A deal happens when these prices meet.
-          </p>
-        </div>
-
         {/* ── Buy/Sell pressure bar ── */}
         <div className="ob-pressure-wrap">
           <span className="ob-pressure-lbl buy-lbl">Buyers {buyPct}%</span>

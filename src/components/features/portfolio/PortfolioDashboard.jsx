@@ -11,6 +11,7 @@ export default function PortfolioDashboard({
   portfolioEquities,
   portfolioBonds,
   portfolioSavings,
+  pendingTrades,
   showToast,
   triggerTrade,
   isGuest,
@@ -131,12 +132,12 @@ export default function PortfolioDashboard({
                     </span>
                   </div>
 
-                  {/* Trade button */}
+                  {/* View order status */}
                   <button
-                    className="pf-trade-btn"
-                    onClick={e => { e.stopPropagation(); navigate(`/market/${stock.symbol}`); }}
+                    className="pf-trade-btn pf-view-btn"
+                    onClick={e => { e.stopPropagation(); navigate(`/portfolio/${stock.symbol}`); }}
                   >
-                    Trade
+                    View
                   </button>
                 </div>
               );

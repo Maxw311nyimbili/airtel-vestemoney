@@ -10,6 +10,7 @@ import LandingPage from './components/features/splash/LandingPage';
 import LoginScreen from './components/features/auth/LoginScreen';
 import MainDashboard from './components/features/dashboard/MainDashboard';
 import PortfolioDashboard from './components/features/portfolio/PortfolioDashboard';
+import OrderStatusPage from './components/features/portfolio/OrderStatusPage';
 import MarketDashboard from './components/features/market/MarketDashboard';
 import StockDetailPage from './components/features/market/StockDetailPage';
 import BuySharesPage from './components/features/market/BuySharesPage';
@@ -43,6 +44,7 @@ function AppLayout({ useWalletHook, showToast }) {
     setWalletBalance,
     sharesOwned,
     setSharesOwned,
+    pendingTrades,
     setIsLoggedIn,
     executeTrade,
   } = useWalletHook;
@@ -133,9 +135,19 @@ function AppLayout({ useWalletHook, showToast }) {
                 portfolioEquities={portfolioAssets.equities}
                 portfolioBonds={portfolioAssets.bonds}
                 portfolioSavings={portfolioAssets.savings}
+                pendingTrades={pendingTrades}
                 showToast={showToast}
                 triggerTrade={triggerTrade}
                 isGuest={isGuest}
+              />
+            }
+          />
+          <Route
+            path="/portfolio/:symbol"
+            element={
+              <OrderStatusPage
+                sharesOwned={sharesOwned}
+                pendingTrades={pendingTrades}
               />
             }
           />

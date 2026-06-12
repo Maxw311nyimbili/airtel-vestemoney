@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import airtelLogo from '../../../images/airtel_logo.png';
-import vesteLogo from '../../../images/Veste.money logo.png';
+import vesteLogo from '../../../images/optimized/veste_logo.png';
 import './LoginScreen.css';
 
 export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, setIsLoggedIn, setIsGuest }) {

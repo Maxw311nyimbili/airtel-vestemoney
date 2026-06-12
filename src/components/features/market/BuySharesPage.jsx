@@ -122,7 +122,7 @@ function OrderSuccess({ stock, amount, shares, orderId, onViewPortfolio, onBackH
             <polyline points="20 6 9 17 4 12" />
           </svg>
         </div>
-        <h2 className="success-heading">Order Successful!</h2>
+        <h2 className="success-heading">Payment Successful!</h2>
         <p className="success-sub-text">You have successfully bought {shares} shares of {stock.name}.</p>
       </div>
       <div className="success-card">

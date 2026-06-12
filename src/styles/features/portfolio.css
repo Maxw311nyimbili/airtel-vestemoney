@@ -299,6 +299,119 @@
   background: var(--primary-red-dark, #B8040F);
 }
 
+.pf-view-btn {
+  background: #4B5563;
+}
+
+.pf-view-btn:hover {
+  background: #374151;
+}
+
+/* ── Order status drawer ── */
+.pf-view-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.pf-view-status-lbl {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.pf-status-pill {
+  font-size: 11px;
+  font-weight: 800;
+  padding: 4px 12px;
+  border-radius: 20px;
+  letter-spacing: 0.3px;
+}
+
+.pf-status-pending {
+  background: #FEF3C7;
+  color: #92400E;
+}
+
+.pf-status-settled {
+  background: #E5F0EC;
+  color: #1F6F4F;
+}
+
+.pf-view-status-note {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  line-height: 1.5;
+  margin: 6px 0 0;
+}
+
+/* ── Order Status page ── */
+.os-body {
+  padding: 16px;
+}
+
+.os-stock-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-light);
+  border-radius: 14px;
+  padding: 14px;
+  margin-bottom: 4px;
+}
+
+.os-stock-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  flex-shrink: 0;
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.os-stock-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.os-stock-sym {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.os-stock-name {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  margin-top: 1px;
+}
+
+.os-stock-price {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 15px;
+  color: var(--text-primary);
+  flex-shrink: 0;
+}
+
+.os-summary {
+  margin-top: 16px;
+}
+
+.os-body .trade-drawer-confirm-btn {
+  display: block;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
+  font-family: inherit;
+}
+
 /* ── Empty state ── */
 .pf-empty {
   display: flex;
@@ -465,7 +578,7 @@
   text-align: right;
 }
 
-/* ── Responsive ── */
+/* ââ Responsive ââ */
 @media (max-width: 768px) {
   .calc-inputs {
     grid-template-columns: 1fr;

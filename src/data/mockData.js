@@ -674,7 +674,7 @@ export const MOCK_STOCKS = [
     sector: 'Manufacturing',
     trend: [1.50, 1.48, 1.47, 1.45, 1.43, 1.46, 1.44, 1.45, 1.43, 1.45],
     open: 1.46,
-    prevClose: 1.46,
+    prevClose: 146,
     dayLow: 1.40,
     dayHigh: 1.50,
     volume: '7.8K',
@@ -705,3 +705,4 @@ export const UPCOMING_DIVIDENDS = [
   { symbol: 'PUMA', exDate: 'Jun 25, 2026', rate: 0.22, date: 'Jul 18, 2026' },
   { symbol: 'ZMBF', exDate: 'Jul 02, 2026', rate: 0.10, date: 'Jul 24, 2026' }
 ];
+

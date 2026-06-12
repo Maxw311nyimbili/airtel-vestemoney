@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import airtelLogo from '../../../images/airtel_logo.png';
-import vesteLogo from '../../../images/Veste.money logo.png';
-import heroImage from '../../../images/optimized/app_hero_picture.jpg';
+import vesteLogo from '../../../images/optimized/veste_logo.png';
+import heroImage from '../../../images/optimized/hero-1.jpg';
 import './LandingPage.css';
 
 export default function LandingPage({ setIsLoggedIn, setIsGuest }) {
@@ -19,17 +19,13 @@ export default function LandingPage({ setIsLoggedIn, setIsGuest }) {
 
       {/* ── Hero ── */}
       <div className="splash-hero">
-        <div className="splash-hero-bg" />
+        <img src={heroImage} alt="" className="splash-hero-img" />
+        <div className="splash-hero-vignette" />
+        <div className="splash-hero-fade" />
 
-        {/* Brand logos at top */}
+        {/* Brand logo at top */}
         <div className="splash-logos">
           <img src={airtelLogo} alt="Airtel" className="splash-logo-airtel" />
-          <div className="splash-logo-divider" />
-          <img src={vesteLogo} alt="Veste Money" className="splash-logo-veste" />
-        </div>
-
-        <div className="splash-image-area">
-          <img src={heroImage} alt="" className="splash-hero-img" />
         </div>
       </div>
 
@@ -38,9 +34,6 @@ export default function LandingPage({ setIsLoggedIn, setIsGuest }) {
         <div className="splash-card-handle" />
 
         <h1 className="splash-title">Airtel Invest</h1>
-        <p className="splash-subtitle">
-          Buy shares on the Lusaka Stock Exchange and grow your wealth — directly from your Airtel Money.
-        </p>
 
         <div className="splash-actions">
           <button className="splash-btn-primary" onClick={() => navigate('/login')}>
@@ -58,7 +51,7 @@ export default function LandingPage({ setIsLoggedIn, setIsGuest }) {
             <span>Powered by</span>
             <img src={vesteLogo} alt="Veste Money" className="splash-powered-logo" />
           </div>
-        </div>
+          </div>
       </div>
 
     </div>

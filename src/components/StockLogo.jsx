@@ -22,7 +22,7 @@ export default function StockLogo({ stock, className }) {
         }}
       >
         <img 
-          src={stock.logo} 
+        src={stock.logo} 
           alt={stock.name || stock.symbol} 
           className="stock-logo-img" 
           style={{ 

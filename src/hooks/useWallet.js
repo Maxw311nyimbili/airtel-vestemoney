@@ -18,6 +18,9 @@ export function useWallet() {
     PUMA: 0
   });
 
+  // Symbols with an order awaiting LuSE matching/settlement
+  const [pendingTrades, setPendingTrades] = useState({});
+
   const executeTrade = (type, symbol, qty) => {
     const stock = StocksService.getStockBySymbol(symbol);
     if (!stock) return { success: false, error: 'Asset not found' };
@@ -44,11 +47,14 @@ export function useWallet() {
       }));
     }
 
+    // Order is awaiting LuSE matching/settlement
+    setPendingTrades(prev => ({ ...prev, [symbol]: type }));
+
     return { success: true, cost };
   };
 
   return {
-    isLoggedIn,
+        isLoggedIn,
     setIsLoggedIn,
     isGuest,
     setIsGuest,
@@ -63,6 +69,8 @@ export function useWallet() {
     setWalletBalance,
     sharesOwned,
     setSharesOwned,
+    pendingTrades,
+    setPendingTrades,
     executeTrade
   };
 }

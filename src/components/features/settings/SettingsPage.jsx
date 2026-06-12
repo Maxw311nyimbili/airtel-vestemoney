@@ -125,12 +125,12 @@ export default function SettingsPage({ userName, phoneNumber, csdAccountNumber, 
             </div>
      <div className="stg-row-body">
               <span className="stg-row-title">App Version</span>
-              <span className="stg-row-sub">1.0.0 · Powered by Veste Money</span>
+              <span className="stg-row-sub">1.0.0 Â· Powered by Veste Money</span>
             </div>
           </div>
         </div>
 
-        {/* ── Logout button ── */}
+        {/* ââ Logout button ââ */}
         <div className="stg-logout-area">
           <button className="stg-logout-btn" onClick={handleLogout}>
             <Icons.LogOut />
