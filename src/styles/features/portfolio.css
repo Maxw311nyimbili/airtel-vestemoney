@@ -403,6 +403,16 @@
   margin-top: 16px;
 }
 
+.os-summary .pf-profit {
+  color: #1A1D23;
+  font-weight: 800;
+}
+
+.os-summary .pf-loss {
+  color: var(--primary-red);
+  font-weight: 800;
+}
+
 .os-body .trade-drawer-confirm-btn {
   display: block;
   width: 100%;
