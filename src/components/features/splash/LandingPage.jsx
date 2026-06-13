@@ -33,8 +33,6 @@ export default function LandingPage({ setIsLoggedIn, setIsGuest }) {
       <div className="splash-bottom-card">
         <div className="splash-card-handle" />
 
-        <h1 className="splash-title">Airtel Invest</h1>
-
         <div className="splash-actions">
           <button className="splash-btn-primary" onClick={() => navigate('/login')}>
             Get Started

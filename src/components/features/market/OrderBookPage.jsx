@@ -38,11 +38,6 @@ export default function OrderBookPage({ showToast }) {
   const priceGap    = latestPrice - lastPrice;
   const isGapUp     = priceGap >= 0;
 
-  // Buy/sell pressure ratio
-  const totalBid = parsed.reduce((s, r) => s + r.bidVol, 0);
-  const totalAsk = parsed.reduce((s, r) => s + r.askVol, 0);
-  const buyPct   = totalBid + totalAsk > 0 ? Math.round((totalBid / (totalBid + totalAsk)) * 100) : 50;
-
   return (
     <div className="screen-container slide-in-right ob-page">
 
@@ -74,15 +69,6 @@ export default function OrderBookPage({ showToast }) {
               {isGapUp ? '+' : ''}{priceGap.toFixed(2)}
             </span>
           </div>
-        </div>
-
-        {/* ── Buy/Sell pressure bar ── */}
-        <div className="ob-pressure-wrap">
-          <span className="ob-pressure-lbl buy-lbl">Buyers {buyPct}%</span>
-          <div className="ob-pressure-track">
-            <div className="ob-pressure-fill buy-fill" style={{ width: `${buyPct}%` }} />
-          </div>
-          <span className="ob-pressure-lbl sell-lbl">Sellers {100 - buyPct}%</span>
         </div>
 
         {/* ── Bids / Asks columns ── */}

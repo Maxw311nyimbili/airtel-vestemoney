@@ -129,6 +129,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
 
         <div className="otp-header-brand">
           <img src={airtelLogo} alt="Airtel" className="otp-airtel-logo" />
+          <span className="otp-tagline">Buy and sell LuSE shares</span>
         </div>
 
         <div className="otp-header-text">

@@ -31,7 +31,6 @@ export default function Header({ showToast, onLogout, isGuest }) {
       <header className="mobile-header">
         <div className="mobile-brand" onClick={() => navigate('/dashboard')} style={{ cursor: 'pointer' }}>
           <img src={airtelLogo} alt="Airtel" className="mobile-brand-logo" />
-          <span className="mobile-brand-invest desktop-only">Invest</span>
         </div>
 
         <nav className="desktop-nav-links desktop-only">
