@@ -154,9 +154,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
           <form className="otp-form" onSubmit={handlePhoneSubmit}>
             <div className="otp-phone-field">
               <div className="otp-phone-prefix">
-                <span className="otp-flag">🇿🇲</span>
                 <span className="otp-prefix-code">+260</span>
-                <div className="otp-prefix-divider" />
               </div>
               <input
                 ref={phoneInputRef}

@@ -111,13 +111,14 @@
 /* ── Phone Input ─────────────────────────────── */
 .otp-phone-field {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   border: 2px solid #E5E7EB;
   border-radius: 14px;
   overflow: hidden;
   background: #ffffff;
   transition: border-color 0.2s ease;
   height: 58px;
+  flex-shrink: 0;
 }
 
 .otp-phone-field:focus-within {
@@ -128,34 +129,35 @@
 .otp-phone-prefix {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 0 14px;
   background: #F9FAFB;
-  height: 100%;
   border-right: 2px solid #E5E7EB;
   flex-shrink: 0;
-}
-
-.otp-flag {
-  font-size: 18px;
   line-height: 1;
 }
 
 .otp-prefix-code {
+  display: flex;
+  align-items: center;
   font-size: 16px;
   font-weight: 700;
+  line-height: 1;
   color: #1A1D27;
   white-space: nowrap;
 }
 
 .otp-phone-input {
   flex: 1;
+  display: block;
   height: 100%;
   border: none;
   background: transparent;
   padding: 0 16px;
   font-size: 18px;
   font-weight: 600;
+  line-height: normal;
   color: #1A1D27;
   letter-spacing: 2px;
   font-family: var(--font-body);
@@ -313,14 +315,14 @@
   align-items: center;
   gap: 6px;
   font-size: 11px;
-  color: #9BA1B2;
+  font-weight: 700;
+  color: #5F6577;
 }
 
 .otp-veste-logo {
   height: 22px;
   width: auto;
   object-fit: contain;
-  opacity: 0.6;
 }
 
 /* ── Desktop / Tablet ─────────────────────────────── */
