@@ -13,7 +13,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
   const otpRefs = [useRef(), useRef(), useRef(), useRef()];
   const phoneInputRef = useRef();
 
-  const isPhoneValid = phoneNumber.replace(/\s/g, '').length === 9;
+  const isPhoneValid = phoneNumber.replace(/\s/g, '').length === 10 && phoneNumber.startsWith('0');
   const isOtpComplete = otp.every(d => d !== '');
 
   // Focus phone input on mount
@@ -47,7 +47,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
       showToast('Please enter a valid 9-digit Airtel number.');
       return;
     }
-    showToast('OTP sent to +260 ' + phoneNumber);
+    showToast('OTP sent to +26 ' + phoneNumber);
     setStep(2);
   };
 
@@ -101,7 +101,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
     setOtp(['', '', '', '']);
     setCountdown(30);
     otpRefs[0].current?.focus();
-    showToast('New OTP sent to +260 ' + phoneNumber);
+    showToast('New OTP sent to +26 ' + phoneNumber);
     // Restart timer
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -154,23 +154,26 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
           <form className="otp-form" onSubmit={handlePhoneSubmit}>
             <div className="otp-phone-field">
               <div className="otp-phone-prefix">
-                <span className="otp-prefix-code">+260</span>
+                <span className="otp-prefix-code">+26</span>
               </div>
               <input
                 ref={phoneInputRef}
                 type="tel"
                 className="otp-phone-input"
                 value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/g, ''))}
-                placeholder="97 XXX XXXX"
-                maxLength={9}
+                onChange={(e) => {
+                  const digits = e.target.value.replace(/\D/g, '');
+                  setPhoneNumber(digits.startsWith('0') ? digits : '0' + digits);
+                }}
+                placeholder="097 XXX XXXX"
+                maxLength={10}
                 inputMode="numeric"
                 autoComplete="tel-national"
               />
             </div>
 
             <p className="otp-hint">
-              Enter your 9-digit Airtel Zambia mobile number
+              Enter your Airtel Zambia number starting with 097
             </p>
 
             <button
