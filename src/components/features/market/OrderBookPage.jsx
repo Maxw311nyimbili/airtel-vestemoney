@@ -15,29 +15,11 @@ export default function OrderBookPage({ showToast }) {
 
   if (!stock) return null;
 
-  const ob   = stock.orderBook;
-  const rows = ob?.rows || [];
-
-  // Parse volumes to numbers for depth bars
-  const parsed = rows.map(r => {
-    const toNum = v => {
-      const s = String(v || '0');
-      return s.includes('K') ? parseFloat(s) * 1000 : parseFloat(s) || 0;
-    };
-    return { ...r, bidVol: toNum(r.volume), askVol: toNum(r.askVolume) };
-  });
-
-  const maxBid = Math.max(...parsed.map(r => r.bidVol), 1);
-  const maxAsk = Math.max(...parsed.map(r => r.askVol), 1);
-
-  const bestBid  = parseFloat(ob?.bestBid || 0);
-  const bestAsk  = parseFloat(ob?.bestAsk || 0);
-  const midPrice = ((bestBid + bestAsk) / 2).toFixed(2);
-
-  const lastPrice   = stock.prevClose ?? stock.price;
-  const latestPrice = stock.price;
-  const priceGap    = latestPrice - lastPrice;
-  const isGapUp     = priceGap >= 0;
+  const ob           = stock.orderBook;
+  const lastPrice    = stock.prevClose ?? stock.price;
+  const latestPrice  = stock.price;
+  const priceGap     = latestPrice - lastPrice;
+  const isGapUp      = priceGap >= 0;
 
   return (
     <div className="screen-container slide-in-right ob-page">
@@ -103,57 +85,7 @@ export default function OrderBookPage({ showToast }) {
           </div>
         </div>
 
-        {/* ── Bids / Asks columns ── */}
-        <div className="ob-columns">
-
-          {/* Buyers column */}
-          <div className="ob-col">
-            <div className="ob-col-header buy-header">
-              <span className="ob-col-title">Buyers</span>
-              <span className="ob-col-sub">Price they'll pay</span>
-            </div>
-            <div className="ob-col-labels">
-              <span>Shares</span>
-              <span>Price</span>
-            </div>
-            {parsed.map((r, i) => (
-              <div key={i} className="ob-row ob-buy-row">
-                <div className="ob-row-bar" style={{ width: `${(r.bidVol / maxBid) * 100}%` }} />
-                <span className="ob-row-vol">{r.volume}</span>
-                <span className="ob-row-price ob-bid-price">ZMW {r.bid}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Sellers column */}
-          <div className="ob-col">
-            <div className="ob-col-header sell-header">
-              <span className="ob-col-title">Sellers</span>
-              <span className="ob-col-sub">Price they want</span>
-            </div>
-            <div className="ob-col-labels">
-              <span>Price</span>
-              <span>Shares</span>
-            </div>
-            {parsed.map((r, i) => (
-              <div key={i} className="ob-row ob-ask-row">
-                <div className="ob-row-bar ask-bar" style={{ width: `${(r.askVol / maxAsk) * 100}%` }} />
-                <span className="ob-row-price ob-ask-price">ZMW {r.ask}</span>
-                <span className="ob-row-vol">{r.askVolume}</span>
-              </div>
-            ))}
-          </div>
-
-        </div>
-
-        {/* Mid price marker */}
-        <div className="ob-midprice">
-          <div className="ob-midprice-line" />
-          <span className="ob-midprice-label">Mid-price ZMW {midPrice}</span>
-          <div className="ob-midprice-line" />
-        </div>
-
-        {/* CTA */}
+        {/* ── CTA ── */}
         <div className="ob-cta-row">
           <button className="ob-cta-buy" onClick={() => navigate(`/market/${stock.symbol}/buy`)}>
             Buy Shares

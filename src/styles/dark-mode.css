@@ -1,368 +1,656 @@
 /* ════════════════════════════════════════════
    DARK MODE OVERRIDES
    Applied when html[data-theme="dark"]
+   Covers every page / component systematically
    ════════════════════════════════════════════ */
 
-/* ── Body & root ── */
-[data-theme="dark"] body {
+/* ─────────────────────────────────────────────
+   1. GLOBAL SURFACES & CONTAINERS
+───────────────────────────────────────────── */
+[data-theme="dark"] body,
+[data-theme="dark"] .screen-container,
+[data-theme="dark"] .slide-in-right,
+[data-theme="dark"] .dashboard-screen,
+[data-theme="dark"] .mkt-screen,
+[data-theme="dark"] .market-screen,
+[data-theme="dark"] .portfolio-screen,
+[data-theme="dark"] .dividend-screen,
+[data-theme="dark"] .settings-screen,
+[data-theme="dark"] .pf-wrapper,
+[data-theme="dark"] .stg-wrapper,
+[data-theme="dark"] .ob-page,
+[data-theme="dark"] .trade-page,
+[data-theme="dark"] .dash-wrapper {
   background: var(--bg-body);
   color: var(--text-primary);
 }
 
-/* ── Bottom Nav ── */
+/* ─────────────────────────────────────────────
+   2. BOTTOM NAV
+───────────────────────────────────────────── */
 [data-theme="dark"] .mobile-bottom-nav {
   background: #141414;
   border-top-color: #2C2C2C;
 }
+[data-theme="dark"] .mobile-nav-item { color: #6B7280; }
+[data-theme="dark"] .mobile-nav-item.active { color: #FF0000; }
 
-[data-theme="dark"] .mobile-nav-item {
-  color: #6B7280;
-}
-
-[data-theme="dark"] .mobile-nav-item.active {
-  color: #FF0000;
-}
-
-/* ── Back button / general surface buttons ── */
+/* ─────────────────────────────────────────────
+   3. BACK BUTTON / PAGE HEADERS
+───────────────────────────────────────────── */
 [data-theme="dark"] .back-btn {
   background: var(--bg-card);
   border-color: var(--border-color);
   color: var(--text-primary);
 }
-
-/* ── Page containers / cards ── */
-[data-theme="dark"] .dashboard-screen {
-  background: var(--bg-body);
+[data-theme="dark"] .pf-header-title,
+[data-theme="dark"] .page-title,
+[data-theme="dark"] .sub-page-header h1 {
+  color: var(--text-primary);
 }
 
-/* ── Dashboard: stock rows list ── */
+/* ─────────────────────────────────────────────
+   4. DASHBOARD
+───────────────────────────────────────────── */
+[data-theme="dark"] .dash-greeting-text,
+[data-theme="dark"] .dash-section-title,
+[data-theme="dark"] .section-header-row h3 {
+  color: var(--text-primary);
+}
+
 [data-theme="dark"] .dash-stocks-list {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
-
 [data-theme="dark"] .dash-stock-row {
   background: var(--bg-card);
   border-bottom-color: var(--border-color);
 }
-
-[data-theme="dark"] .dash-stock-name {
-  color: var(--text-primary);
-}
-
+[data-theme="dark"] .dash-stock-row:active { background: var(--bg-input); }
 [data-theme="dark"] .dash-stock-sym,
-[data-theme="dark"] .dash-stock-vol {
-  color: var(--text-tertiary);
-}
+[data-theme="dark"] .dash-stock-price { color: var(--text-primary); }
+[data-theme="dark"] .dash-stock-name { color: var(--text-secondary); }
+[data-theme="dark"] .dash-stock-chg.chg-up { color: var(--text-secondary); }
 
-/* QA buttons - sell/portfolio which are white in light mode */
+/* Quick action buttons (white bg in light) */
 [data-theme="dark"] .qa-sell,
 [data-theme="dark"] .qa-portfolio {
   background: #2A2A2A;
   color: #FF0000;
   border-color: rgba(255,0,0,0.2);
 }
-
-/* ── Watchlist section ── */
-[data-theme="dark"] .watch-card,
-[data-theme="dark"] .watch-row,
-[data-theme="dark"] .watchlist-empty {
+[data-theme="dark"] .quick-action-btn-card {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
+[data-theme="dark"] .quick-action-icon-wrapper {
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+[data-theme="dark"] .quick-action-label { color: var(--text-primary); }
 
-/* ── Guest lock card ── */
+/* Promo card */
+[data-theme="dark"] .promo-invest-card {
+  background: rgba(255,0,0,0.1);
+  border-color: rgba(255,0,0,0.2);
+}
+[data-theme="dark"] .promo-title { color: var(--text-primary); }
+[data-theme="dark"] .promo-desc { color: var(--text-secondary); }
+
+/* Transactions / white list containers */
+[data-theme="dark"] .transactions-white-list,
+[data-theme="dark"] .market-row-list {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .market-row {
+  background: var(--bg-card);
+  border-bottom-color: var(--border-color);
+}
+[data-theme="dark"] .market-row:hover { background: var(--bg-input); }
+[data-theme="dark"] .market-row-sym,
+[data-theme="dark"] .market-row-price { color: var(--text-primary); }
+[data-theme="dark"] .market-row-name { color: var(--text-secondary); }
+[data-theme="dark"] .market-row-chg.chg-up { color: var(--text-secondary); }
+
+[data-theme="dark"] .balance-plus-btn {
+  background: rgba(255,255,255,0.15);
+  color: #ffffff;
+}
+
+/* ─────────────────────────────────────────────
+   5. SHARED STOCK ROW (market list, watchlist)
+───────────────────────────────────────────── */
+[data-theme="dark"] .stock-row {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .stock-row:active { background: var(--bg-input); }
+[data-theme="dark"] .stock-row-sym,
+[data-theme="dark"] .stock-row-price { color: var(--text-primary); }
+[data-theme="dark"] .stock-row-name { color: var(--text-secondary); }
+[data-theme="dark"] .stock-row-chg.chg-up { color: var(--text-secondary); }
+[data-theme="dark"] .stock-row-owned {
+  color: var(--text-tertiary);
+  background: var(--bg-input);
+}
+[data-theme="dark"] .stock-row-empty { border-color: var(--border-color); }
+[data-theme="dark"] .stock-row-empty-btn {
+  background: var(--bg-card);
+  color: var(--text-primary);
+}
+[data-theme="dark"] .stock-row-star { color: var(--text-tertiary); }
+
+/* ─────────────────────────────────────────────
+   6. MARKET PAGE
+───────────────────────────────────────────── */
+[data-theme="dark"] .mkt-body { background: var(--bg-body); }
+[data-theme="dark"] .mkt-section-label { color: var(--text-secondary); }
+[data-theme="dark"] .mkt-list {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .mkt-highlight-index,
+[data-theme="dark"] .mkt-highlight-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .mkt-hl-title { color: var(--text-secondary); }
+[data-theme="dark"] .mkt-hl-big,
+[data-theme="dark"] .mkt-hl-name { color: var(--text-primary); }
+[data-theme="dark"] .mkt-status-chip {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-secondary);
+}
+[data-theme="dark"] .badge-up {
+  background: var(--bg-input);
+  color: var(--text-secondary);
+}
+[data-theme="dark"] .mkt-hl-badge.badge-dn {
+  background: rgba(255,0,0,0.15);
+  color: #FF6B6B;
+}
+
+/* Search */
+[data-theme="dark"] .search-bar {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .search-bar input {
+  background: transparent;
+  color: var(--text-primary);
+}
+[data-theme="dark"] .search-bar input::placeholder { color: var(--text-tertiary); }
+[data-theme="dark"] .search-bar svg { color: var(--text-tertiary); }
+
+/* Service cards */
+[data-theme="dark"] .service-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .service-card-icon,
+[data-theme="dark"] .service-card-icon.portfolio,
+[data-theme="dark"] .service-card-icon.market,
+[data-theme="dark"] .service-card-icon.dividend,
+[data-theme="dark"] .service-card-icon.lock {
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+[data-theme="dark"] .service-card-title { color: var(--text-primary); }
+[data-theme="dark"] .service-card-desc { color: var(--text-secondary); }
+
+/* Watchlist */
+[data-theme="dark"] .watch-card,
+[data-theme="dark"] .watch-row,
+[data-theme="dark"] .watchlist-empty,
+[data-theme="dark"] .stock-row-list {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
 [data-theme="dark"] .guest-lock-card {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
 
-/* ── Market page ── */
-[data-theme="dark"] .market-screen,
-[data-theme="dark"] .market-page {
-  background: var(--bg-body);
-}
-
-[data-theme="dark"] .search-bar input,
-[data-theme="dark"] .market-search input {
-  background: var(--bg-input);
-  color: var(--text-primary);
+/* ─────────────────────────────────────────────
+   7. STOCK DETAIL PAGE
+───────────────────────────────────────────── */
+[data-theme="dark"] .sd-wrapper { background: var(--bg-body); }
+[data-theme="dark"] .sd-price-hero {
+  background: var(--bg-card);
   border-color: var(--border-color);
 }
-
-[data-theme="dark"] .stock-row,
-[data-theme="dark"] .stock-card,
-[data-theme="dark"] .market-stock-row,
-[data-theme="dark"] .mkt-stock-card {
+[data-theme="dark"] .sd-price { color: var(--text-primary); }
+[data-theme="dark"] .sd-price-sub { color: var(--text-secondary); }
+[data-theme="dark"] .sd-today-label { color: var(--text-tertiary); }
+[data-theme="dark"] .sd-company-row {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .sd-company-sym { color: var(--text-primary); }
+[data-theme="dark"] .sd-company-name { color: var(--text-secondary); }
+[data-theme="dark"] .sd-stats-table {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .sd-stat-lbl { color: var(--text-secondary); }
+[data-theme="dark"] .sd-stat-val { color: var(--text-primary); }
+[data-theme="dark"] .sd-stat-row { border-bottom-color: var(--border-color); }
+[data-theme="dark"] .sd-chart-wrap {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .sd-timeframe-row {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .sd-timeframe-row button { color: var(--text-tertiary); }
+[data-theme="dark"] .sd-timeframe-row button.active {
+  background: var(--bg-input);
+  color: var(--text-primary);
+}
+[data-theme="dark"] .sd-owned-chip {
+  background: var(--bg-input);
+  color: var(--text-secondary);
+}
+[data-theme="dark"] .sd-depth-link {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+[data-theme="dark"] .sd-depth-link:active { background: var(--bg-input); }
+[data-theme="dark"] .sd-depth-link svg { color: var(--text-tertiary); }
+[data-theme="dark"] .sd-bottom-bar {
+  background: var(--bg-card);
+  border-top-color: var(--border-color);
+}
+[data-theme="dark"] .sd-company-info {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
 
-[data-theme="dark"] .mkt-card-full-name {
-  color: var(--text-primary);
+/* ─────────────────────────────────────────────
+   8. ORDER BOOK
+───────────────────────────────────────────── */
+[data-theme="dark"] .ob-body { background: var(--bg-body); }
+[data-theme="dark"] .ob-stock-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .ob-stock-full-name { color: var(--text-primary); }
+[data-theme="dark"] .ob-stock-price { color: var(--text-primary); }
+[data-theme="dark"] .ob-stock-bid-ask span,
+[data-theme="dark"] .ob-stock-supply-demand span { color: var(--text-secondary); }
+[data-theme="dark"] .ob-stock-card-bottom { border-top-color: var(--border-color); }
+[data-theme="dark"] .ob-price-strip {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .ob-price-lbl { color: var(--text-secondary); }
+[data-theme="dark"] .ob-price-val { color: var(--text-primary); }
+[data-theme="dark"] .ob-price-divider { background: var(--border-color); }
+[data-theme="dark"] .ob-col {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .ob-col-header { border-bottom-color: var(--border-color); }
+[data-theme="dark"] .ob-col-title { color: var(--text-primary); }
+[data-theme="dark"] .ob-col-sub { color: var(--text-tertiary); }
+[data-theme="dark"] .ob-col-labels span { color: var(--text-tertiary); }
+[data-theme="dark"] .ob-row { border-bottom-color: var(--border-color); }
+[data-theme="dark"] .ob-row-vol,
+[data-theme="dark"] .ob-row-price { color: var(--text-primary); }
+[data-theme="dark"] .ob-midprice-line { background: var(--border-color); }
+[data-theme="dark"] .ob-midprice-label { color: var(--text-secondary); }
+[data-theme="dark"] .ob-cta-sell {
+  background: transparent;
+  border-color: #FF0000;
+  color: #FF0000;
 }
 
-[data-theme="dark"] .mkt-card-price {
+/* ─────────────────────────────────────────────
+   9. PORTFOLIO PAGE
+───────────────────────────────────────────── */
+[data-theme="dark"] .pf-section-label { color: var(--text-secondary); }
+[data-theme="dark"] .pf-bucket {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .pf-bucket:hover { background: var(--bg-input); }
+[data-theme="dark"] .pf-bucket-icon { background: var(--bg-input); }
+[data-theme="dark"] .pf-bucket-name { color: var(--text-primary); }
+[data-theme="dark"] .pf-bucket-value { color: var(--text-primary); }
+[data-theme="dark"] .pf-bucket-chg { color: var(--text-secondary); }
+[data-theme="dark"] .chg-up { color: var(--text-secondary); }
+[data-theme="dark"] .pf-holding-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .pf-holding-card:hover { background: var(--bg-input); }
+[data-theme="dark"] .pf-holding-sym { color: var(--text-primary); }
+[data-theme="dark"] .pf-holding-qty { color: var(--text-secondary); }
+[data-theme="dark"] .pf-holding-val { color: var(--text-primary); }
+[data-theme="dark"] .pf-holding-chg { color: var(--text-secondary); }
+[data-theme="dark"] .pf-view-btn {
+  background: var(--bg-input);
   color: var(--text-primary);
 }
+[data-theme="dark"] .pf-view-status-lbl { color: var(--text-secondary); }
+[data-theme="dark"] .pf-view-status-note { color: var(--text-tertiary); }
+[data-theme="dark"] .pf-status-pending {
+  background: rgba(245,158,11,0.15);
+  color: #FCD34D;
+}
+[data-theme="dark"] .pf-status-settled {
+  background: rgba(34,197,94,0.12);
+  color: #6EE7B7;
+}
+[data-theme="dark"] .pf-empty { color: var(--text-secondary); }
+[data-theme="dark"] .pf-header-action {
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+[data-theme="dark"] .pf-profit { color: var(--text-primary); }
 
-[data-theme="dark"] .mkt-card-bid-ask span,
-[data-theme="dark"] .mkt-card-supply-demand span {
+/* ─────────────────────────────────────────────
+   10. ORDER STATUS PAGE
+───────────────────────────────────────────── */
+[data-theme="dark"] .os-body { background: var(--bg-body); }
+[data-theme="dark"] .os-stock-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .os-stock-sym { color: var(--text-primary); }
+[data-theme="dark"] .os-stock-name { color: var(--text-secondary); }
+[data-theme="dark"] .os-stock-price { color: var(--text-primary); }
+[data-theme="dark"] .orev-rows {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .orev-row { border-bottom-color: var(--border-color); }
+[data-theme="dark"] .orev-label { color: var(--text-secondary); }
+[data-theme="dark"] .orev-value { color: var(--text-primary); }
+[data-theme="dark"] .orev-pay-section {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .orev-pay-label { color: var(--text-secondary); }
+[data-theme="dark"] .orev-pay-name { color: var(--text-primary); }
+
+/* ─────────────────────────────────────────────
+   11. BUY / SELL TRADE PAGE
+───────────────────────────────────────────── */
+[data-theme="dark"] .trade-page-body { background: var(--bg-body); }
+[data-theme="dark"] .trade-stock-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .trade-stock-name { color: var(--text-primary); }
+[data-theme="dark"] .trade-stock-price-lbl { color: var(--text-secondary); }
+[data-theme="dark"] .trade-stock-price { color: var(--text-primary); }
+[data-theme="dark"] .trade-section-title { color: var(--text-secondary); }
+[data-theme="dark"] .trade-section {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .trade-custom-input-wrap {
+  background: var(--bg-input);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .trade-custom-prefix,
+[data-theme="dark"] .trade-custom-suffix { color: var(--text-secondary); }
+[data-theme="dark"] .trade-custom-input {
+  background: transparent;
+  color: var(--text-primary);
+}
+[data-theme="dark"] .trade-est-row {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .trade-est-note { color: var(--text-secondary); }
+[data-theme="dark"] .trade-est-value { color: var(--text-primary); }
+[data-theme="dark"] .trade-owned-bar {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .trade-owned-count { color: var(--text-primary); }
+[data-theme="dark"] .trade-payment-row {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .trade-payment-name { color: var(--text-primary); }
+[data-theme="dark"] .trade-payment-info { color: var(--text-secondary); }
+[data-theme="dark"] .trade-presets button {
+  background: var(--bg-input);
+  border-color: var(--border-color);
   color: var(--text-secondary);
 }
 
-[data-theme="dark"] .stock-name,
-[data-theme="dark"] .stock-sym {
-  color: var(--text-primary);
-}
-
-/* Stock detail */
-[data-theme="dark"] .stock-detail-card,
-[data-theme="dark"] .stock-info-card,
-[data-theme="dark"] .ob-card,
-[data-theme="dark"] .ob-header-card {
+/* ─────────────────────────────────────────────
+   12. SETTINGS / ACCOUNT PAGE
+───────────────────────────────────────────── */
+[data-theme="dark"] .stg-section {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
-
-[data-theme="dark"] .ob-col-header,
-[data-theme="dark"] .ob-row {
-  border-bottom-color: var(--border-color);
-}
-
-[data-theme="dark"] .ob-row:hover {
-  background: rgba(255,255,255,0.04);
-}
-
-/* Buy/Sell pages */
-[data-theme="dark"] .buy-page,
-[data-theme="dark"] .sell-page,
-[data-theme="dark"] .trade-page {
-  background: var(--bg-body);
-}
-
-[data-theme="dark"] .buy-card,
-[data-theme="dark"] .sell-card,
-[data-theme="dark"] .trade-input-card {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-
-[data-theme="dark"] .trade-input,
-[data-theme="dark"] .trade-custom-input,
-[data-theme="dark"] .amount-input {
+[data-theme="dark"] .stg-row { border-bottom-color: var(--border-color); }
+[data-theme="dark"] .stg-row:active { background: var(--bg-input); }
+[data-theme="dark"] .stg-row-title { color: var(--text-primary); }
+[data-theme="dark"] .stg-row-sub,
+[data-theme="dark"] .stg-row-mono { color: var(--text-secondary); }
+[data-theme="dark"] .stg-row svg:last-child { color: var(--text-tertiary); }
+[data-theme="dark"] .stg-row-icon {
   background: var(--bg-input);
-  color: var(--text-primary);
-  border-color: var(--border-color);
+  color: #FF0000;
 }
-
-/* ── Portfolio page ── */
-[data-theme="dark"] .portfolio-screen,
-[data-theme="dark"] .portfolio-page {
-  background: var(--bg-body);
+[data-theme="dark"] .stg-logout-btn {
+  background: rgba(255,0,0,0.12);
+  border-color: rgba(255,0,0,0.25);
+  color: #FF0000;
 }
+[data-theme="dark"] .stg-logout-btn:active { background: rgba(255,0,0,0.2); }
 
-[data-theme="dark"] .portfolio-item,
-[data-theme="dark"] .holding-card,
-[data-theme="dark"] .port-row {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-
-[data-theme="dark"] .order-status-card,
-[data-theme="dark"] .order-card {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-
-/* ── Dividends page ── */
-[data-theme="dark"] .dividend-screen,
-[data-theme="dark"] .dividend-page {
-  background: var(--bg-body);
-}
-
-[data-theme="dark"] .dividend-card,
+/* ─────────────────────────────────────────────
+   13. DIVIDENDS PAGE
+───────────────────────────────────────────── */
 [data-theme="dark"] .div-row {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
-
-/* ── Settings / Account page ── */
-[data-theme="dark"] .settings-screen,
-[data-theme="dark"] .settings-page {
-  background: var(--bg-body);
-}
-
-[data-theme="dark"] .settings-card,
-[data-theme="dark"] .settings-section,
-[data-theme="dark"] .account-card,
-[data-theme="dark"] .profile-card {
+[data-theme="dark"] .div-row-sym { color: var(--text-primary); }
+[data-theme="dark"] .div-row-date,
+[data-theme="dark"] .div-row-exdate { color: var(--text-secondary); }
+[data-theme="dark"] .div-row-rate { color: var(--text-primary); }
+[data-theme="dark"] .div-calc-card {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
-
-[data-theme="dark"] .settings-item,
-[data-theme="dark"] .account-item {
-  border-bottom-color: var(--border-color);
+[data-theme="dark"] .calc-inputs {
+  background: var(--bg-input);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .calc-field input {
+  background: transparent;
   color: var(--text-primary);
 }
-
-[data-theme="dark"] .settings-item:hover,
-[data-theme="dark"] .account-item:hover {
-  background: rgba(255,255,255,0.04);
+[data-theme="dark"] .calc-result {
+  background: var(--bg-card);
+  border-color: var(--border-color);
 }
+[data-theme="dark"] .calc-result-label { color: var(--text-secondary); }
+[data-theme="dark"] .calc-result-value { color: var(--text-primary); }
 
-/* ── Trade drawer ── */
+/* ─────────────────────────────────────────────
+   14. TAB BARS
+───────────────────────────────────────────── */
+[data-theme="dark"] .tab-bar,
+[data-theme="dark"] .filter-tabs,
+[data-theme="dark"] .dash-tabs,
+[data-theme="dark"] .mkt-tabs {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .tab-btn,
+[data-theme="dark"] .filter-tab { color: var(--text-tertiary); }
+[data-theme="dark"] .tab-btn.active,
+[data-theme="dark"] .filter-tab.active { color: #FF0000; }
+
+/* ─────────────────────────────────────────────
+   15. TRADE DRAWER
+───────────────────────────────────────────── */
 [data-theme="dark"] .trade-drawer {
   background: var(--bg-card);
   border-top-color: var(--border-color);
 }
-
-[data-theme="dark"] .trade-drawer-overlay {
-  background: rgba(0,0,0,0.7);
-}
-
-[data-theme="dark"] .trade-drawer-header {
-  border-bottom-color: var(--border-color);
-}
-
+[data-theme="dark"] .trade-drawer-overlay { background: rgba(0,0,0,0.75); }
+[data-theme="dark"] .trade-drawer-header { border-bottom-color: var(--border-color); }
 [data-theme="dark"] .trade-drawer-tab {
   background: var(--bg-input);
   color: var(--text-secondary);
   border-color: var(--border-color);
 }
-
-[data-theme="dark"] .qty-input-row input {
-  background: var(--bg-input);
-  color: var(--text-primary);
-  border-color: var(--border-color);
+[data-theme="dark"] .trade-drawer-tab.buy.active {
+  background: rgba(255,0,0,0.15);
+  border-color: #FF0000;
+  color: #FF0000;
 }
-
+[data-theme="dark"] .trade-drawer-tab.sell.active {
+  background: rgba(239,68,68,0.15);
+  border-color: #EF4444;
+  color: #EF4444;
+}
+[data-theme="dark"] .qty-input-row input,
 [data-theme="dark"] .qty-input-row button {
   background: var(--bg-input);
   color: var(--text-primary);
   border-color: var(--border-color);
 }
-
 [data-theme="dark"] .qty-presets button {
   background: var(--bg-input);
   color: var(--text-secondary);
   border-color: var(--border-color);
 }
-
 [data-theme="dark"] .trade-drawer-summary {
   background: var(--bg-input);
   border-color: var(--border-color);
 }
-
 [data-theme="dark"] .summary-row {
   color: var(--text-secondary);
   border-bottom-color: var(--border-color);
 }
+[data-theme="dark"] .summary-row.total { color: var(--text-primary); }
 
-[data-theme="dark"] .summary-row.total {
-  color: var(--text-primary);
-}
-
-/* ── Help sheet ── */
-[data-theme="dark"] .help-sheet {
+/* ─────────────────────────────────────────────
+   16. ORDER CONFIRMATION MODAL
+───────────────────────────────────────────── */
+[data-theme="dark"] .order-modal-overlay { background: rgba(0,0,0,0.75); }
+[data-theme="dark"] .order-modal-body {
   background: var(--bg-card);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .order-modal-header { border-bottom-color: var(--border-color); }
+[data-theme="dark"] .order-modal-title { color: var(--text-primary); }
+[data-theme="dark"] .order-modal-footer { border-top-color: var(--border-color); }
+[data-theme="dark"] .order-cta-btn {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border-color: var(--border-color);
 }
 
-[data-theme="dark"] .help-sheet-header {
-  border-bottom-color: var(--border-color);
+/* ─────────────────────────────────────────────
+   17. SUCCESS PAGE
+───────────────────────────────────────────── */
+[data-theme="dark"] .success-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
 }
-
-[data-theme="dark"] .faq-item {
-  border-bottom-color: var(--border-color);
-}
-
-[data-theme="dark"] .faq-question {
+[data-theme="dark"] .success-heading { color: var(--text-primary); }
+[data-theme="dark"] .success-sub-text { color: var(--text-secondary); }
+[data-theme="dark"] .success-home-btn {
+  background: var(--bg-input);
+  border-color: var(--border-color);
   color: var(--text-primary);
 }
 
-[data-theme="dark"] .faq-answer {
-  color: var(--text-secondary);
-}
-
-/* ── OTP Login page ── */
-[data-theme="dark"] .otp-page {
-  background: var(--bg-body);
-}
-
-[data-theme="dark"] .otp-body {
-  background: var(--bg-surface);
-}
-
+/* ─────────────────────────────────────────────
+   18. OTP LOGIN PAGE
+───────────────────────────────────────────── */
+[data-theme="dark"] .otp-page { background: var(--bg-body); }
+[data-theme="dark"] .otp-body { background: var(--bg-surface); }
+[data-theme="dark"] .otp-header-title { color: var(--text-primary); }
+[data-theme="dark"] .otp-header-sub,
+[data-theme="dark"] .otp-tagline,
+[data-theme="dark"] .otp-hint { color: var(--text-secondary); }
 [data-theme="dark"] .otp-phone-field {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
-
 [data-theme="dark"] .otp-phone-prefix {
   background: var(--bg-input);
   border-right-color: var(--border-color);
 }
-
-[data-theme="dark"] .otp-prefix-code {
-  color: var(--text-primary);
-}
-
+[data-theme="dark"] .otp-prefix-code { color: var(--text-primary); }
 [data-theme="dark"] .otp-phone-input {
   color: var(--text-primary);
+  background: transparent;
 }
-
 [data-theme="dark"] .otp-box {
   background: var(--bg-input);
   border-color: var(--border-color);
   color: var(--text-primary);
 }
+[data-theme="dark"] .otp-resend-btn,
+[data-theme="dark"] .otp-timer-text,
+[data-theme="dark"] .otp-change-phone { color: var(--text-secondary); }
+[data-theme="dark"] .otp-powered,
+[data-theme="dark"] .otp-footer { color: var(--text-tertiary); }
+[data-theme="dark"] .otp-timer-count { color: var(--text-primary); }
 
 @media (min-width: 600px) {
-  [data-theme="dark"] .otp-page { background: #0C0C0C; }
-  [data-theme="dark"] .otp-body { background: var(--bg-card); }
+  [data-theme="dark"] .otp-page  { background: #0C0C0C; }
+  [data-theme="dark"] .otp-body  { background: var(--bg-card); }
 }
 
-/* ── Allocation bar ── */
-[data-theme="dark"] .alloc-track {
+/* ─────────────────────────────────────────────
+   19. LANDING / SPLASH PAGE
+───────────────────────────────────────────── */
+[data-theme="dark"] .splash-bottom-card { background: var(--bg-surface); }
+[data-theme="dark"] .splash-terms { color: var(--text-tertiary); }
+[data-theme="dark"] .splash-btn-ghost {
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+[data-theme="dark"] .splash-powered { color: var(--text-tertiary); }
+
+/* ─────────────────────────────────────────────
+   20. HELP / FAQ SHEET
+───────────────────────────────────────────── */
+[data-theme="dark"] .help-sheet { background: var(--bg-card); }
+[data-theme="dark"] .help-sheet-header { border-bottom-color: var(--border-color); }
+[data-theme="dark"] .faq-item { border-bottom-color: var(--border-color); }
+[data-theme="dark"] .faq-question { color: var(--text-primary); }
+[data-theme="dark"] .faq-answer { color: var(--text-secondary); }
+
+/* ─────────────────────────────────────────────
+   21. MISC: allocation bar, activity, amounts
+───────────────────────────────────────────── */
+[data-theme="dark"] .alloc-track { background: var(--bg-input); }
+
+[data-theme="dark"] .activity-icon-green {
   background: var(--bg-input);
+  color: var(--text-secondary);
 }
+[data-theme="dark"] .activity-icon-red {
+  background: rgba(255,0,0,0.12);
+  color: #FF6B6B;
+}
+[data-theme="dark"] .amount-green,
+[data-theme="dark"] .chg-up { color: var(--text-secondary); }
+[data-theme="dark"] .amount-default { color: var(--text-primary); }
 
-/* ── Tab bars ── */
-[data-theme="dark"] .tab-bar,
-[data-theme="dark"] .filter-tabs,
-[data-theme="dark"] .dash-tabs {
+[data-theme="dark"] .market-overview-card {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
-
-[data-theme="dark"] .tab-btn,
-[data-theme="dark"] .filter-tab {
-  color: var(--text-tertiary);
-}
-
-[data-theme="dark"] .tab-btn.active,
-[data-theme="dark"] .filter-tab.active {
-  color: #FF0000;
-}
-
-/* ── Section titles that use hardcoded dark text ── */
-[data-theme="dark"] .dash-section-title,
-[data-theme="dark"] .dash-greeting-text,
-[data-theme="dark"] .sub-page-header h1,
-[data-theme="dark"] .page-title {
-  color: var(--text-primary);
-}
-
-/* ── Landing page dark mode ── */
-[data-theme="dark"] .splash-bottom-card {
-  background: var(--bg-surface);
-}
-
-[data-theme="dark"] .splash-terms {
-  color: var(--text-tertiary);
-}
-
-[data-theme="dark"] .splash-btn-ghost {
-  color: var(--text-tertiary);
-}
+[data-theme="dark"] .market-overview-label { color: var(--text-tertiary); }
