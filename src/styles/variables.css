@@ -1,54 +1,99 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
 :root {
-  --primary-red: #E30613;
-  --primary-red-hover: #C40510;
-  --primary-red-light: #FFF1F2;
-  --primary-red-10: rgba(227, 6, 19, 0.1);
-  --accent-gold: #FFB800;
-  --accent-gold-dark: #D49900;
+  /* ── Brand ── */
+  --primary-red: #FF0000;
+  --primary-red-hover: #CC0000;
+  --primary-red-light: rgba(255,0,0,0.08);
+  --primary-red-10: rgba(255,0,0,0.1);
 
+  /* ── Backgrounds ── */
   --bg-body: #F5F6FA;
   --bg-surface: #FFFFFF;
-  --bg-dark: #0F1117;
-  --bg-dark-card: #1A1D27;
-  --bg-dark-hover: #242834;
+  --bg-card: #FFFFFF;
+  --bg-input: #F9FAFB;
 
+  /* ── Text ── */
   --text-primary: #1A1D27;
   --text-secondary: #5F6577;
   --text-tertiary: #9BA1B2;
   --text-inverse: #FFFFFF;
 
-  --success: #E30613;
-  --success-light: #FFF1F2;
+  /* ── Borders ── */
+  --border-color: #E5E7EB;
+  --border-light: #F0F1F4;
+
+  /* ── Status ── */
+  --success: #16A34A;
+  --success-light: #F0FDF4;
   --warning: #F59E0B;
   --danger: #EF4444;
   --danger-light: #FEF2F2;
 
-  --border-color: #E5E7EB;
-  --border-light: #F0F1F4;
+  /* ── Header ── */
+  --header-bg: linear-gradient(135deg, #CC0000 0%, #FF0000 100%);
+  --header-text: #FFFFFF;
+  --header-icon: rgba(255,255,255,0.85);
+  --header-border: transparent;
 
+  /* ── Fonts ── */
   --font-display: 'Inter', system-ui, sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
 
+  /* ── Shadows ── */
   --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
   --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
   --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
   --shadow-lg: 0 12px 32px rgba(0,0,0,0.12);
-  --shadow-red: 0 8px 24px rgba(227, 6, 19, 0.2);
+  --shadow-red: 0 8px 24px rgba(255,0,0,0.2);
 
+  /* ── Radii ── */
   --radius-xs: 6px;
   --radius-sm: 10px;
   --radius-md: 14px;
   --radius-lg: 20px;
   --radius-xl: 28px;
 
+  /* ── Motion ── */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
   --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 
   --sidebar-width: 260px;
   --header-height: 68px;
+}
+
+/* ════════════════════════════════
+   DARK MODE
+   ════════════════════════════════ */
+[data-theme="dark"] {
+  --bg-body: #0C0C0C;
+  --bg-surface: #1A1A1A;
+  --bg-card: #1E1E1E;
+  --bg-input: #2A2A2A;
+
+  --text-primary: #FFFFFF;
+  --text-secondary: #9BA1B2;
+  --text-tertiary: #6B7280;
+  --text-inverse: #FFFFFF;
+
+  --border-color: #2C2C2C;
+  --border-light: #242424;
+
+  --primary-red-light: rgba(255,0,0,0.14);
+  --primary-red-10: rgba(255,0,0,0.14);
+
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.3);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg: 0 12px 32px rgba(0,0,0,0.6);
+  --shadow-red: 0 8px 24px rgba(255,0,0,0.25);
+
+  /* Header stays red in dark mode */
+  --header-bg: linear-gradient(135deg, #CC0000 0%, #FF0000 100%);
+  --header-text: #FFFFFF;
+  --header-icon: rgba(255,255,255,0.85);
+  --header-border: transparent;
 }
 
 /* --- Reset --- */
@@ -162,7 +207,7 @@ a {
   display: flex;
   align-items: center;
   gap: 10px;
-  background: #E30613;
+  background: #FF0000;
   color: var(--text-inverse);
   padding: 14px 24px;
   border-radius: var(--radius-md);

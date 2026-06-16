@@ -110,16 +110,12 @@ export default function MarketDashboard({
               const inWatchlist = watchlist && watchlist.includes(stock.symbol);
               return (
                 <div key={stock.symbol} className="stock-row" onClick={() => navigate(`/market/${stock.symbol}`)}>
-                  {/* Logo */}
                   <StockLogo stock={stock} className="stock-row-logo" />
-
                   <div className="stock-row-body">
                     <div className="stock-row-top">
                       <span className="stock-row-sym">
                         {stock.symbol}
-                        {owned > 0 && (
-                          <span className="stock-row-owned">{owned.toLocaleString()} owned</span>
-                        )}
+                        {owned > 0 && <span className="stock-row-owned">{owned.toLocaleString()} owned</span>}
                       </span>
                       <span className="stock-row-price">ZMW {stock.price.toFixed(2)}</span>
                     </div>
@@ -130,12 +126,9 @@ export default function MarketDashboard({
                       </span>
                     </div>
                   </div>
-
                   <div className="stock-row-spark">
                     <Sparkline data={stock.trend} positive={stock.change >= 0} />
                   </div>
-
-                  {/* Watchlist star */}
                   {toggleWatchlist && (
                     <button
                       className={`stock-row-star ${inWatchlist ? 'active' : ''}`}
@@ -144,7 +137,7 @@ export default function MarketDashboard({
                     >
                       {inWatchlist ? <Icons.StarFilled /> : <Icons.Star />}
                     </button>
-              )}
+                  )}
                 </div>
               );
             })}

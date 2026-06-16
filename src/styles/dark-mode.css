@@ -1,0 +1,368 @@
+/* ════════════════════════════════════════════
+   DARK MODE OVERRIDES
+   Applied when html[data-theme="dark"]
+   ════════════════════════════════════════════ */
+
+/* ── Body & root ── */
+[data-theme="dark"] body {
+  background: var(--bg-body);
+  color: var(--text-primary);
+}
+
+/* ── Bottom Nav ── */
+[data-theme="dark"] .mobile-bottom-nav {
+  background: #141414;
+  border-top-color: #2C2C2C;
+}
+
+[data-theme="dark"] .mobile-nav-item {
+  color: #6B7280;
+}
+
+[data-theme="dark"] .mobile-nav-item.active {
+  color: #FF0000;
+}
+
+/* ── Back button / general surface buttons ── */
+[data-theme="dark"] .back-btn {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+/* ── Page containers / cards ── */
+[data-theme="dark"] .dashboard-screen {
+  background: var(--bg-body);
+}
+
+/* ── Dashboard: stock rows list ── */
+[data-theme="dark"] .dash-stocks-list {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .dash-stock-row {
+  background: var(--bg-card);
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .dash-stock-name {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .dash-stock-sym,
+[data-theme="dark"] .dash-stock-vol {
+  color: var(--text-tertiary);
+}
+
+/* QA buttons - sell/portfolio which are white in light mode */
+[data-theme="dark"] .qa-sell,
+[data-theme="dark"] .qa-portfolio {
+  background: #2A2A2A;
+  color: #FF0000;
+  border-color: rgba(255,0,0,0.2);
+}
+
+/* ── Watchlist section ── */
+[data-theme="dark"] .watch-card,
+[data-theme="dark"] .watch-row,
+[data-theme="dark"] .watchlist-empty {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+/* ── Guest lock card ── */
+[data-theme="dark"] .guest-lock-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+/* ── Market page ── */
+[data-theme="dark"] .market-screen,
+[data-theme="dark"] .market-page {
+  background: var(--bg-body);
+}
+
+[data-theme="dark"] .search-bar input,
+[data-theme="dark"] .market-search input {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .stock-row,
+[data-theme="dark"] .stock-card,
+[data-theme="dark"] .market-stock-row,
+[data-theme="dark"] .mkt-stock-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .mkt-card-full-name {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .mkt-card-price {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .mkt-card-bid-ask span,
+[data-theme="dark"] .mkt-card-supply-demand span {
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .stock-name,
+[data-theme="dark"] .stock-sym {
+  color: var(--text-primary);
+}
+
+/* Stock detail */
+[data-theme="dark"] .stock-detail-card,
+[data-theme="dark"] .stock-info-card,
+[data-theme="dark"] .ob-card,
+[data-theme="dark"] .ob-header-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .ob-col-header,
+[data-theme="dark"] .ob-row {
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .ob-row:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* Buy/Sell pages */
+[data-theme="dark"] .buy-page,
+[data-theme="dark"] .sell-page,
+[data-theme="dark"] .trade-page {
+  background: var(--bg-body);
+}
+
+[data-theme="dark"] .buy-card,
+[data-theme="dark"] .sell-card,
+[data-theme="dark"] .trade-input-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .trade-input,
+[data-theme="dark"] .trade-custom-input,
+[data-theme="dark"] .amount-input {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* ── Portfolio page ── */
+[data-theme="dark"] .portfolio-screen,
+[data-theme="dark"] .portfolio-page {
+  background: var(--bg-body);
+}
+
+[data-theme="dark"] .portfolio-item,
+[data-theme="dark"] .holding-card,
+[data-theme="dark"] .port-row {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .order-status-card,
+[data-theme="dark"] .order-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+/* ── Dividends page ── */
+[data-theme="dark"] .dividend-screen,
+[data-theme="dark"] .dividend-page {
+  background: var(--bg-body);
+}
+
+[data-theme="dark"] .dividend-card,
+[data-theme="dark"] .div-row {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+/* ── Settings / Account page ── */
+[data-theme="dark"] .settings-screen,
+[data-theme="dark"] .settings-page {
+  background: var(--bg-body);
+}
+
+[data-theme="dark"] .settings-card,
+[data-theme="dark"] .settings-section,
+[data-theme="dark"] .account-card,
+[data-theme="dark"] .profile-card {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .settings-item,
+[data-theme="dark"] .account-item {
+  border-bottom-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .settings-item:hover,
+[data-theme="dark"] .account-item:hover {
+  background: rgba(255,255,255,0.04);
+}
+
+/* ── Trade drawer ── */
+[data-theme="dark"] .trade-drawer {
+  background: var(--bg-card);
+  border-top-color: var(--border-color);
+}
+
+[data-theme="dark"] .trade-drawer-overlay {
+  background: rgba(0,0,0,0.7);
+}
+
+[data-theme="dark"] .trade-drawer-header {
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .trade-drawer-tab {
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .qty-input-row input {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .qty-input-row button {
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .qty-presets button {
+  background: var(--bg-input);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .trade-drawer-summary {
+  background: var(--bg-input);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .summary-row {
+  color: var(--text-secondary);
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .summary-row.total {
+  color: var(--text-primary);
+}
+
+/* ── Help sheet ── */
+[data-theme="dark"] .help-sheet {
+  background: var(--bg-card);
+}
+
+[data-theme="dark"] .help-sheet-header {
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .faq-item {
+  border-bottom-color: var(--border-color);
+}
+
+[data-theme="dark"] .faq-question {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .faq-answer {
+  color: var(--text-secondary);
+}
+
+/* ── OTP Login page ── */
+[data-theme="dark"] .otp-page {
+  background: var(--bg-body);
+}
+
+[data-theme="dark"] .otp-body {
+  background: var(--bg-surface);
+}
+
+[data-theme="dark"] .otp-phone-field {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .otp-phone-prefix {
+  background: var(--bg-input);
+  border-right-color: var(--border-color);
+}
+
+[data-theme="dark"] .otp-prefix-code {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .otp-phone-input {
+  color: var(--text-primary);
+}
+
+[data-theme="dark"] .otp-box {
+  background: var(--bg-input);
+  border-color: var(--border-color);
+  color: var(--text-primary);
+}
+
+@media (min-width: 600px) {
+  [data-theme="dark"] .otp-page { background: #0C0C0C; }
+  [data-theme="dark"] .otp-body { background: var(--bg-card); }
+}
+
+/* ── Allocation bar ── */
+[data-theme="dark"] .alloc-track {
+  background: var(--bg-input);
+}
+
+/* ── Tab bars ── */
+[data-theme="dark"] .tab-bar,
+[data-theme="dark"] .filter-tabs,
+[data-theme="dark"] .dash-tabs {
+  background: var(--bg-card);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .tab-btn,
+[data-theme="dark"] .filter-tab {
+  color: var(--text-tertiary);
+}
+
+[data-theme="dark"] .tab-btn.active,
+[data-theme="dark"] .filter-tab.active {
+  color: #FF0000;
+}
+
+/* ── Section titles that use hardcoded dark text ── */
+[data-theme="dark"] .dash-section-title,
+[data-theme="dark"] .dash-greeting-text,
+[data-theme="dark"] .sub-page-header h1,
+[data-theme="dark"] .page-title {
+  color: var(--text-primary);
+}
+
+/* ── Landing page dark mode ── */
+[data-theme="dark"] .splash-bottom-card {
+  background: var(--bg-surface);
+}
+
+[data-theme="dark"] .splash-terms {
+  color: var(--text-tertiary);
+}
+
+[data-theme="dark"] .splash-btn-ghost {
+  color: var(--text-tertiary);
+}

@@ -13,14 +13,14 @@
 
 /* ── Red Header ─────────────────────────────── */
 .otp-header {
-  background: linear-gradient(135deg, #C40510 0%, #E30613 100%);
+  background: linear-gradient(135deg, #CC0000 0%, #FF0000 100%);
   padding: 48px 24px 40px;
   display: flex;
   flex-direction: column;
   gap: 16px;
   position: relative;
   border-radius: 0 0 36px 36px;
-  box-shadow: 0 8px 32px rgba(227,6,19,0.25);
+  box-shadow: 0 8px 32px rgba(255,0,0,0.25);
 }
 
 .otp-back-btn {
@@ -122,8 +122,8 @@
 }
 
 .otp-phone-field:focus-within {
-  border-color: #E30613;
-  box-shadow: 0 0 0 3px rgba(227,6,19,0.1);
+  border-color: #FF0000;
+  box-shadow: 0 0 0 3px rgba(255,0,0,0.1);
 }
 
 .otp-phone-prefix {
@@ -191,20 +191,20 @@
   cursor: text;
   transition: all 0.2s ease;
   outline: none;
-  caret-color: #E30613;
+  caret-color: #FF0000;
 }
 
 .otp-box:focus {
-  border-color: #E30613;
+  border-color: #FF0000;
   background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(227,6,19,0.12);
+  box-shadow: 0 0 0 3px rgba(255,0,0,0.12);
   transform: scale(1.04);
 }
 
 .otp-box.otp-box-filled {
-  border-color: #E30613;
+  border-color: #FF0000;
   background: #FFF1F2;
-  color: #E30613;
+  color: #FF0000;
 }
 
 /* ── Timer + Resend ─────────────────────────────── */
@@ -228,7 +228,7 @@
 .otp-resend-btn {
   background: none;
   border: none;
-  color: #E30613;
+  color: #FF0000;
   font-size: 13.5px;
   font-weight: 700;
   cursor: pointer;
@@ -254,22 +254,22 @@
   width: 100%;
   height: 54px;
   border-radius: 14px;
-  background: #E30613;
+  background: #FF0000;
   color: #ffffff;
   font-size: 16px;
   font-weight: 700;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(227,6,19,0.28);
+  box-shadow: 0 4px 16px rgba(255,0,0,0.28);
   transition: all 0.2s ease;
   font-family: var(--font-body);
   margin-top: 4px;
 }
 
 .otp-primary-btn:hover:not(:disabled) {
-  background: #C40510;
+  background: #CC0000;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(227,6,19,0.35);
+  box-shadow: 0 6px 20px rgba(255,0,0,0.35);
 }
 
 .otp-primary-btn:active:not(:disabled) {
@@ -347,7 +347,7 @@
   .otp-body {
     background: #ffffff;
     border-radius: 0 0 24px 24px;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.06);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
     padding: 36px 40px 32px;
     flex: unset;
   }

@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Icons } from '../../Icons';
 import { MOCK_STOCKS } from '../../../data/mockData';
+import StockLogo from '../../StockLogo';
 
 export default function OrderBookPage({ showToast }) {
   const { symbol } = useParams();
@@ -50,6 +51,37 @@ export default function OrderBookPage({ showToast }) {
       </div>
 
       <div className="ob-body">
+
+        {/* ── Stock summary card ── */}
+        <div className="ob-stock-card">
+          <div className="ob-stock-card-top">
+            <StockLogo stock={stock} className="ob-stock-logo" />
+            <div className="ob-stock-names">
+              <div className="ob-stock-full-name">{stock.name}</div>
+            </div>
+            <div className="ob-stock-price-col">
+              <div className="ob-stock-price">ZMW {stock.price.toFixed(2)}</div>
+              <div className="ob-stock-chg-wrap">
+                {stock.change === 0
+                  ? <span className="ob-stock-chg-flat" />
+                  : stock.change > 0
+                  ? <span className="ob-stock-chg-up">+{stock.change.toFixed(2)}%</span>
+                  : <span className="ob-stock-chg-dn">{stock.change.toFixed(2)}%</span>
+                }
+              </div>
+            </div>
+          </div>
+          <div className="ob-stock-card-bottom">
+            <div className="ob-stock-bid-ask">
+              <span>Best Bid: ZMW {ob?.bestBid}</span>
+              <span>Best Ask: ZMW {ob?.bestAsk}</span>
+            </div>
+            <div className="ob-stock-supply-demand">
+              <span>Supply: {(stock.supply || 0).toLocaleString()}</span>
+              <span>Demand: {(stock.demand || 0).toLocaleString()}</span>
+            </div>
+          </div>
+        </div>
 
         {/* ── Price strip ── */}
         <div className="ob-price-strip">
@@ -114,14 +146,14 @@ export default function OrderBookPage({ showToast }) {
 
         </div>
 
-        {/* ── Mid price marker ── */}
+        {/* Mid price marker */}
         <div className="ob-midprice">
           <div className="ob-midprice-line" />
           <span className="ob-midprice-label">Mid-price ZMW {midPrice}</span>
           <div className="ob-midprice-line" />
         </div>
 
-        {/* ── CTA ── */}
+        {/* CTA */}
         <div className="ob-cta-row">
           <button className="ob-cta-buy" onClick={() => navigate(`/market/${stock.symbol}/buy`)}>
             Buy Shares

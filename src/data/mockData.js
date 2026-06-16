@@ -40,6 +40,8 @@ export const MOCK_STOCKS = [
     dayLow: 1.75,
     dayHigh: 1.88,
     volume: '21.4K',
+    supply: 28450,
+    demand: 3120,
     orderBook: {
       bestBid: '1.83',
       speed: 'High',
@@ -69,6 +71,8 @@ export const MOCK_STOCKS = [
     dayLow: 3.32,
     dayHigh: 3.50,
     volume: '15.8K',
+    supply: 42100,
+    demand: 1850,
     orderBook: {
       bestBid: '3.42',
       speed: 'Medium',
@@ -98,6 +102,8 @@ export const MOCK_STOCKS = [
     dayLow: 2.10,
     dayHigh: 2.22,
     volume: '8.4K',
+    supply: 15300,
+    demand: 890,
     orderBook: {
       bestBid: '2.13',
       speed: 'Low',
@@ -127,6 +133,8 @@ export const MOCK_STOCKS = [
     dayLow: 0.87,
     dayHigh: 0.98,
     volume: '34.2K',
+    supply: 67800,
+    demand: 4200,
     orderBook: {
       bestBid: '0.93',
       speed: 'High',
@@ -156,6 +164,8 @@ export const MOCK_STOCKS = [
     dayLow: 2.00,
     dayHigh: 2.12,
     volume: '9.3K',
+    supply: 19600,
+    demand: 1420,
     orderBook: {
       bestBid: '2.08',
       speed: 'High',
@@ -185,6 +195,8 @@ export const MOCK_STOCKS = [
     dayLow: 4.12,
     dayHigh: 4.30,
     volume: '11.2K',
+    supply: 23400,
+    demand: 2100,
     orderBook: {
       bestBid: '4.22',
       speed: 'Medium',
@@ -214,6 +226,8 @@ export const MOCK_STOCKS = [
     dayLow: 0.78,
     dayHigh: 0.84,
     volume: '22.8K',
+    supply: 51200,
+    demand: 3800,
     orderBook: {
       bestBid: '0.79',
       speed: 'High',
@@ -243,6 +257,8 @@ export const MOCK_STOCKS = [
     dayLow: 1.46,
     dayHigh: 1.54,
     volume: '4.2K',
+    supply: 8900,
+    demand: 420,
     orderBook: {
       bestBid: '1.48',
       speed: 'Low',
@@ -272,6 +288,8 @@ export const MOCK_STOCKS = [
     dayLow: 3.02,
     dayHigh: 3.16,
     volume: '6.3K',
+    supply: 11200,
+    demand: 680,
     orderBook: {
       bestBid: '3.08',
       speed: 'Medium',
@@ -301,6 +319,8 @@ export const MOCK_STOCKS = [
     dayLow: 1.21,
     dayHigh: 1.31,
     volume: '14.1K',
+    supply: 34500,
+    demand: 2300,
     orderBook: {
       bestBid: '1.23',
       speed: 'Medium',
@@ -330,6 +350,8 @@ export const MOCK_STOCKS = [
     dayLow: 5.40,
     dayHigh: 5.70,
     volume: '18.4K',
+    supply: 22800,
+    demand: 1950,
     orderBook: {
       bestBid: '5.55',
       speed: 'High',
@@ -359,6 +381,8 @@ export const MOCK_STOCKS = [
     dayLow: 2.78,
     dayHigh: 2.91,
     volume: '11.8K',
+    supply: 29400,
+    demand: 1640,
     orderBook: {
       bestBid: '2.83',
       speed: 'Medium',
@@ -388,6 +412,8 @@ export const MOCK_STOCKS = [
     dayLow: 1.86,
     dayHigh: 2.00,
     volume: '16.2K',
+    supply: 38700,
+    demand: 2890,
     orderBook: {
       bestBid: '1.92',
       speed: 'High',
@@ -417,6 +443,8 @@ export const MOCK_STOCKS = [
     dayLow: 6.74,
     dayHigh: 6.98,
     volume: '22.4K',
+    supply: 44300,
+    demand: 3100,
     orderBook: {
       bestBid: '6.78',
       speed: 'High',
@@ -446,6 +474,8 @@ export const MOCK_STOCKS = [
     dayLow: 2.44,
     dayHigh: 2.56,
     volume: '5.3K',
+    supply: 7600,
+    demand: 350,
     orderBook: {
       bestBid: '2.46',
       speed: 'Low',
@@ -475,6 +505,8 @@ export const MOCK_STOCKS = [
     dayLow: 1.60,
     dayHigh: 1.72,
     volume: '9.1K',
+    supply: 18100,
+    demand: 1120,
     orderBook: {
       bestBid: '1.63',
       speed: 'Medium',
@@ -504,6 +536,8 @@ export const MOCK_STOCKS = [
     dayLow: 12.34,
     dayHigh: 12.60,
     volume: '6.7K',
+    supply: 5400,
+    demand: 210,
     orderBook: {
       bestBid: '12.42',
       speed: 'Low',
@@ -533,6 +567,8 @@ export const MOCK_STOCKS = [
     dayLow: 5.08,
     dayHigh: 5.28,
     volume: '4.8K',
+    supply: 9800,
+    demand: 480,
     orderBook: {
       bestBid: '5.15',
       speed: 'Low',
@@ -562,6 +598,8 @@ export const MOCK_STOCKS = [
     dayLow: 3.14,
     dayHigh: 3.34,
     volume: '12.8K',
+    supply: 31600,
+    demand: 2240,
     orderBook: {
       bestBid: '3.18',
       speed: 'Medium',
@@ -591,6 +629,8 @@ export const MOCK_STOCKS = [
     dayLow: 4.60,
     dayHigh: 4.90,
     volume: '18.2K',
+    supply: 35718,
+    demand: 181,
     orderBook: {
       bestBid: '4.78',
       speed: 'High',
@@ -620,6 +660,8 @@ export const MOCK_STOCKS = [
     dayLow: 8.35,
     dayHigh: 8.60,
     volume: '4.5K',
+    supply: 6200,
+    demand: 390,
     orderBook: {
       bestBid: '8.46',
       speed: 'Medium',
@@ -649,6 +691,8 @@ export const MOCK_STOCKS = [
     dayLow: 2.12,
     dayHigh: 2.30,
     volume: '19.4K',
+    supply: 47900,
+    demand: 3560,
     orderBook: {
       bestBid: '2.21',
       speed: 'High',
@@ -678,6 +722,8 @@ export const MOCK_STOCKS = [
     dayLow: 1.40,
     dayHigh: 1.50,
     volume: '7.8K',
+    supply: 14200,
+    demand: 760,
     orderBook: {
       bestBid: '1.43',
       speed: 'Low',

@@ -20,7 +20,7 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: linear-gradient(155deg, #C40510 0%, #E30613 55%, #9F050D 100%);
+  background: linear-gradient(155deg, #CC0000 0%, #FF0000 55%, #990000 100%);
 }
 
 /* Full-bleed hero photo (slight overscan hides any sub-pixel seam) */
@@ -141,19 +141,19 @@
   width: 100%;
   height: 52px;
   border-radius: 14px;
-  background: #E30613;
+  background: #FF0000;
   color: #ffffff;
   font-size: 16px;
   font-weight: 700;
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 16px rgba(227,6,19,0.28);
+  box-shadow: 0 4px 16px rgba(255,0,0,0.28);
   transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
   font-family: inherit;
 }
 
 .splash-btn-primary:active {
-  background: #C40510;
+  background: #CC0000;
   transform: scale(0.98);
 }
 
@@ -172,8 +172,8 @@
 }
 
 .splash-btn-outline:active {
-  border-color: #E30613;
-  color: #E30613;
+  border-color: #FF0000;
+  color: #FF0000;
   background: #FFF1F2;
 }
 

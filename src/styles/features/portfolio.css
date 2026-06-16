@@ -50,7 +50,7 @@
 .pf-hero-card {
   position: relative;
   margin: 16px 16px 0;
-  background: linear-gradient(135deg, #E30613 0%, #B8040F 100%);
+  background: linear-gradient(145deg, #CC0000 0%, #2D3142 100%);
   border-radius: 18px;
   padding: 16px 16px 12px;
   color: #fff;
@@ -296,7 +296,7 @@
 }
 
 .pf-trade-btn:hover {
-  background: var(--primary-red-dark, #B8040F);
+  background: var(--primary-red-dark, #CC0000);
 }
 
 .pf-view-btn {

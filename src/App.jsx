@@ -29,7 +29,7 @@ import { useWallet } from './hooks/useWallet';
 import { usePortfolio } from './hooks/usePortfolio';
 import { useWatchlist } from './hooks/useWatchlist';
 
-function AppLayout({ useWalletHook, showToast }) {
+function AppLayout({ useWalletHook, showToast, isDarkMode, toggleDarkMode }) {
   const {
     isLoggedIn,
     isGuest,
@@ -100,7 +100,7 @@ function AppLayout({ useWalletHook, showToast }) {
 
   return (
     <div className="app-layout">
-      <Header showToast={showToast} onLogout={setIsLoggedIn} isGuest={isGuest} />
+      <Header showToast={showToast} onLogout={setIsLoggedIn} isGuest={isGuest} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
 
       <main className="main-content">
         <Routes>
@@ -320,8 +320,16 @@ function AppLayout({ useWalletHook, showToast }) {
 export default function App() {
   const walletHook = useWallet();
   const [toast, setToast] = useState('');
+  const [isDarkMode, setIsDarkMode] = useState(false);
 
   const showToast = (message) => setToast(message);
+
+  const toggleDarkMode = () => setIsDarkMode(d => !d);
+
+  // Apply data-theme to <html> so CSS vars cascade everywhere
+  React.useEffect(() => {
+    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+  }, [isDarkMode]);
 
   React.useEffect(() => {
     if (toast) {
@@ -340,7 +348,7 @@ export default function App() {
           <span>{toast}</span>
         </div>
       )}
-      <AppLayout useWalletHook={walletHook} showToast={showToast} />
+      <AppLayout useWalletHook={walletHook} showToast={showToast} isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
     </HashRouter>
   );
 }

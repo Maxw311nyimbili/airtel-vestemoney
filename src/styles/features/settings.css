@@ -11,7 +11,7 @@
 
 /* ── Profile card ── */
 .stg-profile-card {
-  background: #E30613;
+  background: linear-gradient(145deg, #CC0000 0%, #2D3142 100%);
   border-radius: 16px;
   padding: 24px 20px;
   display: flex;
@@ -106,7 +106,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #E30613;
+  color: #FF0000;
   flex-shrink: 0;
 }
 
@@ -162,7 +162,7 @@
   gap: 8px;
   padding: 14px;
   background: #FFF1F2;
-  color: #E30613;
+  color: #FF0000;
   border: 1.5px solid #FECDD3;
   border-radius: 12px;
   font-size: 15px;
@@ -173,7 +173,7 @@
 
 .stg-logout-btn:active {
   background: #FFE4E6;
-  border-color: #E30613;
+  border-color: #FF0000;
 }
 
 .stg-logout-btn svg {
