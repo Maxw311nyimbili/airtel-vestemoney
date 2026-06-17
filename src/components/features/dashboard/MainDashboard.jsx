@@ -160,7 +160,7 @@ export default function MainDashboard({
           {/* ── Popular Stocks ── */}
           <div className="dash-section">
             <div className="dash-section-header">
-              <span className="dash-section-title">Popular Stocks</span>
+              <span className="dash-section-title">Popular Shares</span>
               <button className="dash-section-link" onClick={() => navigate('/market')}>See All</button>
             </div>
 

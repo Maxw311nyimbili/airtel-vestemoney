@@ -3,8 +3,6 @@
    ============================ */
 
 .otp-page {
-  min-height: 100vh;
-  min-height: 100dvh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -60,11 +58,11 @@
 }
 
 .otp-tagline {
-  font-size: 12.5px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
   color: rgba(255,255,255,0.85);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .otp-header-text {
@@ -94,10 +92,9 @@
 
 /* ── Body ─────────────────────────────── */
 .otp-body {
-  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 32px 24px 24px;
+  padding: 32px 24px 28px;
 }
 
 .otp-form {
@@ -105,7 +102,6 @@
   flex-direction: column;
   align-items: stretch;
   gap: 20px;
-  flex: 1;
 }
 
 /* ── Phone Input ─────────────────────────────── */
@@ -302,8 +298,8 @@
 
 /* ── Footer ─────────────────────────────── */
 .otp-footer {
-  margin-top: auto;
-  padding-top: 24px;
+  margin-top: 28px;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -331,28 +327,27 @@
     background: #F5F6FA;
     align-items: center;
     justify-content: center;
-    padding: 32px 24px;
+    min-height: 100vh;
+    min-height: 100dvh;
+    padding: 40px 24px;
   }
 
-  .otp-page > * {
+  .otp-card {
     width: 100%;
     max-width: 420px;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.12);
   }
 
   .otp-header {
-    border-radius: 24px 24px 0 0;
+    border-radius: 0;
     padding: 48px 40px 36px;
   }
 
   .otp-body {
     background: #ffffff;
-    border-radius: 0 0 24px 24px;
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
-    padding: 36px 40px 32px;
-    flex: unset;
-  }
-
-  .otp-form {
-    flex: unset;
+    border-radius: 0;
+    padding: 32px 40px 36px;
   }
 }

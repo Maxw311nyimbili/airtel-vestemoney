@@ -3115,4 +3115,74 @@
 
 .sd-depth-link:active { background: #F4F5F7; }
 
-.sd-depth-link svg { color: #9BA1B2; flex-shrink: 0; }
+/* No Shares Modal */
+.no-shares-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  animation: fadeIn 0.2s ease both;
+}
+
+.no-shares-modal {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 24px 24px;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.no-shares-modal-logo {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+}
+
+.no-shares-modal-title {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1A1D23;
+  margin: 4px 0 0;
+}
+
+.no-shares-modal-msg {
+  font-size: 14px;
+  color: #5F6577;
+  line-height: 1.5;
+}
+
+.no-shares-buy-btn {
+  width: 100%;
+  background: #FF0000;
+  color: #ffffff;
+  border: none;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  margin-top: 8px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.no-shares-buy-btn:active { opacity: 0.85; }
+
+.no-shares-cancel-btn {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #9BA1B2;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px;
+  cursor: pointer;
+}

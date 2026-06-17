@@ -96,7 +96,7 @@ export default function MarketDashboard({
         {/* ── All Stocks ── */}
         <div className="mkt-stocks-section">
           <span className="mkt-section-label">
-            {searchQuery ? `Results for "${searchQuery}"` : 'All Stocks'}
+            {searchQuery ? `Results for "${searchQuery}"` : 'All Shares'}
           </span>
 
           <div className="mkt-list">
@@ -115,7 +115,6 @@ export default function MarketDashboard({
                     <div className="stock-row-top">
                       <span className="stock-row-sym">
                         {stock.symbol}
-                        {owned > 0 && <span className="stock-row-owned">{owned.toLocaleString()} owned</span>}
                       </span>
                       <span className="stock-row-price">ZMW {stock.price.toFixed(2)}</span>
                     </div>

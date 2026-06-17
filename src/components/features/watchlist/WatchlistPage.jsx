@@ -52,9 +52,6 @@ export default function WatchlistPage({ watchlist, toggleWatchlist, sharesOwned 
                       <div className="stock-row-top">
                         <span className="stock-row-sym">
                           {stock.symbol}
-                          {owned > 0 && (
-                            <span className="stock-row-owned">{owned.toLocaleString()} owned</span>
-                          )}
                         </span>
                         <span className="stock-row-price">ZMW {stock.price.toFixed(2)}</span>
                       </div>

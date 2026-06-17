@@ -44,10 +44,10 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
   const handlePhoneSubmit = (e) => {
     e?.preventDefault();
     if (!isPhoneValid) {
-      showToast('Please enter a valid 9-digit Airtel number.');
+      showToast('Please enter a valid 10-digit Airtel number.');
       return;
     }
-    showToast('OTP sent to +26 ' + phoneNumber);
+    showToast('OTP sent to +260 ' + phoneNumber);
     setStep(2);
   };
 
@@ -101,7 +101,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
     setOtp(['', '', '', '']);
     setCountdown(30);
     otpRefs[0].current?.focus();
-    showToast('New OTP sent to +26 ' + phoneNumber);
+    showToast('New OTP sent to +260 ' + phoneNumber);
     // Restart timer
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -114,6 +114,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
 
   return (
     <div className="otp-page">
+      <div className="otp-card">
       {/* Red header area */}
       <div className="otp-header">
         <button
@@ -129,7 +130,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
 
         <div className="otp-header-brand">
           <img src={airtelLogo} alt="Airtel" className="otp-airtel-logo" />
-          <span className="otp-tagline">Buy and sell LuSE shares</span>
+          <span className="otp-tagline">BUY AND SELL <span style={{textTransform:'none'}}>LuSE</span> SHARES</span>
         </div>
 
         <div className="otp-header-text">
@@ -153,9 +154,6 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
           /* ── Step 1: Phone Number ── */
           <form className="otp-form" onSubmit={handlePhoneSubmit}>
             <div className="otp-phone-field">
-              <div className="otp-phone-prefix">
-                <span className="otp-prefix-code">+26</span>
-              </div>
               <input
                 ref={phoneInputRef}
                 type="tel"
@@ -163,7 +161,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
                 value={phoneNumber}
                 onChange={(e) => {
                   const digits = e.target.value.replace(/\D/g, '');
-                  setPhoneNumber(digits.startsWith('0') ? digits : '0' + digits);
+                  setPhoneNumber(digits.startsWith('0') ? digits : digits ? '0' + digits : '');
                 }}
                 placeholder="097 XXX XXXX"
                 maxLength={10}
@@ -173,7 +171,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
             </div>
 
             <p className="otp-hint">
-              Enter your Airtel Zambia number starting with 097
+              Enter your Airtel number starting with 097 or 077
             </p>
 
             <button
@@ -239,6 +237,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
           </div>
         </div>
       </div>
+      </div>{/* end otp-card */}
     </div>
   );
 }

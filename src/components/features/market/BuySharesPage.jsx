@@ -6,7 +6,10 @@ import paymentLogo from '../../../images/payment_logo.png';
 import GuestLock from '../../shared/GuestLock';
 import StockLogo from '../../StockLogo';
 
-const FEE_RATE = 0.015;
+const BROKER_RATE = 0.010;
+const LUSE_RATE   = 0.003;
+const SEC_RATE    = 0.002;
+const FEE_RATE    = BROKER_RATE + LUSE_RATE + SEC_RATE; // 1.5%
 
 function genOrderId() {
   return 'INV' + Math.random().toString(36).substr(2, 9).toUpperCase();
@@ -22,7 +25,9 @@ function OrderReview({ stock, amount, shares, onBack, onContinue }) {
     { label: 'Current Price',    value: `ZMW ${stock.price.toFixed(2)}` },
     { label: 'Amount',           value: `ZMW ${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}` },
     { label: 'Number of Shares', value: `${shares} Shares` },
-    { label: 'Fees (1.5%)',      value: `ZMW ${fees.toFixed(2)}` },
+    { label: 'Broker Fees (1.0%)', value: `ZMW ${(amount * BROKER_RATE).toFixed(2)}` },
+    { label: 'LuSE Fees (0.3%)',  value: `ZMW ${(amount * LUSE_RATE).toFixed(2)}` },
+    { label: 'SEC Fees (0.2%)',   value: `ZMW ${(amount * SEC_RATE).toFixed(2)}` },
   ];
   return (
     <div className="order-modal-overlay">
@@ -246,8 +251,16 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
               <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {gross.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
-              <span>Taxes &amp; Fees (1.5%)</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {fees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span>Broker Fees (1.0%)</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(gross * BROKER_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>LuSE Fees (0.3%)</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(gross * LUSE_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>SEC Fees (0.2%)</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(gross * SEC_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
             <div style={{ height: 1, background: '#F0F0F0', margin: '4px 0' }} />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, fontWeight: 800, color: '#E30613' }}>
@@ -282,14 +295,14 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
       </div>
 
       {step === 'review' && (
-        <OrderReview stock={stock} amount={gross} shares={qty}
+        <OrderReview stock={stock} amount={amount} shares={qty}
           onBack={() => setStep('select')} onContinue={() => setStep('pin')} />
       )}
       {step === 'pin' && (
         <PinEntry onBack={() => setStep('review')} onSuccess={handlePinSuccess} />
       )}
       {step === 'success' && (
-        <OrderSuccess stock={stock} amount={gross} shares={qty} orderId={orderId}
+        <OrderSuccess stock={stock} amount={amount} shares={qty} orderId={orderId}
           onViewPortfolio={() => navigate('/portfolio')} onBackHome={() => navigate('/dashboard')} />
       )}
     </div>

@@ -7,7 +7,10 @@ import GuestLock from '../../shared/GuestLock';
 import StockLogo from '../../StockLogo';
 
 const PRESETS = [10, 50, 100, 500];
-const FEE_RATE = 0.015;
+const BROKER_RATE = 0.010;
+const LUSE_RATE   = 0.003;
+const SEC_RATE    = 0.002;
+const FEE_RATE    = BROKER_RATE + LUSE_RATE + SEC_RATE;
 
 function genOrderId() {
   return 'SLL' + Math.random().toString(36).substr(2, 9).toUpperCase();
@@ -19,11 +22,13 @@ function OrderReview({ stock, qty, proceeds, onBack, onContinue }) {
   const net    = proceeds - fees;
   const rows = [
     { label: 'Order Type',    value: 'Sell', cls: 'orev-type-sell' },
-    { label: 'Stock',         value: stock.name },
+    { label: 'Company',       value: stock.name },
     { label: 'Current Price', value: `ZMW ${stock.price.toFixed(2)}` },
     { label: 'Shares to Sell',value: `${qty} Shares` },
     { label: 'Gross Proceeds',value: `ZMW ${proceeds.toLocaleString('en-US', { minimumFractionDigits: 2 })}` },
-    { label: 'Fees (1.5%)',   value: `ZMW ${fees.toFixed(2)}` },
+    { label: 'Broker Fees (1.0%)', value: `ZMW ${(proceeds * BROKER_RATE).toFixed(2)}` },
+    { label: 'LuSE Fees (0.3%)',   value: `ZMW ${(proceeds * LUSE_RATE).toFixed(2)}` },
+    { label: 'SEC Fees (0.2%)',    value: `ZMW ${(proceeds * SEC_RATE).toFixed(2)}` },
   ];
   return (
     <div className="order-modal-overlay">
@@ -150,11 +155,12 @@ export default function SellSharesPage({ walletBalance, sharesOwned, onTradeExec
     [symbol]
   );
 
-  const [selectedQty, setSelectedQty] = useState(null);
-  const [customMode,  setCustomMode]  = useState(false);
-  const [customValue, setCustomValue] = useState('');
-  const [step,        setStep]        = useState('select');
-  const [orderId,     setOrderId]     = useState('');
+  const [selectedQty,   setSelectedQty]   = useState(null);
+  const [customMode,    setCustomMode]     = useState(false);
+  const [customValue,   setCustomValue]    = useState('');
+  const [step,          setStep]           = useState('select');
+  const [orderId,       setOrderId]        = useState('');
+  const [noSharesModal, setNoSharesModal]  = useState(false);
 
   if (!stock) return null;
 
@@ -183,9 +189,12 @@ export default function SellSharesPage({ walletBalance, sharesOwned, onTradeExec
   const canSell = qty > 0 && qty <= owned;
 
   const handleReviewOrder = () => {
+    if (owned === 0) {
+      setNoSharesModal(true);
+      return;
+    }
     if (!canSell) {
-      if (owned === 0) showToast(`You don't own any shares of ${stock.symbol}`);
-      else if (qty > owned) showToast(`You only own ${owned} shares.`);
+      if (qty > owned) showToast(`You only own ${owned} shares.`);
       else showToast('Enter a valid number of shares.');
       return;
     }
@@ -277,8 +286,16 @@ export default function SellSharesPage({ walletBalance, sharesOwned, onTradeExec
               <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {proceeds.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
-              <span>Taxes &amp; Fees (1.5%)</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {fees.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span>Broker Fees (1.0%)</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(proceeds * BROKER_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>LuSE Fees (0.3%)</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(proceeds * LUSE_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+              <span>SEC Fees (0.2%)</span>
+              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(proceeds * SEC_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
             <div style={{ height: 1, background: '#F0F0F0', margin: '4px 0' }} />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, fontWeight: 800, color: '#E30613' }}>
@@ -321,7 +338,29 @@ export default function SellSharesPage({ walletBalance, sharesOwned, onTradeExec
       )}
       {step === 'success' && (
         <OrderSuccess stock={stock} qty={qty} proceeds={proceeds} orderId={orderId}
-          onViewPortfolio={() => navigate('/portfolio')} onBackHome={() => navigate('/dashboard')} />
+           onBackHome={() => navigate('/dashboard')} />
+      )}
+
+      {/* No Shares Modal */}
+      {noSharesModal && (
+        <div className="no-shares-modal-overlay" onClick={() => setNoSharesModal(false)}>
+          <div className="no-shares-modal" onClick={e => e.stopPropagation()}>
+            <StockLogo stock={stock} className="no-shares-modal-logo" />
+            <h3 className="no-shares-modal-title">No Shares to Sell</h3>
+            <p className="no-shares-modal-msg">
+              You don't own any shares of <strong>{stock.symbol}</strong>. Buy shares first before you can sell.
+            </p>
+            <button
+              className="no-shares-buy-btn"
+              onClick={() => { setNoSharesModal(false); navigate(`/buy/${stock.symbol}`); }}
+            >
+              Buy {stock.symbol} Shares
+            </button>
+            <button className="no-shares-cancel-btn" onClick={() => setNoSharesModal(false)}>
+              Maybe Later
+            </button>
+          </div>
+        </div>
       )}
     </div>
   );

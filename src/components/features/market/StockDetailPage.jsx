@@ -93,7 +93,6 @@ export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExe
           <Icons.ChevronLeft />
         </button>
         <span className="pf-header-title">{stock.name.split(' ').slice(0, 3).join(' ')}</span>
-        {owned > 0 && <span className="sd-owned-chip">{owned.toLocaleString()} owned</span>}
         {toggleWatchlist && (
           <button
             className={`sd-star-btn ${watchlist && watchlist.includes(stock.symbol) ? 'active' : ''}`}
