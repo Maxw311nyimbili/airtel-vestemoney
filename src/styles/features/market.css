@@ -2931,7 +2931,7 @@
   margin-top: 4px;
 }
 
-.ob-stock-chg-up { font-size: 12px; font-weight: 600; color: #16A34A; }
+.ob-stock-chg-up { font-size: 12px; font-weight: 600; color: var(--primary-red); }
 .ob-stock-chg-dn { font-size: 12px; font-weight: 600; color: var(--primary-red); }
 .ob-stock-chg-flat {
   display: block;

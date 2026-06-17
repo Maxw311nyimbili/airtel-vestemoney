@@ -14,6 +14,7 @@ export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExe
 
   const [timeframe, setTimeframe] = useState('1D');
   const [hoveredPoint, setHoveredPoint] = useState(null);
+  const [noSharesModal, setNoSharesModal] = useState(false);
 
   if (!stock) {
     return (
@@ -217,11 +218,33 @@ export default function StockDetailPage({ walletBalance, sharesOwned, onTradeExe
         <button className="sd-buy-btn" onClick={() => navigate(`/market/${stock.symbol}/buy`)}>
           Buy
         </button>
-        <button className="sd-sell-btn" onClick={() => navigate(`/market/${stock.symbol}/sell`)}>
+        <button className="sd-sell-btn" onClick={() => {
+          if (!owned || owned === 0) { setNoSharesModal(true); return; }
+          navigate(`/market/${stock.symbol}/sell`);
+        }}>
           Sell
         </button>
       </div>
 
+      {noSharesModal && (
+        <div className="no-shares-modal-overlay" onClick={() => setNoSharesModal(false)}>
+          <div className="no-shares-modal" onClick={e => e.stopPropagation()}>
+            <div className="no-shares-modal-icon">
+              <StockLogo stock={stock} style={{ width: 52, height: 52, borderRadius: 14 }} />
+            </div>
+            <h3 className="no-shares-modal-title">No Shares to Sell</h3>
+            <p className="no-shares-modal-msg">
+              You don't own any {stock.symbol} shares yet. Buy shares first to start trading.
+            </p>
+            <button className="no-shares-buy-btn" onClick={() => { setNoSharesModal(false); navigate(`/market/${stock.symbol}/buy`); }}>
+              Buy {stock.symbol} Shares
+            </button>
+            <button className="no-shares-cancel-btn" onClick={() => setNoSharesModal(false)}>
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

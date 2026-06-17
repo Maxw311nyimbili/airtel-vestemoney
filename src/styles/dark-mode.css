@@ -223,3 +223,19 @@
 [data-theme="dark"] .no-shares-modal-msg {
   color: var(--text-secondary);
 }
+
+/* OTP / LOGIN SCREEN - dark mode overrides */
+[data-theme="dark"] .otp-page { background: #1A1A1A; }
+[data-theme="dark"] .otp-body { background: #1E1E1E; }
+[data-theme="dark"] .otp-tagline { color: #ffffff !important; }
+[data-theme="dark"] .otp-header-title { color: #ffffff !important; }
+[data-theme="dark"] .otp-header-sub { color: rgba(255,255,255,0.9) !important; }
+[data-theme="dark"] .otp-header-sub strong { color: #ffffff !important; }
+[data-theme="dark"] .otp-hint { color: #9BA1B2; }
+[data-theme="dark"] .otp-phone-field { background: #2A2A2A; border-color: #3A3A3A; }
+[data-theme="dark"] .otp-phone-input { background: #2A2A2A; color: #ffffff; }
+[data-theme="dark"] .otp-box { background: #2A2A2A; border-color: #3A3A3A; color: #ffffff; }
+[data-theme="dark"] .otp-box.otp-box-filled { border-color: #E30613; }
+[data-theme="dark"] .otp-timer-text { color: #9BA1B2; }
+[data-theme="dark"] .otp-powered span { color: #9BA1B2; }
+[data-theme="dark"] .otp-change-phone { color: #9BA1B2; }
