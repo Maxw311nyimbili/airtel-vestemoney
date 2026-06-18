@@ -17,17 +17,18 @@ function genOrderId() {
 
 /* ── Step 1: Order Review ── */
 function OrderReview({ stock, amount, shares, onBack, onContinue }) {
-  const fees  = amount * FEE_RATE;
-  const total = amount + fees;
+  const amtNum = parseFloat(amount) || 0;
+  const fees  = amtNum * FEE_RATE;
+  const total = amtNum + fees;
   const rows = [
     { label: 'Order Type',       value: 'Buy',  cls: 'orev-type-buy' },
     { label: 'Stock',            value: stock.name },
     { label: 'Current Price',    value: `ZMW ${stock.price.toFixed(2)}` },
-    { label: 'Amount',           value: `ZMW ${amount.toLocaleString('en-US', { minimumFractionDigits: 2 })}` },
+    { label: 'Amount',           value: `ZMW ${amtNum.toLocaleString('en-US', { minimumFractionDigits: 2 })}` },
     { label: 'Number of Shares', value: `${shares} Shares` },
-    { label: 'Broker Fees (1.0%)', value: `ZMW ${(amount * BROKER_RATE).toFixed(2)}` },
-    { label: 'LuSE Fees (0.3%)',  value: `ZMW ${(amount * LUSE_RATE).toFixed(2)}` },
-    { label: 'SEC Fees (0.2%)',   value: `ZMW ${(amount * SEC_RATE).toFixed(2)}` },
+    { label: 'Broker Fees (1.0%)', value: `ZMW ${(amtNum * BROKER_RATE).toFixed(2)}` },
+    { label: 'LuSE Fees (0.3%)',  value: `ZMW ${(amtNum * LUSE_RATE).toFixed(2)}` },
+    { label: 'SEC Fees (0.2%)',   value: `ZMW ${(amtNum * SEC_RATE).toFixed(2)}` },
   ];
   return (
     <div className="order-modal-overlay">
@@ -108,8 +109,9 @@ function PinEntry({ onBack, onSuccess }) {
 
 /* ── Step 3: Success ── */
 function OrderSuccess({ stock, amount, shares, orderId, onViewPortfolio, onBackHome }) {
-  const fees  = amount * FEE_RATE;
-  const total = amount + fees;
+  const amtNum = parseFloat(amount) || 0;
+  const fees  = amtNum * FEE_RATE;
+  const total = amtNum + fees;
   const now   = new Date().toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' });
   const rows  = [
     { label: 'Amount Paid',   value: `ZMW ${total.toLocaleString('en-US', { minimumFractionDigits: 2 })}` },
@@ -238,29 +240,29 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
         <div className="trade-section">
           <span className="trade-section-title">Order Summary</span>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>Share Price</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {stock.price.toFixed(2)}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {stock.price.toFixed(2)}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>Number of Shares</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>{qty} Shares</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{qty} Shares</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>Subtotal (Gross)</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {gross.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {gross.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>Broker Fees (1.0%)</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(gross * BROKER_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {(gross * BROKER_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>LuSE Fees (0.3%)</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(gross * LUSE_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {(gross * LUSE_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>SEC Fees (0.2%)</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(gross * SEC_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {(gross * SEC_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
             <div style={{ height: 1, background: '#F0F0F0', margin: '4px 0' }} />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, fontWeight: 800, color: '#E30613' }}>

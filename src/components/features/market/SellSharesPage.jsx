@@ -273,29 +273,29 @@ export default function SellSharesPage({ walletBalance, sharesOwned, onTradeExec
         <div className="trade-section">
           <span className="trade-section-title">Order Summary</span>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>Share Price</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {stock.price.toFixed(2)}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {stock.price.toFixed(2)}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>Number of Shares</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>{qty} Shares</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>{qty} Shares</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>Gross Proceeds</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {proceeds.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {proceeds.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>Broker Fees (1.0%)</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(proceeds * BROKER_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {(proceeds * BROKER_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>LuSE Fees (0.3%)</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(proceeds * LUSE_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {(proceeds * LUSE_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: '#5F6577' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 13, color: 'var(--text-secondary)' }}>
               <span>SEC Fees (0.2%)</span>
-              <span style={{ fontWeight: 700, color: '#1A1D23' }}>ZMW {(proceeds * SEC_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
+              <span style={{ fontWeight: 700, color: 'var(--text-primary)' }}>ZMW {(proceeds * SEC_RATE).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
             </div>
             <div style={{ height: 1, background: '#F0F0F0', margin: '4px 0' }} />
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 14, fontWeight: 800, color: '#E30613' }}>

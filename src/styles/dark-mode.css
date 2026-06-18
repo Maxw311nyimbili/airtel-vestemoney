@@ -1,13 +1,24 @@
 /* ════════════════════════════════════════════
-   DARK MODE OVERRIDES
-   Applied when html[data-theme="dark"]
-   Covers every page / component systematically
+   DARK MODE — COMPLETE SYSTEM OVERRIDE
+   Triggered by html[data-theme="dark"]
+   Covers every page and component
    ════════════════════════════════════════════ */
 
-/* ─────────────────────────────────────────────
-   1. GLOBAL SURFACES & CONTAINERS
-───────────────────────────────────────────── */
+/* ─── CSS VARIABLE OVERRIDES ─── */
+[data-theme="dark"] {
+  --bg-body:      #0C0C0C;
+  --bg-card:      #1E1E1E;
+  --bg-input:     #2A2A2A;
+  --border-color: #2C2C2C;
+  --border-light: #2C2C2C;
+  --text-primary: #FFFFFF;
+  --text-secondary: #9BA1B2;
+  --text-tertiary:  #6B7280;
+}
+
+/* ─── 1. GLOBAL SURFACES ─── */
 [data-theme="dark"] body,
+[data-theme="dark"] #root,
 [data-theme="dark"] .screen-container,
 [data-theme="dark"] .slide-in-right,
 [data-theme="dark"] .dashboard-screen,
@@ -20,222 +31,427 @@
 [data-theme="dark"] .stg-wrapper,
 [data-theme="dark"] .ob-page,
 [data-theme="dark"] .trade-page,
-[data-theme="dark"] .dash-wrapper {
+[data-theme="dark"] .dash-wrapper,
+[data-theme="dark"] .sd-page,
+[data-theme="dark"] .mkt-body,
+[data-theme="dark"] .ob-body {
   background: var(--bg-body);
   color: var(--text-primary);
 }
 
-/* ─────────────────────────────────────────────
-   2. BOTTOM NAV
-───────────────────────────────────────────── */
-[data-theme="dark"] .mobile-bottom-nav {
-  background: #141414;
-  border-top-color: #2C2C2C;
-}
-[data-theme="dark"] .mobile-nav-item { color: #6B7280; }
-[data-theme="dark"] .mobile-nav-item.active { color: #FF0000; }
+/* ─── 2. PAGE / SECTION HEADERS ─── */
+[data-theme="dark"] .pf-header,
+[data-theme="dark"] .pf-header-title,
+[data-theme="dark"] .page-title,
+[data-theme="dark"] .sub-page-header h1 { color: var(--text-primary); }
 
-/* ─────────────────────────────────────────────
-   3. BACK BUTTON / PAGE HEADERS
-───────────────────────────────────────────── */
 [data-theme="dark"] .back-btn {
   background: var(--bg-card);
   border-color: var(--border-color);
   color: var(--text-primary);
 }
-[data-theme="dark"] .pf-header-title,
-[data-theme="dark"] .page-title,
-[data-theme="dark"] .sub-page-header h1 {
-  color: var(--text-primary);
-}
 
-/* ─────────────────────────────────────────────
-   4. DASHBOARD
-───────────────────────────────────────────── */
-[data-theme="dark"] .dash-greeting-text,
-[data-theme="dark"] .dash-section-title,
-[data-theme="dark"] .section-header-row h3 {
-  color: var(--text-primary);
+/* ─── 3. BOTTOM NAV ─── */
+[data-theme="dark"] .mobile-bottom-nav {
+  background: #141414;
+  border-top-color: #2C2C2C;
 }
+[data-theme="dark"] .mobile-nav-item        { color: #6B7280; }
+[data-theme="dark"] .mobile-nav-item.active { color: #FF0000; }
 
-[data-theme="dark"] .dash-stocks-list {
+/* ─── 4. HEADER & DROPDOWN ─── */
+[data-theme="dark"] .header-menu-dropdown {
   background: var(--bg-card);
   border-color: var(--border-color);
 }
-[data-theme="dark"] .dash-stock-row {
-  background: var(--bg-card);
+[data-theme="dark"] .header-menu-item {
+  color: var(--text-primary);
   border-bottom-color: var(--border-color);
 }
-[data-theme="dark"] .dash-stock-row:active { background: var(--bg-input); }
-[data-theme="dark"] .dash-stock-sym,
-[data-theme="dark"] .dash-stock-price { color: var(--text-primary); }
-[data-theme="dark"] .dash-stock-name { color: var(--text-secondary); }
-[data-theme="dark"] .dash-stock-chg.chg-up { color: var(--text-secondary); }
+[data-theme="dark"] .header-menu-item:hover { background: var(--bg-input); }
+[data-theme="dark"] .mobile-menu-drawer     { background: var(--bg-card); }
 
-/* Quick action buttons (white bg in light) */
+/* Help sheet */
+[data-theme="dark"] .help-sheet,
+[data-theme="dark"] .help-overlay { background: var(--bg-card); }
+[data-theme="dark"] .help-sheet-title  { color: var(--text-primary); }
+[data-theme="dark"] .help-sheet-handle { background: var(--bg-input); }
+[data-theme="dark"] .help-contact-btn  { background: var(--bg-input); color: var(--text-primary); border-color: var(--border-color); }
+[data-theme="dark"] .help-contact-row  { border-color: var(--border-color); }
+[data-theme="dark"] .faq-question      { color: var(--text-primary); border-color: var(--border-color); }
+[data-theme="dark"] .faq-answer        { color: var(--text-secondary); }
+[data-theme="dark"] .faq-list          { border-color: var(--border-color); }
+
+/* ─── 5. OTP / LOGIN PAGE ─── */
+[data-theme="dark"] .otp-page  { background: #111111; }
+[data-theme="dark"] .otp-card  { background: #1A1A1A; }
+[data-theme="dark"] .otp-body  { background: #1A1A1A; }
+
+/* Red header area stays red — only text that inherits needs forcing */
+[data-theme="dark"] .otp-tagline      { color: #ffffff !important; }
+[data-theme="dark"] .otp-header-title { color: #ffffff !important; }
+[data-theme="dark"] .otp-header-sub   { color: rgba(255,255,255,0.88) !important; }
+[data-theme="dark"] .otp-header-sub strong { color: #ffffff !important; }
+
+[data-theme="dark"] .otp-hint         { color: var(--text-secondary); }
+[data-theme="dark"] .otp-phone-field  { background: var(--bg-input); border-color: #3A3A3A; }
+[data-theme="dark"] .otp-phone-input  { background: transparent; color: #ffffff; }
+[data-theme="dark"] .otp-phone-input::placeholder { color: #555; }
+[data-theme="dark"] .otp-box          { background: var(--bg-input); border-color: #3A3A3A; color: #ffffff; }
+[data-theme="dark"] .otp-box.otp-box-filled { border-color: #E30613; background: #2A1010; }
+[data-theme="dark"] .otp-timer-text   { color: var(--text-secondary); }
+[data-theme="dark"] .otp-timer-count  { color: #FF0000; }
+[data-theme="dark"] .otp-resend-btn   { color: #FF6B6B; }
+[data-theme="dark"] .otp-change-phone { color: var(--text-secondary); }
+[data-theme="dark"] .otp-powered span { color: var(--text-secondary); }
+[data-theme="dark"] .otp-footer       { border-color: var(--border-color); }
+
+/* ─── 6. LANDING / SPLASH PAGE ─── */
+[data-theme="dark"] .splash-page        { background: var(--bg-body); }
+[data-theme="dark"] .splash-bottom-card { background: #1A1A1A; }
+[data-theme="dark"] .splash-card-handle { background: #3A3A3A; }
+[data-theme="dark"] .splash-terms,
+[data-theme="dark"] .splash-footer,
+[data-theme="dark"] .splash-powered     { color: var(--text-secondary); }
+
+/* ─── 7. DASHBOARD ─── */
+[data-theme="dark"] .dash-greeting-text,
+[data-theme="dark"] .dash-section-title,
+[data-theme="dark"] .section-header-row h3 { color: var(--text-primary); }
+[data-theme="dark"] .dash-section-link      { color: #FF6B6B; }
+
+/* Portfolio card (red gradient — keep gradient, lighten text) */
+[data-theme="dark"] .dash-port-label { color: rgba(255,255,255,0.75); }
+[data-theme="dark"] .dash-port-value { color: #ffffff; }
+[data-theme="dark"] .dash-port-stat-lbl { color: rgba(255,255,255,0.7); }
+[data-theme="dark"] .dash-port-stat-val { color: #ffffff; }
+[data-theme="dark"] .dash-port-stat-sep { background: rgba(255,255,255,0.25); }
+[data-theme="dark"] .dash-port-card-locked { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .dash-port-locked-text { color: var(--text-secondary); }
+
+/* Quick actions */
 [data-theme="dark"] .qa-sell,
 [data-theme="dark"] .qa-portfolio {
-  background: #2A2A2A;
+  background: var(--bg-input);
   color: #FF0000;
   border-color: rgba(255,0,0,0.2);
 }
-[data-theme="dark"] .quick-action-btn-card {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-[data-theme="dark"] .quick-action-icon-wrapper {
-  background: var(--bg-input);
-  color: var(--text-primary);
-}
-[data-theme="dark"] .quick-action-label { color: var(--text-primary); }
-
-/* Promo card */
-[data-theme="dark"] .promo-invest-card {
-  background: rgba(255,0,0,0.1);
-  border-color: rgba(255,0,0,0.2);
-}
-[data-theme="dark"] .promo-title { color: var(--text-primary); }
-[data-theme="dark"] .promo-desc { color: var(--text-secondary); }
-
-/* Transactions / white list containers */
-[data-theme="dark"] .transactions-white-list,
-[data-theme="dark"] .market-row-list {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-[data-theme="dark"] .market-row {
-  background: var(--bg-card);
-  border-bottom-color: var(--border-color);
-}
-[data-theme="dark"] .market-row:hover { background: var(--bg-input); }
-[data-theme="dark"] .market-row-sym,
-[data-theme="dark"] .market-row-price { color: var(--text-primary); }
-[data-theme="dark"] .market-row-name { color: var(--text-secondary); }
-[data-theme="dark"] .market-row-chg.chg-up { color: var(--text-secondary); }
-
-[data-theme="dark"] .balance-plus-btn {
-  background: rgba(255,255,255,0.15);
-  color: #ffffff;
-}
-
-/* ─────────────────────────────────────────────
-   5. SHARED STOCK ROW (market list, watchlist)
-───────────────────────────────────────────── */
-[data-theme="dark"] .stock-row {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-[data-theme="dark"] .stock-row:active { background: var(--bg-input); }
-[data-theme="dark"] .stock-row-sym,
-[data-theme="dark"] .stock-row-price { color: var(--text-primary); }
-[data-theme="dark"] .stock-row-name { color: var(--text-secondary); }
-[data-theme="dark"] .stock-row-chg.chg-up { color: var(--text-secondary); }
-[data-theme="dark"] .stock-row-owned {
-  color: var(--text-tertiary);
-  background: var(--bg-input);
-}
-[data-theme="dark"] .stock-row-empty { border-color: var(--border-color); }
-[data-theme="dark"] .stock-row-empty-btn {
-  background: var(--bg-card);
-  color: var(--text-primary);
-}
-[data-theme="dark"] .stock-row-star { color: var(--text-tertiary); }
-
-/* ─────────────────────────────────────────────
-   6. MARKET PAGE
-───────────────────────────────────────────── */
-[data-theme="dark"] .mkt-body { background: var(--bg-body); }
-[data-theme="dark"] .mkt-section-label { color: var(--text-secondary); }
-[data-theme="dark"] .mkt-list {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-[data-theme="dark"] .mkt-highlight-index,
-[data-theme="dark"] .mkt-highlight-card {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-[data-theme="dark"] .mkt-hl-title { color: var(--text-secondary); }
-[data-theme="dark"] .mkt-hl-big,
-[data-theme="dark"] .mkt-hl-name { color: var(--text-primary); }
-[data-theme="dark"] .mkt-status-chip {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-  color: var(--text-secondary);
-}
-[data-theme="dark"] .badge-up {
-  background: var(--bg-input);
-  color: var(--text-secondary);
-}
-[data-theme="dark"] .mkt-hl-badge.badge-dn {
-  background: rgba(255,0,0,0.15);
-  color: #FF6B6B;
-}
-
-/* Search */
-[data-theme="dark"] .search-bar {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-[data-theme="dark"] .search-bar input {
-  background: transparent;
-  color: var(--text-primary);
-}
-[data-theme="dark"] .search-bar input::placeholder { color: var(--text-tertiary); }
-[data-theme="dark"] .search-bar svg { color: var(--text-tertiary); }
+[data-theme="dark"] .quick-action-btn-card  { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .quick-action-icon-wrapper { background: var(--bg-input); color: var(--text-primary); }
+[data-theme="dark"] .quick-action-label     { color: var(--text-primary); }
 
 /* Service cards */
-[data-theme="dark"] .service-card {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
+[data-theme="dark"] .service-card { background: var(--bg-card); border-color: var(--border-color); }
 [data-theme="dark"] .service-card-icon,
 [data-theme="dark"] .service-card-icon.portfolio,
 [data-theme="dark"] .service-card-icon.market,
 [data-theme="dark"] .service-card-icon.dividend,
-[data-theme="dark"] .service-card-icon.lock {
-  background: var(--bg-input);
-  color: var(--text-primary);
-}
+[data-theme="dark"] .service-card-icon.lock { background: var(--bg-input); color: var(--text-primary); }
 [data-theme="dark"] .service-card-title { color: var(--text-primary); }
-[data-theme="dark"] .service-card-desc { color: var(--text-secondary); }
+[data-theme="dark"] .service-card-desc  { color: var(--text-secondary); }
 
-/* Watchlist */
+/* Promo card */
+[data-theme="dark"] .promo-invest-card { background: rgba(255,0,0,0.1); border-color: rgba(255,0,0,0.2); }
+[data-theme="dark"] .promo-title { color: var(--text-primary); }
+[data-theme="dark"] .promo-desc  { color: var(--text-secondary); }
+
+/* Market row list (dashboard) */
+[data-theme="dark"] .transactions-white-list,
+[data-theme="dark"] .market-row-list { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .market-row { background: var(--bg-card); border-bottom-color: var(--border-color); }
+[data-theme="dark"] .market-row:hover { background: var(--bg-input); }
+[data-theme="dark"] .market-row-sym,
+[data-theme="dark"] .market-row-price { color: var(--text-primary); }
+[data-theme="dark"] .market-row-name  { color: var(--text-secondary); }
+[data-theme="dark"] .market-row-chg.chg-up { color: var(--text-secondary); }
+
+/* Balance top-up button */
+[data-theme="dark"] .balance-plus-btn { background: rgba(255,255,255,0.15); color: #ffffff; }
+
+/* Dash stock rows */
+[data-theme="dark"] .dash-stocks-list { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .dash-stock-row   { background: var(--bg-card); border-bottom-color: var(--border-color); }
+[data-theme="dark"] .dash-stock-row:active { background: var(--bg-input); }
+[data-theme="dark"] .dash-stock-sym,
+[data-theme="dark"] .dash-stock-price { color: var(--text-primary); }
+[data-theme="dark"] .dash-stock-name  { color: var(--text-secondary); }
+[data-theme="dark"] .dash-stock-chg.chg-up { color: var(--text-secondary); }
+
+/* Wallet / activity */
+[data-theme="dark"] .activity-icon-red { background: rgba(255,0,0,0.12); color: #FF6B6B; }
+
+/* Trade drawer */
+[data-theme="dark"] .trade-drawer        { background: var(--bg-card); }
+[data-theme="dark"] .trade-drawer-header { border-color: var(--border-color); }
+[data-theme="dark"] .trade-drawer-header h3 { color: var(--text-primary); }
+[data-theme="dark"] .trade-drawer-close  { background: var(--bg-input); color: var(--text-primary); }
+[data-theme="dark"] .trade-drawer-symbol { color: var(--text-primary); }
+[data-theme="dark"] .trade-drawer-name   { color: var(--text-secondary); }
+[data-theme="dark"] .trade-drawer-price  { color: var(--text-primary); }
+[data-theme="dark"] .trade-drawer-tab    { background: var(--bg-input); border-color: var(--border-color); color: var(--text-secondary); }
+[data-theme="dark"] .trade-drawer-balance-info { color: var(--text-secondary); }
+[data-theme="dark"] .trade-drawer-qty-selector label { color: var(--text-secondary); }
+[data-theme="dark"] .trade-drawer-summary { background: var(--bg-input); border-color: var(--border-color); }
+[data-theme="dark"] .summary-row         { color: var(--text-secondary); border-color: var(--border-color); }
+[data-theme="dark"] .summary-row.total   { color: var(--text-primary); }
+
+/* ─── 8. MARKET PAGE ─── */
+[data-theme="dark"] .mkt-section-label { color: var(--text-secondary); }
+[data-theme="dark"] .mkt-list,
+[data-theme="dark"] .mkt-highlight-index,
+[data-theme="dark"] .mkt-highlight-card { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .mkt-hl-title  { color: var(--text-secondary); }
+[data-theme="dark"] .mkt-hl-big,
+[data-theme="dark"] .mkt-hl-name   { color: var(--text-primary); }
+[data-theme="dark"] .mkt-status-chip { background: var(--bg-card); border-color: var(--border-color); color: var(--text-secondary); }
+[data-theme="dark"] .mkt-status-dot  { background: #22C55E; }
+[data-theme="dark"] .badge-up { background: var(--bg-input); color: var(--text-secondary); }
+[data-theme="dark"] .mkt-hl-badge.badge-dn { background: rgba(255,0,0,0.15); color: #FF6B6B; }
+
+/* Search bar */
+[data-theme="dark"] .search-bar { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .search-bar input { background: transparent; color: var(--text-primary); }
+[data-theme="dark"] .search-bar input::placeholder { color: var(--text-tertiary); }
+[data-theme="dark"] .search-bar svg   { color: var(--text-tertiary); }
+
+/* ─── 9. SHARED STOCK ROW ─── */
+[data-theme="dark"] .stock-row { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .stock-row:active { background: var(--bg-input); }
+[data-theme="dark"] .stock-row-sym,
+[data-theme="dark"] .stock-row-price  { color: var(--text-primary); }
+[data-theme="dark"] .stock-row-name   { color: var(--text-secondary); }
+[data-theme="dark"] .stock-row-chg.chg-up { color: var(--text-secondary); }
+[data-theme="dark"] .stock-row-empty  { border-color: var(--border-color); color: var(--text-secondary); }
+[data-theme="dark"] .stock-row-empty-btn { background: var(--bg-card); color: var(--text-primary); border-color: var(--border-color); }
+[data-theme="dark"] .stock-row-star   { color: var(--text-tertiary); }
+[data-theme="dark"] .stock-row-list   { background: var(--bg-card); }
+
+/* ─── 10. STOCK DETAIL PAGE ─── */
+[data-theme="dark"] .sd-wrapper       { background: var(--bg-body); }
+[data-theme="dark"] .sd-company-name  { color: var(--text-primary); }
+[data-theme="dark"] .sd-company-sym   { color: var(--text-secondary); }
+[data-theme="dark"] .sd-price         { color: var(--text-primary); }
+[data-theme="dark"] .sd-today-label   { color: var(--text-secondary); }
+[data-theme="dark"] .sd-timeframe-row { background: transparent; }
+[data-theme="dark"] .sd-tf-btn        { background: var(--bg-input); color: var(--text-secondary); border-color: var(--border-color); }
+[data-theme="dark"] .sd-tf-btn.active { background: #E30613; color: #ffffff; border-color: #E30613; }
+[data-theme="dark"] .sd-chart-wrap    { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .sd-stats-table   { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .sd-stat-row      { border-color: var(--border-color); }
+[data-theme="dark"] .sd-stat-lbl      { color: var(--text-secondary); }
+[data-theme="dark"] .sd-stat-val      { color: var(--text-primary); }
+[data-theme="dark"] .sd-depth-link    { background: var(--bg-card); border-color: var(--border-color); color: var(--text-primary); }
+[data-theme="dark"] .sd-bottom-bar    { background: var(--bg-card); border-color: var(--border-color); }
+
+/* ─── 11. ORDER BOOK PAGE ─── */
+[data-theme="dark"] .ob-stock-card       { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .ob-stock-full-name  { color: var(--text-secondary); }
+[data-theme="dark"] .ob-stock-price      { color: var(--text-primary); }
+[data-theme="dark"] .ob-price-strip      { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .ob-price-lbl        { color: var(--text-secondary); }
+[data-theme="dark"] .ob-price-val        { color: var(--text-primary); }
+[data-theme="dark"] .ob-price-divider    { background: var(--border-color); }
+[data-theme="dark"] .ob-stock-bid-ask    { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .ob-stock-supply-demand { color: var(--text-secondary); }
+[data-theme="dark"] .ob-cta-row          { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .side-title.bid-text { color: var(--text-primary); }
+
+/* ─── 12. BUY / SELL TRADE PAGES ─── */
+[data-theme="dark"] .trade-page-body    { background: var(--bg-body); }
+[data-theme="dark"] .trade-stock-card   { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .trade-stock-name   { color: var(--text-primary); }
+[data-theme="dark"] .trade-stock-price-lbl { color: var(--text-secondary); }
+[data-theme="dark"] .trade-stock-price  { color: var(--text-primary); }
+[data-theme="dark"] .trade-section      { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .trade-section-title { color: var(--text-secondary); }
+[data-theme="dark"] .trade-custom-input-wrap { background: var(--bg-input); border-color: var(--border-color); }
+[data-theme="dark"] .trade-custom-prefix,
+[data-theme="dark"] .trade-custom-suffix { color: var(--text-secondary); border-color: var(--border-color); }
+[data-theme="dark"] .trade-custom-input  { color: var(--text-primary); background: transparent; }
+[data-theme="dark"] .trade-custom-input::placeholder { color: var(--text-tertiary); }
+[data-theme="dark"] .trade-est-note     { color: var(--text-secondary); }
+[data-theme="dark"] .trade-est-value    { color: var(--text-primary); }
+[data-theme="dark"] .trade-preset-btn   { background: var(--bg-input); border-color: var(--border-color); color: var(--text-primary); }
+[data-theme="dark"] .trade-owned-bar    { background: var(--bg-input); }
+[data-theme="dark"] .trade-owned-count  { color: var(--text-secondary); }
+[data-theme="dark"] .trade-payment-row  { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .trade-payment-name { color: var(--text-primary); }
+
+/* Order summary inline text (inline styles use color: #5F6577 / #1A1D23) */
+[data-theme="dark"] .trade-section div[style] span { color: var(--text-secondary) !important; }
+
+/* Order Review modal */
+[data-theme="dark"] .order-modal-overlay { background: var(--bg-body); }
+[data-theme="dark"] .order-modal-header  { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .order-modal-title   { color: var(--text-primary); }
+[data-theme="dark"] .order-modal-body    { background: var(--bg-body); }
+[data-theme="dark"] .order-modal-footer  { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .orev-rows           { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .orev-row            { border-color: var(--border-color); }
+[data-theme="dark"] .orev-label          { color: #B0B8C8; }
+[data-theme="dark"] .orev-value          { color: #FFFFFF; }
+[data-theme="dark"] .orev-total          { border-color: var(--border-color); }
+[data-theme="dark"] .orev-total .orev-label,
+[data-theme="dark"] .orev-total .orev-value { color: var(--text-primary); }
+[data-theme="dark"] .orev-pay-section    { background: var(--bg-input); border-color: var(--border-color); }
+[data-theme="dark"] .orev-pay-label      { color: var(--text-secondary); }
+[data-theme="dark"] .orev-pay-name       { color: var(--text-primary); }
+
+/* PIN entry */
+[data-theme="dark"] .pin-modal-body      { background: var(--bg-body); }
+[data-theme="dark"] .pin-modal-subtitle  { color: var(--text-secondary); }
+[data-theme="dark"] .pin-dots            {}
+[data-theme="dark"] .pin-key             { background: var(--bg-card); border-color: var(--border-color); color: var(--text-primary); }
+[data-theme="dark"] .pin-key:active      { background: var(--bg-input); }
+[data-theme="dark"] .pin-del             { background: var(--bg-card); color: var(--text-primary); }
+[data-theme="dark"] .pin-forgot         { color: var(--text-secondary); }
+
+/* Success screen */
+[data-theme="dark"] .success-overlay     { background: var(--bg-body); }
+[data-theme="dark"] .success-card        { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .success-heading     { color: var(--text-primary); }
+[data-theme="dark"] .success-sub-text    { color: var(--text-secondary); }
+[data-theme="dark"] .success-home-btn    { background: var(--bg-input); color: var(--text-primary); border-color: var(--border-color); }
+
+/* ─── 13. PORTFOLIO PAGE ─── */
+[data-theme="dark"] .pf-section-label  { color: var(--text-secondary); }
+[data-theme="dark"] .pf-bucket         { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .pf-bucket:hover   { background: var(--bg-input); }
+[data-theme="dark"] .pf-bucket-icon    { background: var(--bg-input); }
+[data-theme="dark"] .pf-bucket-name    { color: var(--text-primary); }
+[data-theme="dark"] .pf-bucket-value   { color: var(--text-primary); }
+[data-theme="dark"] .pf-bucket-chg     { color: var(--text-secondary); }
+[data-theme="dark"] .pf-holding-card   { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .pf-holding-card:hover { background: var(--bg-input); }
+[data-theme="dark"] .pf-holding-sym    { color: var(--text-primary); }
+[data-theme="dark"] .pf-holding-qty    { color: var(--text-secondary); }
+[data-theme="dark"] .pf-holding-val    { color: var(--text-primary); }
+[data-theme="dark"] .pf-view-btn       { background: var(--bg-input); border-color: var(--border-color); color: var(--text-secondary); }
+[data-theme="dark"] .pf-view-status-lbl { color: var(--text-secondary); }
+[data-theme="dark"] .pf-status-pill    { border-color: var(--border-color); }
+[data-theme="dark"] .pf-status-pending { background: rgba(251,191,36,0.15); color: #FCD34D; border-color: rgba(251,191,36,0.3); }
+[data-theme="dark"] .pf-status-settled { background: rgba(34,197,94,0.12); color: #4ADE80; border-color: rgba(34,197,94,0.25); }
+[data-theme="dark"] .pf-view-status-note { color: var(--text-tertiary); }
+[data-theme="dark"] .pf-empty         { color: var(--text-secondary); }
+[data-theme="dark"] .pf-empty-cta     { background: var(--bg-input); color: var(--text-primary); border-color: var(--border-color); }
+
+/* Order Status page */
+[data-theme="dark"] .os-body          { background: var(--bg-body); }
+[data-theme="dark"] .os-stock-card    { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .os-stock-sym     { color: var(--text-secondary); }
+[data-theme="dark"] .os-stock-name    { color: var(--text-primary); }
+[data-theme="dark"] .os-stock-price   { color: var(--text-primary); }
+[data-theme="dark"] .os-summary       { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .os-summary .orev-row { border-color: var(--border-color); }
+
+/* ─── 14. SETTINGS PAGE ─── */
+[data-theme="dark"] .stg-profile-card { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .stg-name         { color: var(--text-primary); }
+[data-theme="dark"] .stg-phone        { color: var(--text-secondary); }
+[data-theme="dark"] .stg-avatar       { background: var(--bg-input); color: var(--text-secondary); }
+[data-theme="dark"] .stg-section      { color: var(--text-secondary); }
+[data-theme="dark"] .stg-row          { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .stg-row-title    { color: var(--text-primary); }
+[data-theme="dark"] .stg-row-sub      { color: var(--text-secondary); }
+[data-theme="dark"] .stg-row-icon     { background: var(--bg-input); color: var(--text-secondary); }
+[data-theme="dark"] .stg-row-mono     { color: var(--text-secondary); background: var(--bg-input); }
+[data-theme="dark"] .stg-row-static   { color: var(--text-secondary); }
+[data-theme="dark"] .stg-logout-area  { border-color: var(--border-color); }
+[data-theme="dark"] .stg-profile-info { background: var(--bg-card); border-color: var(--border-color); }
+
+/* ─── 15. DIVIDENDS PAGE ─── */
+[data-theme="dark"] .div-row         { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .div-row:hover   { background: var(--bg-input); }
+[data-theme="dark"] .div-row-sym     { color: var(--text-primary); }
+[data-theme="dark"] .div-row-date    { color: var(--text-secondary); }
+[data-theme="dark"] .div-row-exdate  { color: var(--text-tertiary); }
+[data-theme="dark"] .div-row-rate    { color: var(--text-primary); }
+[data-theme="dark"] .div-row-payout  { color: var(--text-secondary); }
+[data-theme="dark"] .div-owned       { color: var(--text-secondary); }
+[data-theme="dark"] .div-calc-card   { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .calc-inputs     { background: var(--bg-input); border-color: var(--border-color); }
+[data-theme="dark"] .calc-field      { background: transparent; color: var(--text-primary); border-color: var(--border-color); }
+[data-theme="dark"] .calc-result     { background: var(--bg-input); border-color: var(--border-color); }
+[data-theme="dark"] .calc-result-label { color: var(--text-secondary); }
+[data-theme="dark"] .calc-result-value { color: var(--text-primary); }
+
+/* ─── 16. SHARED / GUEST LOCK ─── */
+[data-theme="dark"] .guest-lock-card  { background: var(--bg-card); border-color: var(--border-color); }
+[data-theme="dark"] .guest-lock-title { color: var(--text-primary); }
+[data-theme="dark"] .guest-lock-message { color: var(--text-secondary); }
+[data-theme="dark"] .guest-lock-icon  { background: var(--bg-input); color: var(--text-secondary); }
+
+/* ─── 17. NO-SHARES MODAL ─── */
+[data-theme="dark"] .no-shares-modal        { background: var(--bg-card); }
+[data-theme="dark"] .no-shares-modal-title  { color: var(--text-primary); }
+[data-theme="dark"] .no-shares-modal-msg    { color: var(--text-secondary); }
+[data-theme="dark"] .no-shares-cancel-btn   { color: var(--text-tertiary); }
+
+/* ─── 18. ORDER SUMMARY INLINE DIVIDERS ─── */
+[data-theme="dark"] div[style*="#F0F0F0"] { background: var(--border-color) !important; }
+
+/* ─── 19. WATCHLIST EMPTY STATE ─── */
+[data-theme="dark"] .watchlist-empty  { color: var(--text-secondary); }
 [data-theme="dark"] .watch-card,
-[data-theme="dark"] .watch-row,
-[data-theme="dark"] .watchlist-empty,
-[data-theme="dark"] .stock-row-list {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
-[data-theme="dark"] .guest-lock-card {
-  background: var(--bg-card);
-  border-color: var(--border-color);
-}
+[data-theme="dark"] .watch-row        { background: var(--bg-card); border-color: var(--border-color); }
 
-/* No Shares Modal - dark mode */
-[data-theme="dark"] .no-shares-modal {
-  background: var(--bg-card);
-}
-[data-theme="dark"] .no-shares-modal-title {
-  color: var(--text-primary);
-}
-[data-theme="dark"] .no-shares-modal-msg {
-  color: var(--text-secondary);
-}
 
-/* OTP / LOGIN SCREEN - dark mode overrides */
-[data-theme="dark"] .otp-page { background: #1A1A1A; }
-[data-theme="dark"] .otp-body { background: #1E1E1E; }
-[data-theme="dark"] .otp-tagline { color: #ffffff !important; }
-[data-theme="dark"] .otp-header-title { color: #ffffff !important; }
-[data-theme="dark"] .otp-header-sub { color: rgba(255,255,255,0.9) !important; }
-[data-theme="dark"] .otp-header-sub strong { color: #ffffff !important; }
-[data-theme="dark"] .otp-hint { color: #9BA1B2; }
-[data-theme="dark"] .otp-phone-field { background: #2A2A2A; border-color: #3A3A3A; }
-[data-theme="dark"] .otp-phone-input { background: #2A2A2A; color: #ffffff; }
-[data-theme="dark"] .otp-box { background: #2A2A2A; border-color: #3A3A3A; color: #ffffff; }
-[data-theme="dark"] .otp-box.otp-box-filled { border-color: #E30613; }
-[data-theme="dark"] .otp-timer-text { color: #9BA1B2; }
-[data-theme="dark"] .otp-powered span { color: #9BA1B2; }
-[data-theme="dark"] .otp-change-phone { color: #9BA1B2; }
+/* ─── CONTRAST BOOSTS ─── */
+/* chg-up in dark: was grey, now lighter for readability */
+[data-theme="dark"] .chg-up { color: #C0C7D4; }
+
+/* order modal — full dark surfaces */
+[data-theme="dark"] .order-modal-overlay  { background: #0C0C0C; }
+[data-theme="dark"] .order-modal-header   { background: #1A1A1A; border-color: #2C2C2C; }
+[data-theme="dark"] .order-modal-title    { color: #FFFFFF; }
+[data-theme="dark"] .order-modal-body     { background: #0C0C0C; }
+[data-theme="dark"] .order-modal-footer   { background: #1A1A1A; border-color: #2C2C2C; }
+[data-theme="dark"] .orev-rows            { background: #1A1A1A; border-color: #2C2C2C; }
+[data-theme="dark"] .orev-row             { border-color: #2C2C2C; }
+[data-theme="dark"] .orev-label           { color: #B0B8C8; }
+[data-theme="dark"] .orev-value           { color: #FFFFFF; }
+[data-theme="dark"] .orev-row.orev-total  { background: #222; }
+[data-theme="dark"] .orev-row.orev-total .orev-label { color: #FFFFFF; }
+[data-theme="dark"] .orev-row.orev-total .orev-value { color: #FFFFFF; }
+[data-theme="dark"] .orev-pay-section     { background: #0C0C0C; }
+[data-theme="dark"] .orev-pay-row         { background: #1A1A1A; border-color: #2C2C2C; }
+[data-theme="dark"] .orev-pay-label       { color: #B0B8C8; }
+[data-theme="dark"] .orev-pay-name        { color: #FFFFFF; }
+
+/* success screen */
+[data-theme="dark"] .success-overlay      { background: #0C0C0C; }
+[data-theme="dark"] .success-top          { background: #E30613; }
+[data-theme="dark"] .success-card         { background: #1A1A1A; border-color: #2C2C2C; }
+[data-theme="dark"] .success-heading      { color: #FFFFFF; }
+[data-theme="dark"] .success-sub-text     { color: rgba(255,255,255,0.85); }
+[data-theme="dark"] .success-home-btn     { background: #1E1E1E; color: #FFFFFF; border: 1.5px solid #3A3A3A; }
+[data-theme="dark"] .success-actions      { background: #0C0C0C; }
+
+/* pin modal */
+[data-theme="dark"] .pin-modal-body       { background: #0C0C0C; }
+[data-theme="dark"] .pin-modal-subtitle   { color: #B0B8C8; }
+[data-theme="dark"] .pin-key              { background: #1E1E1E; border-color: #333; color: #FFFFFF; box-shadow: none; }
+[data-theme="dark"] .pin-del              { background: #1E1E1E; color: #FFFFFF; }
+[data-theme="dark"] .pin-forgot           { color: #9BA1B2; }
+
+/* trade section inline summary text */
+[data-theme="dark"] .trade-section        { background: #1A1A1A; border-color: #2C2C2C; }
+[data-theme="dark"] .trade-section-title  { color: #B0B8C8; }
+[data-theme="dark"] .trade-stock-card     { background: #1A1A1A; border-color: #2C2C2C; }
+[data-theme="dark"] .trade-custom-input-wrap { background: #1E1E1E; border-color: #333; }
+[data-theme="dark"] .trade-custom-prefix  { color: #B0B8C8; border-color: #333; }
+[data-theme="dark"] .trade-custom-input   { color: #FFFFFF; }
+
+/* sd chart text in dark */
+[data-theme="dark"] .sd-company-name      { color: #FFFFFF; }
+[data-theme="dark"] .sd-company-sym       { color: #B0B8C8; }
+[data-theme="dark"] .sd-price             { color: #FFFFFF; }
+[data-theme="dark"] .sd-stat-lbl          { color: #B0B8C8; }
+[data-theme="dark"] .sd-stat-val          { color: #FFFFFF; }
+[data-theme="dark"] .sd-stat-row          { border-color: #2C2C2C; }
+[data-theme="dark"] .sd-stats-table       { background: #1A1A1A; border-color: #2C2C2C; }
+[data-theme="dark"] .sd-tf-btn            { background: #1E1E1E; color: #9BA1B2; border-color: #2C2C2C; }
+[data-theme="dark"] .sd-tf-btn.active     { background: #E30613; color: #FFFFFF; border-color: #E30613; }
+[data-theme="dark"] .sd-chart-wrap        { background: #1A1A1A; border-color: #2C2C2C; }
+[data-theme="dark"] .sd-depth-link        { background: #1A1A1A; border-color: #2C2C2C; color: #FFFFFF; }
+[data-theme="dark"] .sd-bottom-bar        { background: #141414; border-color: #2C2C2C; }
