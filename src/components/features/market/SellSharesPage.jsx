@@ -49,13 +49,6 @@ function OrderReview({ stock, qty, proceeds, onBack, onContinue }) {
             <span className="orev-value">ZMW {net.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
           </div>
         </div>
-        <div className="orev-pay-section">
-          <span className="orev-pay-label">Proceeds go to</span>
-          <div className="orev-pay-row">
-            <img src={paymentLogo} alt="Payment" className="orev-pay-logo" style={{ objectFit: 'contain' }} />
-            <span className="orev-pay-name">Airtel Money</span>
-          </div>
-        </div>
       </div>
       <div className="order-modal-footer">
         <button className="order-cta-btn" onClick={onContinue}>Continue to PIN</button>

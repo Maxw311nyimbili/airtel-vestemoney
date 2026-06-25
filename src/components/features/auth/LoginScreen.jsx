@@ -47,7 +47,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
       showToast('Please enter a valid 10-digit Airtel number.');
       return;
     }
-    showToast('OTP sent to +260 ' + phoneNumber);
+    showToast('OTP sent to ' + phoneNumber);
     setStep(2);
   };
 
@@ -101,7 +101,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
     setOtp(['', '', '', '']);
     setCountdown(30);
     otpRefs[0].current?.focus();
-    showToast('New OTP sent to +260 ' + phoneNumber);
+    showToast('New OTP sent to ' + phoneNumber);
     // Restart timer
     if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => {
@@ -142,7 +142,7 @@ export default function LoginScreen({ phoneNumber, setPhoneNumber, showToast, se
           ) : (
             <>
               <h1 className="otp-header-title">Verify your number</h1>
-              <p className="otp-header-sub">Enter the 4-digit code sent to <strong>+260 {phoneNumber}</strong></p>
+              <p className="otp-header-sub">Enter the 4-digit code sent to <strong>{phoneNumber}</strong></p>
             </>
           )}
         </div>

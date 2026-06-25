@@ -49,13 +49,6 @@ function OrderReview({ stock, amount, shares, onBack, onContinue }) {
             <span className="orev-value">ZMW {total.toLocaleString('en-US', { minimumFractionDigits: 2 })}</span>
           </div>
         </div>
-        <div className="orev-pay-section">
-          <span className="orev-pay-label">Pay with</span>
-          <div className="orev-pay-row">
-            <img src={paymentLogo} alt="Payment" className="orev-pay-logo" style={{ objectFit: 'contain' }} />
-            <span className="orev-pay-name">Airtel Money</span>
-          </div>
-        </div>
       </div>
       <div className="order-modal-footer">
         <button className="order-cta-btn" onClick={onContinue}>Continue to PIN</button>
@@ -271,28 +264,11 @@ export default function BuySharesPage({ walletBalance, sharesOwned, onTradeExecu
             </div>
           </div>
         </div>
-
-        <div className="trade-section">
-          <span className="trade-section-title">Payment Method</span>
-          <div className="trade-payment-row">
-            <div className="trade-payment-logo">
-              <img src={paymentLogo} alt="Payment" style={{ height: 28, width: 'auto', objectFit: 'contain' }} />
-            </div>
-            <div className="trade-payment-info">
-              <span className="trade-payment-name">Airtel Money</span>
-            </div>
-            <div className="trade-payment-check">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </div>
-          </div>
-        </div>
       </div>
 
       <div className="sd-bottom-bar">
         <button className={`trade-review-btn ${canBuy ? '' : 'disabled'}`} onClick={handleReviewOrder}>
-          Review Order
+          Pay Now
         </button>
       </div>
 
